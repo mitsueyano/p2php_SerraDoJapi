@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>INÍCIO</title>
     <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="../padroes/padraoPag.css">
 </head>
 <body>
     <div id="header">
@@ -37,7 +38,20 @@
             </div>
         </div>
         <div id="destaques">
-            <p>Destaques</p>
+            <p>Destaques da comunidade</p>
+            <div id="barra-destaques">
+                <div class="bloco-destaques"><img src="../img/passaroexemplo.jpg" alt="passaroteste"></div>
+                <div class="bloco-destaques"><img src="../img/passaroexemplo.jpg" alt="passaroteste"></div>
+                <div class="bloco-destaques"><img src="../img/passaroexemplo.jpg" alt="passaroteste"></div>
+                <div class="bloco-destaques"><img src="../img/passaroexemplo.jpg" alt="passaroteste"></div> 
+                <div class="bloco-destaques"><img src="../img/passaroexemplo.jpg" alt="passaroteste"></div>
+                <div class="bloco-destaques"><img src="../img/passaroexemplo.jpg" alt="passaroteste"></div>
+                <div class="bloco-destaques"><img src="../img/passaroexemplo.jpg" alt="passaroteste"></div>
+                <div class="bloco-destaques"><img src="../img/passaroexemplo.jpg" alt="passaroteste"></div> 
+            </div>
+        </div>
+        <div id="divbtn">
+            <a href="" id="btn-compartilhe">Compartilhe sua observação</a>
         </div>
     </div>
 </body>
