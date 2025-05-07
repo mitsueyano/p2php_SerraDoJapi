@@ -18,22 +18,30 @@
         <a href="../cadastro_login/cadastro_login.php">ENTRE / CADASTRE-SE</a>
     </div>
     <div id="conteudo">
+        <p id="pergunta">O que você quer observar hoje?</p>
         <div id="div-barra-pesquisa">
             <div id="barra-pesquisa">
-                <input type="text" name="" id="input-pesquisa" value="TESTE">
+                <input type="text" name="" id="input-pesquisa" placeholder="Pesquise...">
+            </div>
+            <div class="flex">
+                <div class="divopcao">
+                    <img src="../img/especies_HanifiSarikaya.jpg" alt="Imagem de uma abelha polinizando">
+                    <span>Espécies</span>
+                </div>
+                <div class="divopcao">
+                    <img src="../img/placaanimal.png" alt="Imagem de uma abelha polinizando">
+                    <span>Ocorrências</span>
+                </div>
             </div>
         </div>
-        <div id="navbar-catalogo">
-            <a href="" class="opcoes-catalogo">Plantas</a>
-            <a href="" class="opcoes-catalogo">Animais</a>
-            <a href="" class="opcoes-catalogo">Insetos</a>
-        </div>
         <div id="divfeed">
-            <p>Registros da comunidade</p>
             <div id="navbar-feed">
-                <span>Filtrar por:</span>
-                <a href="">Mais recentes</a>
-                <a href="">Mais populares</a>
+                <span id="texto">Registros da comunidade</span>
+                <div id="filtro">
+                    <span>Filtrar por:</span>
+                    <a href="">Recentes</a>
+                    <a href="">Populares</a>
+                </div>
             </div>
             <div id="feed">
                 <div class="bloco-post">

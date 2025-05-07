@@ -36,6 +36,59 @@
     flex-direction: column;
     align-items: center;
 }
+
+/* Texto Geral*/
+#divtextogeral{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#imgtextogeral{
+    width: 90%;
+    height: 50vh;
+    padding: 20px;
+    background-image: url('../img/martimpescador_AoTak.jpg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+#textogeral{
+    padding: 20px 40px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    background: linear-gradient(90deg, rgba(82, 27, 27, 0) 35%, rgba(0, 0, 0, 0.8) 75%);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: end;
+}
+#textogeral p{
+    width: 30%;
+    font-size: 18pt;
+    text-align: end;
+}
+/* Botão compartilhe*/
+#btn-compartilhe{
+    text-decoration: none;
+    background-color: transparent;
+    padding: 10px;
+    text-align: center;
+    color: #fff;
+    border-radius: 2px;
+    border: 2px solid #fff;
+    font-size: 19pt;
+}
+#btn-compartilhe:hover{
+    background-color: #fff;
+    color: #000;
+}
+
+
 /* Destaques */
 #destaques{
     display: flex;
@@ -74,25 +127,6 @@
 .bloco-destaques img:hover{
     cursor: pointer;
     filter: brightness(70%);
-}
-/* Botão compartilhe*/
-#divbtn{
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-    padding: 10bpx;
-}
-#btn-compartilhe{
-    text-decoration: none;
-    background-color: #7D8C46;
-    padding: 10px;
-    text-align: center;
-    color: #fff;
-    border-radius: 2px;
-}
-#btn-compartilhe:hover{
-    box-shadow: 2px 2px 5px #334027;
 }
 
 

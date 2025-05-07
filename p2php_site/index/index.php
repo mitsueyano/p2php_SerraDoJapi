@@ -37,6 +37,14 @@
                 </div>
             </div>
         </div>
+        <div id="divtextogeral">
+            <div id="imgtextogeral">
+                <div id="textogeral">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio eligendi deserunt explicabo vero repellat porro. Quam sed deleniti, unde.</p>
+                    <a href="" id="btn-compartilhe">Compartilhe sua observação</a>
+                </div>
+            </div>
+        </div>
         <div id="destaques">
             <p>Destaques da comunidade</p>
             <div id="barra-destaques">
@@ -49,9 +57,6 @@
                 <div class="bloco-destaques"><img src="../img/passaroexemplo.jpg" alt="passaroteste"></div>
                 <div class="bloco-destaques"><img src="../img/passaroexemplo.jpg" alt="passaroteste"></div> 
             </div>
-        </div>
-        <div id="divbtn">
-            <a href="" id="btn-compartilhe">Compartilhe sua observação</a>
         </div>
     </div>
 </body>
