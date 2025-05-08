@@ -92,21 +92,21 @@ html, body {
 }
 /* Página selecionada na navbar*/
 #selected {
-    background-color: rgba(73, 89, 39, 0.562) !important;
-    color: #ffffff !important;
-    position: relative !important;
+    background-color: rgba(73, 89, 39, 0.562);
+    color: #ffffff;
+    position: relative;
 }
 #selected::after {
-    content: '' !important;
-    position: absolute !important;
-    bottom: 20% !important;
-    left: 25% !important;
-    width: 50% !important;
-    height: 2px !important;
-    background-color: #ffffffcc !important;
-    transform: scaleX(1) !important;
-    transform-origin: center !important;
-    transition: transform 0.3s ease !important;
+    content: '';
+    position: absolute;
+    bottom: 20%;
+    left: 25%;
+    width: 50%;
+    height: 2px;
+    background-color: #ffffffcc;
+    transform: scaleX(1);
+    transform-origin: center;
+    transition: transform 0.3s ease;
 }
 
 /* Conteúdo */
