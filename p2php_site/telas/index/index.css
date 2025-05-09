@@ -8,6 +8,7 @@
 #lema{
     font-size: 2.5vw;
     color: #334027;
+    margin-top: 0;
 }
 #texto{
     width: 45%;
@@ -42,6 +43,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 25px;
 }
 #imgtextogeral{
     width: 90%;

@@ -90,13 +90,14 @@ html, body {
 #navbar > a:hover::after {
     transform: scaleX(1);
 }
+
 /* Página selecionada na navbar*/
-#selected {
+.selected {
     background-color: rgba(73, 89, 39, 0.562);
     color: #ffffff;
     position: relative;
 }
-#selected::after {
+.selected::after {
     content: '';
     position: absolute;
     bottom: 20%;
@@ -104,7 +105,7 @@ html, body {
     width: 50%;
     height: 2px;
     background-color: #ffffffcc;
-    transform: scaleX(1);
+    transform: scaleX(1)  !important;
     transform-origin: center;
     transition: transform 0.3s ease;
 }

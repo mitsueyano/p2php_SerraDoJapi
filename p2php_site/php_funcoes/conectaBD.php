@@ -1,4 +1,4 @@
-<?php 
+<?php //--- Função padrão para conectar ao banco de dados ---//
 $server = 'localhost';
 $user = 'root';
 $password = '';
