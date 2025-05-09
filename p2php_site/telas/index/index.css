@@ -69,7 +69,7 @@
 }
 #textogeral p{
     width: 30%;
-    font-size: 18pt;
+    font-size: 1.5vw;
     text-align: end;
 }
 /* Botão compartilhe*/
@@ -81,7 +81,7 @@
     color: #fff;
     border-radius: 2px;
     border: 2px solid #fff;
-    font-size: 19pt;
+    font-size: 1.7vw;
 }
 #btn-compartilhe:hover{
     background-color: #fff;
@@ -110,6 +110,17 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
+}
+@media (max-width: 1024px) {
+    #barra-destaques {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    #barra-destaques {
+        grid-template-columns: 1fr;
+    }
 }
 .bloco-destaques{
     height: 100%;

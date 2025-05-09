@@ -5,7 +5,7 @@
     height: 70vh;
 }
 #caixa{
-    width: 20%;
+    min-width: 20%;
     height: 80%;
     background-color: #fff;
     display: flex;

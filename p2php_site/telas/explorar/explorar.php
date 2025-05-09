@@ -15,7 +15,7 @@
     <div id="navbar">
         <a href="../index/index.php">INÍCIO</a>
         <a href="../explorar/explorar.php" id="selected">EXPLORAR</a>
-        <a href="../cadastro_login/cadastro_login.php">ENTRE / CADASTRE-SE</a>
+        <a href="../login/login.php">ENTRE / CADASTRE-SE</a>
     </div>
     <div id="conteudo">
         <p id="pergunta">O que você quer observar hoje?</p>
