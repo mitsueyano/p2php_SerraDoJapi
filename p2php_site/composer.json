@@ -1,0 +1,12 @@
+{
+    "name": "luiza/p2php_site",
+    "autoload": {
+        "psr-4": {
+            "Luiza\\P2phpSite\\": "src/"
+        }
+    },
+    "require": {
+        "cloudinary/cloudinary_php": "^3.1",
+        "vlucas/phpdotenv": "^5.6"
+    }
+}

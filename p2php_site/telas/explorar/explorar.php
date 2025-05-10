@@ -23,7 +23,7 @@
         </div>
         <div id="navbar">
             <a href="../index/index.php">INÍCIO</a>
-            <a href="../explorar/explorar.php" class="selected"">EXPLORAR</a>
+            <a href="../explorar/explorar.php" class="selected">EXPLORAR</a>
             <a href="../login/login.php" id="login-link">ENTRE / CADASTRE-SE</a>
             <a href="../perfil/perfil.php" id="perfil-link" style="display: none;">PERFIL</a>
         </div>
@@ -53,38 +53,18 @@
                         <a href="">Populares</a>
                     </div>
                 </div>
+                <div id="compartilhe">
+                    <a href="../compartilhar/compartilhar.php" id="btn-compartilhe">Compartilhe sua Observação</a>
+                </div>
                 <div id="feed">
-                    <div class="bloco-post">
-                        <div class="imagem-post"><img src="../img/passaroexemplo.jpg" alt="passaroteste"></div>
-                        <div class="texto-post"><span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse vero necessitatibus cum, odit quo enim incidunt. At earum reprehenderit iusto, minus voluptas delectus et tenetur error accusantium pariatur placeat facilis.</span></div>
-                        <div class="interacoes-post"></div>
-                    </div>
-                    <div class="bloco-post">
-                        <div class="imagem-post"><img src="../img/passaroexemplo.jpg" alt="passaroteste"></div>
-                        <div class="texto-post"></div>
-                        <div class="interacoes-post"></div>
-                    </div>
-                    <div class="bloco-post">
-                        <div class="imagem-post"><img src="../img/passaroexemplo.jpg" alt="passaroteste"></div>
-                        <div class="texto-post"></div>
-                        <div class="interacoes-post"></div>
-                    </div>
-                    <div class="bloco-post">
-                        <div class="imagem-post"><img src="../img/passaroexemplo.jpg" alt="passaroteste"></div>
-                        <div class="texto-post"></div>
-                        <div class="interacoes-post"></div>
-                    </div>
-                    <div class="bloco-post">
-                        <div class="imagem-post"><img src="../img/passaroexemplo.jpg" alt="passaroteste"></div>
-                        <div class="texto-post"></div>
-                        <div class="interacoes-post"></div>
-                    </div>
+                </div>
+                <div id="ver-mais-container">
+                    <button id="btn-ver-mais">Ver mais</button>
                 </div>
             </div>
         </div>
     </body>
 </html>
 <script src="../padroes/mostraPerfil.js"></script>
-<script>
-    sessionStorage.setItem("logado", "<?php echo isset($_SESSION['logado']) && $_SESSION['logado'] === true ? 'true' : 'false'; ?>");
-</script>
+<script src="explorar.js"></script>
+<script src="https://kit.fontawesome.com/c68ccb89e7.js" crossorigin="anonymous"></script>
