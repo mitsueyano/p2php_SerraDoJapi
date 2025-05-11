@@ -51,7 +51,7 @@
                 <div id="imgtextogeral">
                     <div id="textogeral">
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio eligendi deserunt explicabo vero repellat porro. Quam sed deleniti, unde.</p>
-                        <a href="" id="btn-compartilhe">Compartilhe sua observação</a>
+                        <button id="btn-compartilhe">Compartilhe sua observação</button>
                     </div>
                 </div>
             </div>
@@ -72,4 +72,17 @@
     </body>
 </html>
 <script src="../padroes/mostraPerfil.js"></script>
-<script>sessionStorage.setItem("logado", "<?php echo isset($_SESSION['logado']) && $_SESSION['logado'] === true ? 'true' : 'false'; ?>");</script>
+<script>
+    sessionStorage.setItem("logado", "<?php echo isset($_SESSION['logado']) && $_SESSION['logado'] === true ? 'true' : 'false'; ?>");
+    const btnCompartilhe = document.getElementById("btn-compartilhe");
+
+    btnCompartilhe.addEventListener("click", function(event) {
+
+        if (sessionStorage.getItem("logado") !== "true") {
+            window.location.href = "../login/login.php";
+        } else {
+            window.location.href = "../compartilhar/compartilhar.php";
+        }
+    });
+
+</script>

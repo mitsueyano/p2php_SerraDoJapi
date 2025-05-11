@@ -65,6 +65,9 @@
         </div>
     </body>
 </html>
+<script>
+    sessionStorage.setItem("logado", "<?php echo isset($_SESSION['logado']) && $_SESSION['logado'] === true ? 'true' : 'false'; ?>");
+</script>
 <script src="../padroes/mostraPerfil.js"></script>
 <script src="explorar.js"></script>
 <script src="https://kit.fontawesome.com/c68ccb89e7.js" crossorigin="anonymous"></script>

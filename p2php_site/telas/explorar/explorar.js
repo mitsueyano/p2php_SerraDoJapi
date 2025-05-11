@@ -1,12 +1,10 @@
- sessionStorage.setItem("logado", "<?php echo isset($_SESSION['logado']) && $_SESSION['logado'] === true ? 'true' : 'false'; ?>");
+//---Função para carregar uma quantidade posts limitados do banco de dados >> carregarPosts.php---//
 
-    //---Função para carregar uma quantidade posts limitados do banco de dados >> carregarPosts.php---//
+let offset = 0;
+const limite = 1; //Limite
+const feed = document.getElementById("feed");
 
-    let offset = 0;
-    const limite = 1; //Limite
-    const feed = document.getElementById("feed");
-
-    function carregarPosts() {
+function carregarPosts() {
     fetch(`../../php_funcoes/carregarPosts.php?offset=${offset}`)
             .then(response => response.json())
             .then(posts => {
@@ -47,7 +45,7 @@
                 });
                 offset += limite;
             });
-    }
+}
 
     document.getElementById("btn-ver-mais").addEventListener("click", carregarPosts);
     window.addEventListener("DOMContentLoaded", carregarPosts);

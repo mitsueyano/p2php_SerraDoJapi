@@ -1,5 +1,3 @@
-sessionStorage.setItem("logado", "<?php echo isset($_SESSION['logado']) && $_SESSION['logado'] === true ? 'true' : 'false'; ?>");
-
 //Inicializa o mapa em Jundiaí-SP
 const map = L.map('map').setView([-23.1857, -46.8978], 13);
 

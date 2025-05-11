@@ -36,13 +36,13 @@
                     <label for="imagem">Selecione uma imagem:</label><br>
                     <input type="file" name="imagem" accept="image/*" required><br><br>
                     <label for="nomepopular">Nome Popular:</label>
-                    <input type="text" name="nomepopular">
+                    <input type="text" name="nomepopular" required>
                     <label for="classtaxonomica">Classificação Taxonomica</label>
-                    <label for="classe">Classe:</label><input type="text" name="classe" id="">
-                    <label for="familia">Família:</label><input type="text" name="familia" id="">
-                    <label for="especie">Espécie:</label><input type="text" name="especie" id="">
-                    <label for="data">Data:</label><input type="date" name="data" id="">
-                    <label for="hora">Hora:</label><input type="time" name="hora">
+                    <label for="classe">Classe:</label><input type="text" name="classe" id="" required>
+                    <label for="familia">Família:</label><input type="text" name="familia" id="" required>
+                    <label for="especie">Espécie:</label><input type="text" name="especie" id="" required>
+                    <label for="data">Data:</label><input type="date" name="data" id="" required>
+                    <label for="hora">Hora:</label><input type="time" name="hora" required>
                     <label for="comentario">Comentário</label><textarea name="comentario" id=""></textarea>
                     <label for="geolocalizacao">Geolocalização:</label><br>
 
@@ -50,15 +50,18 @@
                     
                     <br><br>
                     <label for="latitude">Latitude:</label>
-                    <input type="text" name="latitude" id="latitude" readonly><br>
+                    <input type="text" name="latitude" id="latitude" readonly required><br>
                     <label for="longitude">Longitude:</label>
-                    <input type="text" name="longitude" id="longitude" readonly><br>
+                    <input type="text" name="longitude" id="longitude" readonly required><br>
 
                     <input type="submit" value="Enviar imagem">
                 </form>
             </div>
         </div>
     </body>
+    <script>
+    sessionStorage.setItem("logado", "<?php echo isset($_SESSION['logado']) && $_SESSION['logado'] === true ? 'true' : 'false'; ?>");
+    </script>
     <script src="../padroes/mostraPerfil.js"></script>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
