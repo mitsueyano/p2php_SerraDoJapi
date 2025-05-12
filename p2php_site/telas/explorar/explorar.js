@@ -4,6 +4,23 @@ let offset = 0;
 const limite = 1; //Limite
 const feed = document.getElementById("feed");
 
+//To fazendo aqui
+function teste(id){   
+    fetch("../php_funcoes/atualizarLikes.php"),{
+        method: "POST",
+        headers :{
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            id: id
+        })
+    }
+    .then((response) => response.json())
+    .then((data) => {
+        document.getElementById(id).classList.toggle("liked");
+    })
+} 
+
 function carregarPosts() {
     fetch(`../../php_funcoes/carregarPosts.php?offset=${offset}`)
             .then(response => response.json())
@@ -37,9 +54,12 @@ function carregarPosts() {
                             </div>
                         </div>
                         <div class="interacoes-post">
-                            <i class="fa-solid fa-comments comentario"></i>
-                            <i class="fa-solid fa-heart like"></i>
+                            <i class="fa-solid fa-comments comentario"></i><span>${post.qtde_coment}</span>
+                            <i class="fa-solid fa-heart like" id="${post.id}" onclick="teste(this.id)"></i><span>${post.qtde_likes}</span>
                         </div>
+                        <form action="../php_funcoes/atualizarLikes.php">
+                            <input type="text" value="${post.id}" class="idpost" name="idpost">
+                        </form>
                     `;
                     feed.appendChild(bloco);
                 });
@@ -47,5 +67,6 @@ function carregarPosts() {
             });
 }
 
-    document.getElementById("btn-ver-mais").addEventListener("click", carregarPosts);
-    window.addEventListener("DOMContentLoaded", carregarPosts);
+document.getElementById("btn-ver-mais").addEventListener("click", carregarPosts);
+window.addEventListener("DOMContentLoaded", carregarPosts);
+ 

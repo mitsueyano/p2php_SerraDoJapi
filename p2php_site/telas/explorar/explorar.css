@@ -119,7 +119,7 @@
 /* Posts do feed */
 .bloco-post{
     width: 100%;
-    height: 55vh;
+    height: 57vh;
     border-top: 1px solid #334027;
     border-bottom: 1px solid #334027;
     background-color: #fff;
@@ -223,6 +223,15 @@
 }
 .comentario:hover{
     color: #7D8C46;
+}
+
+.liked{
+    color: #E65374 !important;
+}
+
+/* ID do post */
+.idpost{
+    visibility: hidden;
 }
 
 /* Botão "Ver mais" */

@@ -72,17 +72,7 @@
     </body>
 </html>
 <script src="../padroes/mostraPerfil.js"></script>
+<script src="../index/index.js"></script>
 <script>
     sessionStorage.setItem("logado", "<?php echo isset($_SESSION['logado']) && $_SESSION['logado'] === true ? 'true' : 'false'; ?>");
-    const btnCompartilhe = document.getElementById("btn-compartilhe");
-
-    btnCompartilhe.addEventListener("click", function(event) {
-
-        if (sessionStorage.getItem("logado") !== "true") {
-            window.location.href = "../login/login.php";
-        } else {
-            window.location.href = "../compartilhar/compartilhar.php";
-        }
-    });
-
 </script>

@@ -34,12 +34,12 @@
                     <input type="text" name="" id="input-pesquisa" placeholder="Pesquise...">
                 </div>
                 <div class="flex">
-                    <div class="divopcao">
+                    <div class="divopcao" id="opcao-especies" onclick=" window.location.href ='../especies/especies.php';">
                         <img src="../img/especies_HanifiSarikaya.jpg" alt="Imagem de uma abelha polinizando">
                         <span>Espécies</span>
                     </div>
-                    <div class="divopcao">
-                        <img src="../img/placaanimal.png" alt="Imagem de uma abelha polinizando">
+                    <div class="divopcao" id="opcao-ocorrencias" onclick=" window.location.href ='../ocorrencias/ocorrencias.php';">
+                        <img src="../img/placaanimal.png" alt="Placa de animal na pista">
                         <span>Ocorrências</span>
                     </div>
                 </div>

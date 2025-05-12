@@ -54,16 +54,17 @@ CREATE TABLE registros_biologicos (
     descricao TEXT,
     id_geolocalizacao INT NOT NULL,
     url_imagem VARCHAR(255),
+    qtdelikes INT NOT NULL,
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id),
     FOREIGN KEY (id_taxonomia) REFERENCES classificacao_taxonomica(id),
     FOREIGN KEY (id_geolocalizacao) REFERENCES geolocalizacao(id)
 );
 
 INSERT INTO registros_biologicos (
-    id_usuario, nome_popular, id_taxonomia, data_observacao, horario_observacao, descricao, id_geolocalizacao, url_imagem) VALUES
-('1', 'Papagaio-verdadeiro', 1, '2025-04-12', '08:30:00', 'Avistado em árvore frutífera.', 1, 'https://res.cloudinary.com/djbatjpjn/image/upload/v1746915864/hdhsdtqgv7ea5cbhtl4z.png'),
-('2', 'Jaguatirica', 2, '2025-03-28', '22:15:00', 'Atravessando trilha noturna.', 2, 'https://res.cloudinary.com/djbatjpjn/image/upload/v1746915960/ytbx8r46k4r9fv3qnirn.png'),
-('3', 'Perereca-de-banheiro', 3, '2025-02-10', '19:05:00', 'Pousada em janela durante chuva.', 3, 'https://res.cloudinary.com/djbatjpjn/image/upload/v1746916025/tviwtun4vxqcivfeiysy.png');
+    id_usuario, nome_popular, id_taxonomia, data_observacao, horario_observacao, descricao, id_geolocalizacao, url_imagem, qdtelikes) VALUES
+('1', 'Papagaio-verdadeiro', 1, '2025-04-12', '08:30:00', 'Avistado em árvore frutífera.', 1, 'https://res.cloudinary.com/djbatjpjn/image/upload/v1746915864/hdhsdtqgv7ea5cbhtl4z.png', 1),
+('2', 'Jaguatirica', 2, '2025-03-28', '22:15:00', 'Atravessando trilha noturna.', 2, 'https://res.cloudinary.com/djbatjpjn/image/upload/v1746915960/ytbx8r46k4r9fv3qnirn.png', 1),
+('3', 'Perereca-de-banheiro', 3, '2025-02-10', '19:05:00', 'Pousada em janela durante chuva.', 3, 'https://res.cloudinary.com/djbatjpjn/image/upload/v1746916025/tviwtun4vxqcivfeiysy.png', 1);
 
 
 select * from usuarios;

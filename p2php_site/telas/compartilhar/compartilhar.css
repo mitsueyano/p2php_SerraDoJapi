@@ -15,7 +15,7 @@
 form{
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 5px;
     align-items: center;
     justify-content: center;
     height: 100%;
@@ -26,8 +26,23 @@ form{
 form input{
     border: 1px solid #7D8C46;
     height: 3vh;
-    max-width: 100%;
 }
 form input:focus{
     outline: 1px solid #7D8C46;
+}
+.flex{
+    display: flex;
+    width: 80%;
+    height: 80%;
+    justify-content: space-between;
+}
+.texto{
+    color: #334027;
+    font-size: 3.2vh;
+}
+textarea{
+    min-width: 80%;
+    min-height: 100px;
+    max-width: 80%;
+    max-height: 100px;
 }

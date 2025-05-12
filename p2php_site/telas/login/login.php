@@ -33,6 +33,7 @@
                 <form action="../../php_funcoes/conectaLogin.php" method="post">
                     <div class="secao"><label for="cpf">CPF</label><input type="text" required id="cpf" name="cpf"></div>
                     <div class="secao"><label for="senha">Senha</label><input type="password" required id="senha" name="senha"><a href="" id="esquecisenha">Esqueci minha senha</a></div>
+                    <span id="msg-erro"></span>
                     <input type="submit" value="ENTRAR" id="entrar">
                     <a href="../cadastro/cadastro.php" id="cadastre">Não possui uma conta? Cadastre-se.</a>
                 </form>
@@ -40,7 +41,7 @@
         </div>
     </body>
 </html>
-<script src="../padroes/mostraPerfil.js"></script>
+<script src="../login/login.js"></script>
 <script>
     sessionStorage.setItem("logado", "<?php echo isset($_SESSION['logado']) && $_SESSION['logado'] === true ? 'true' : 'false'; ?>");
 </script>

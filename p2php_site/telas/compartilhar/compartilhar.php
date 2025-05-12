@@ -33,34 +33,37 @@
         <div id="conteudo">
             <div id="caixa">
                 <form action="../../php_funcoes/upload.php" method="POST" enctype="multipart/form-data">
-                    <label for="imagem">Selecione uma imagem:</label><br>
+                    <label for="imagem" class="texto">Selecione uma imagem:</label><br>
                     <input type="file" name="imagem" accept="image/*" required><br><br>
-                    <label for="nomepopular">Nome Popular:</label>
-                    <input type="text" name="nomepopular" required>
-                    <label for="classtaxonomica">Classificação Taxonomica</label>
-                    <label for="classe">Classe:</label><input type="text" name="classe" id="" required>
-                    <label for="familia">Família:</label><input type="text" name="familia" id="" required>
-                    <label for="especie">Espécie:</label><input type="text" name="especie" id="" required>
-                    <label for="data">Data:</label><input type="date" name="data" id="" required>
-                    <label for="hora">Hora:</label><input type="time" name="hora" required>
-                    <label for="comentario">Comentário</label><textarea name="comentario" id=""></textarea>
+                    <div class="flex">
+                        <label for="nomepopular">Nome Popular:</label>
+                        <input type="text" name="nomepopular" required>
+                    </div>
+                    <label for="classtaxonomica" class="texto">Classificação Taxonomica:</label>
+                    <div class="flex"><label for="classe">Classe:</label><input type="text" name="classe" required></div>   
+                    <div class="flex"><label for="familia">Família:</label><input type="text" name="familia" required></div>
+                    <div class="flex"><label for="especie">Espécie:</label><input type="text" name="especie" required></div>
+                    <div class="flex"><label for="data">Data:</label><input type="date" name="data" required></div>
+                    <div class="flex"><label for="hora">Hora:</label><input type="time" name="hora" required></div>
+                    <label for="comentario">Comentário</label><textarea name="comentario"></textarea>
                     <label for="geolocalizacao">Geolocalização:</label><br>
-
                     <div id="map" style="height: 400px; width: 100%;"></div>
                     
-                    <br><br>
-                    <label for="latitude">Latitude:</label>
-                    <input type="text" name="latitude" id="latitude" readonly required><br>
-                    <label for="longitude">Longitude:</label>
-                    <input type="text" name="longitude" id="longitude" readonly required><br>
-
+                    <div class="flex">
+                        <label for="latitude">Latitude:</label>
+                        <input type="text" name="latitude" id="latitude" readonly required><br>
+                    </div>
+                    <div class="flex">
+                        <label for="longitude">Longitude:</label>
+                        <input type="text" name="longitude" id="longitude" readonly required><br>
+                    </div>
                     <input type="submit" value="Enviar imagem">
                 </form>
             </div>
         </div>
     </body>
     <script>
-    sessionStorage.setItem("logado", "<?php echo isset($_SESSION['logado']) && $_SESSION['logado'] === true ? 'true' : 'false'; ?>");
+        sessionStorage.setItem("logado", "<?php echo isset($_SESSION['logado']) && $_SESSION['logado'] === true ? 'true' : 'false'; ?>");
     </script>
     <script src="../padroes/mostraPerfil.js"></script>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
