@@ -34,7 +34,7 @@
                     <input type="text" name="" id="input-pesquisa" placeholder="Pesquise...">
                 </div>
                 <div class="flex">
-                    <div class="divopcao" id="opcao-especies" onclick=" window.location.href ='../especies/especies.php';">
+                    <div class="divopcao" id="opcao-especies" onclick="window.location.href ='../especies/especies.php';">
                         <img src="../img/especies_HanifiSarikaya.jpg" alt="Imagem de uma abelha polinizando">
                         <span>Espécies</span>
                     </div>
@@ -67,6 +67,7 @@
 </html>
 <script>
     sessionStorage.setItem("logado", "<?php echo isset($_SESSION['logado']) && $_SESSION['logado'] === true ? 'true' : 'false'; ?>");
+    sessionStorage.setItem("id_usuario", "<?php echo $_SESSION['id_usuario'] ?? ''; ?>");
 </script>
 <script src="../padroes/mostraPerfil.js"></script>
 <script src="explorar.js"></script>

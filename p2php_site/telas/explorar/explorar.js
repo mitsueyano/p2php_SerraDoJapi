@@ -5,21 +5,35 @@ const limite = 1; //Limite
 const feed = document.getElementById("feed");
 
 //To fazendo aqui
-function teste(id){   
-    fetch("../php_funcoes/atualizarLikes.php"),{
-        method: "POST",
-        headers :{
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            id: id
+function teste(idpost, idusuario ) {   
+    console.log(idpost, idusuario);
+    if (sessionStorage.getItem("logado") !== "true") {
+        console.log("Usuário não logado");
+        window.location.href = "../login/login.php";
+    } else {
+        fetch("../../php_funcoes/atualizarLikes.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                post_id: idpost,
+                usuario_id: idusuario
+            })
         })
+        .then((response) => {
+            if (!response.ok) throw new Error("Erro HTTP " + response.status);
+            return response.json();
+        })
+        .then((data) => {
+            document.getElementById(idpost).classList.toggle("liked");
+        })
+        .catch((error) => {
+            console.error("Erro no fetch:", error);
+        });
     }
-    .then((response) => response.json())
-    .then((data) => {
-        document.getElementById(id).classList.toggle("liked");
-    })
-} 
+}
+
 
 function carregarPosts() {
     fetch(`../../php_funcoes/carregarPosts.php?offset=${offset}`)
@@ -55,7 +69,7 @@ function carregarPosts() {
                         </div>
                         <div class="interacoes-post">
                             <i class="fa-solid fa-comments comentario"></i><span>${post.qtde_coment}</span>
-                            <i class="fa-solid fa-heart like" id="${post.id}" onclick="teste(this.id)"></i><span>${post.qtde_likes}</span>
+                            <i class="fa-solid fa-heart like" id="${post.id}" onclick="teste(this.id, ${post.id_usuario})"></i><span>${post.qtde_likes}</span>
                         </div>
                         <form action="../php_funcoes/atualizarLikes.php">
                             <input type="text" value="${post.id}" class="idpost" name="idpost">
