@@ -3,7 +3,7 @@
 
     if (!isset($_SESSION["logado"]) || $_SESSION["logado"] != TRUE) {
         header("Location: ../login/login.php");
-    }
+    }   
     else {
         echo "<h1>Seja bem-vindo, ".$_SESSION["user"]."</h1>";
     }

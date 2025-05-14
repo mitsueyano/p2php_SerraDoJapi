@@ -79,3 +79,4 @@ select * from usuarios;
 select * from classificacao_taxonomica;
 select * from geolocalizacao;
 select * from registros_biologicos;
+select * from curtidas_usuarios;
