@@ -1,4 +1,4 @@
-//Inicializa o mapa em Jundiaí-SP
+//Inicializa o mapa em Jundiaí
 const map = L.map('map').setView([-23.1857, -46.8978], 13);
 
 // Adiciona o tile layer (a camada base do mapa) do OpenStreetMap
@@ -40,3 +40,75 @@ map.on('click', function (e) {
     document.getElementById('latitude').value = lat.toFixed(6);
     document.getElementById('longitude').value = lng.toFixed(6);
 });
+
+
+
+async function buscarTaxonomia() {
+
+    entradaUsuario = document.getElementById("nomepopular").value;
+
+  try {
+    //iNaturalist
+
+    const iNatResponse = await fetch(`https://api.inaturalist.org/v1/taxa?q=${encodeURIComponent(entradaUsuario)}&locale=pt-BR&per_page=1`);
+    const iNatData = await iNatResponse.json();
+
+    if (!iNatData.results.length) {
+      console.log("⚠️ Espécie não encontrada no iNaturalist.");
+      return;
+    }
+
+    const nome = iNatData.results[0];
+    const nomePopularOficial = nome.preferred_common_name || entradaUsuario;
+    const nomeCientifico = nome.name;
+    var inputClasse =  document.getElementById("classe");
+    var inputFamilia =  document.getElementById("familia");
+    var inputEspecie =  document.getElementById("especie");
+
+    console.log("Entrada do usuário:", entradaUsuario);
+    console.log("Nome popular reconhecido:", nomePopularOficial);
+    console.log("Nome científico:", nomeCientifico);
+
+    //Gbif                      
+    const gbifResponse = await fetch(`https://api.gbif.org/v1/species/match?name=${encodeURIComponent(nomeCientifico)}`);
+    const gbifData = await gbifResponse.json();
+
+    if (!gbifData.class) {
+      console.log("Classificação taxonômica não encontrada no GBIF.");
+      return;
+    }
+
+    var classe = gbifData.class;
+    var familia = gbifData.family;
+    var especie = gbifData.species;
+
+    console.log("Classificação taxonômica simples:");
+    console.log("Reino:", gbifData.kingdom || "—");
+    console.log("Filo:", gbifData.phylum || "—");
+    console.log("Classe:", gbifData.class || "—"); 
+
+    if (classe != undefined){
+       inputClasse.value = classe;
+    } else{
+        inputClasse.value = "";
+    }
+    if (familia != undefined){
+       inputFamilia.value = familia;
+    } else{
+        inputFamilia.value = "";
+    }
+    if (especie != undefined){
+       inputEspecie.value = especie;
+    } else{
+        inputEspecie.value = "";
+    }
+
+  } catch (erro) {
+    console.error("❌ Erro ao buscar dados:", erro);
+  }
+}
+
+buscarTaxonomia("onça-pintada");
+
+
+

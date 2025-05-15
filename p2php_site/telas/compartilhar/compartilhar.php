@@ -40,14 +40,15 @@ if (!isset($_SESSION["logado"]) || $_SESSION["logado"] != TRUE) {
                     <input type="file" name="imagem" accept="image/*" required><br><br>
                     <div class="flex">
                         <label for="nomepopular">Nome Popular:</label>
-                        <input type="text" name="nomepopular" required>
+                        <input type="text" name="nomepopular" id="nomepopular" required>
+                        <button onclick="buscarTaxonomia()">Buscar</button>
                     </div>
                     <label for="classtaxonomica" class="texto">Classificação Taxonomica:</label>
-                    <div class="flex"><label for="classe">Classe:</label><input type="text" name="classe" required>
+                    <div class="flex"><label for="classe">Classe:</label><input type="text" name="classe" id="classe" required>
                     </div>
-                    <div class="flex"><label for="familia">Família:</label><input type="text" name="familia" required>
+                    <div class="flex"><label for="familia">Família:</label><input type="text" name="familia" id="familia" required>
                     </div>
-                    <div class="flex"><label for="especie">Espécie:</label><input type="text" name="especie" required>
+                    <div class="flex"><label for="especie">Espécie:</label><input type="text" name="especie" id="especie" required>
                     </div>
                     <div class="flex"><label for="data">Data:</label><input type="date" name="data" required></div>
                     <div class="flex"><label for="hora">Hora:</label><input type="time" name="hora" required></div>
@@ -67,7 +68,6 @@ if (!isset($_SESSION["logado"]) || $_SESSION["logado"] != TRUE) {
                     </div>
                     <input type="submit" value="Enviar imagem">
                 </div>
-
             </form>
         </div>
     </div>
