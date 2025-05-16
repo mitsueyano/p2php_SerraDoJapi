@@ -29,7 +29,7 @@ CREATE TABLE classificacao_taxonomica (
 INSERT INTO classificacao_taxonomica (classe, familia, especie) VALUES
 ('Aves', 'Psittacidae', 'Amazona aestiva'),
 ('Mammalia', 'Felidae', 'Leopardus pardalis'),
-('Amphibia', 'Hylidae', 'Boana faber');
+('Amphibia', 'Hylidae', 'Scinax fuscovarius');
 
 -- Tabela de geolocalização
 CREATE TABLE geolocalizacao (

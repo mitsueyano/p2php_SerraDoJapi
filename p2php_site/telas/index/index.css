@@ -38,7 +38,7 @@
     align-items: center;
 }
 
-/* Texto Geral*/
+/* Texto Geral */
 #divtextogeral{
     display: flex;
     justify-content: center;
@@ -74,7 +74,7 @@
     font-size: 1.5vw;
     text-align: end;
 }
-/* Botão compartilhe*/
+/* Botão compartilhe */
 #btn-compartilhe{
     text-decoration: none;
     background-color: transparent;

@@ -45,7 +45,11 @@ map.on('click', function (e) {
 
 async function buscarTaxonomia() {
 
-    entradaUsuario = document.getElementById("nomepopular").value;
+    var entradaUsuario = document.getElementById("nomepopular").value;
+    var inputNomeCientifico = document.getElementById("nomecientifico");
+    var inputClasse =  document.getElementById("classe");
+    var inputFamilia =  document.getElementById("familia");
+    var inputEspecie =  document.getElementById("especie");
 
   try {
     //iNaturalist
@@ -55,15 +59,17 @@ async function buscarTaxonomia() {
 
     if (!iNatData.results.length) {
       console.log("⚠️ Espécie não encontrada no iNaturalist.");
+      inputNomeCientifico.value = "";
+      inputClasse.value = "";
+      inputFamilia.value = "";
+      inputEspecie.value = "";
       return;
     }
 
     const nome = iNatData.results[0];
     const nomePopularOficial = nome.preferred_common_name || entradaUsuario;
-    const nomeCientifico = nome.name;
-    var inputClasse =  document.getElementById("classe");
-    var inputFamilia =  document.getElementById("familia");
-    var inputEspecie =  document.getElementById("especie");
+    var nomeCientifico = nome.name;
+   
 
     console.log("Entrada do usuário:", entradaUsuario);
     console.log("Nome popular reconhecido:", nomePopularOficial);
@@ -73,20 +79,29 @@ async function buscarTaxonomia() {
     const gbifResponse = await fetch(`https://api.gbif.org/v1/species/match?name=${encodeURIComponent(nomeCientifico)}`);
     const gbifData = await gbifResponse.json();
 
-    if (!gbifData.class) {
-      console.log("Classificação taxonômica não encontrada no GBIF.");
+    if (!nomeCientifico) {
+    console.log("Classificação taxonômica não encontrada no GBIF.");
+    inputNomeCientifico.value = "";
+      inputClasse.value = "";
+      inputFamilia.value = "";
+      inputEspecie.value = "";
       return;
     }
-
+    
     var classe = gbifData.class;
     var familia = gbifData.family;
     var especie = gbifData.species;
 
-    console.log("Classificação taxonômica simples:");
+    console.log("=====Classificação taxonômica simples=====");
     console.log("Reino:", gbifData.kingdom || "—");
     console.log("Filo:", gbifData.phylum || "—");
     console.log("Classe:", gbifData.class || "—"); 
 
+    if (nomeCientifico != undefined){
+       inputNomeCientifico.value = nomeCientifico;
+    } else{
+        inputNomeCientifico.value = "";
+    }
     if (classe != undefined){
        inputClasse.value = classe;
     } else{
@@ -108,7 +123,6 @@ async function buscarTaxonomia() {
   }
 }
 
-buscarTaxonomia("onça-pintada");
 
 
 

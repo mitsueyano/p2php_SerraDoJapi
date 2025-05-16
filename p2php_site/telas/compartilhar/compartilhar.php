@@ -41,17 +41,31 @@ if (!isset($_SESSION["logado"]) || $_SESSION["logado"] != TRUE) {
                     <div class="flex">
                         <label for="nomepopular">Nome Popular:</label>
                         <input type="text" name="nomepopular" id="nomepopular" required>
-                        <button onclick="buscarTaxonomia()">Buscar</button>
+                    </div>
+                    <div id="div-btnbuscar">
+                        <button onclick="buscarTaxonomia()" id="buscar">Buscar</button>
+                    </div>
+                    <br>
+                    <div class="flex">
+                        <label for="nomecientifico">Nome Científico:</label>
+                        <input type="text" name="nomecientifico" id="nomecientifico" required>
                     </div>
                     <label for="classtaxonomica" class="texto">Classificação Taxonomica:</label>
-                    <div class="flex"><label for="classe">Classe:</label><input type="text" name="classe" id="classe" required>
+                    <div class="flex">
+                        <label for="classe">Classe:</label><input type="text" name="classe" id="classe" required>
                     </div>
-                    <div class="flex"><label for="familia">Família:</label><input type="text" name="familia" id="familia" required>
+                    <div class="flex">
+                        <label for="familia">Família:</label><input type="text" name="familia" id="familia" required>
                     </div>
-                    <div class="flex"><label for="especie">Espécie:</label><input type="text" name="especie" id="especie" required>
+                    <div class="flex">
+                        <label for="especie">Espécie:</label><input type="text" name="especie" id="especie" required>
                     </div>
-                    <div class="flex"><label for="data">Data:</label><input type="date" name="data" required></div>
-                    <div class="flex"><label for="hora">Hora:</label><input type="time" name="hora" required></div>
+                    <div class="flex">
+                        <label for="data">Data:</label><input type="date" name="data" required>
+                    </div>
+                    <div class="flex">
+                        <label for="hora">Hora:</label><input type="time" name="hora" required>
+                    </div>
                     <label for="comentario">Comentário</label><textarea name="comentario"></textarea><br>
                 </div>
                 <div class="geo">
@@ -66,7 +80,8 @@ if (!isset($_SESSION["logado"]) || $_SESSION["logado"] != TRUE) {
                         <label for="longitude">Longitude:</label>
                         <input type="text" name="longitude" id="longitude" readonly required>
                     </div>
-                    <input type="submit" value="Enviar imagem">
+                    <br><br>
+                    <input type="submit" value="Compartilhar" id="compartilhar">
                 </div>
             </form>
         </div>
