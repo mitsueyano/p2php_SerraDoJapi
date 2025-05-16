@@ -1,5 +1,5 @@
 let offset = 0;
-const limite = 1;
+const limite = 8;
 const feed = document.getElementById("feed");
 const idusuario = sessionStorage.getItem("id_usuario");
 
@@ -53,6 +53,26 @@ function abrirModal(urlImagem) {
 function fecharModal() {
     document.getElementById("modal").style.display = "none";
 }
+function formatarDataHoraCompleta(dataStr, horaStr) {
+    // dataStr no formato dd/mm/yyyy, horaStr no formato hh:mm:ss ou hh:mm
+    const partes = dataStr.split('/');
+    if (partes.length !== 3) return dataStr + " às " + horaStr.slice(0,5);
+
+    const dataObj = new Date(partes[2], partes[1] - 1, partes[0]);
+    
+    const hoje = new Date();
+    hoje.setHours(0,0,0,0);
+    const ontem = new Date(hoje);
+    ontem.setDate(hoje.getDate() - 1);
+
+    if (dataObj.getTime() === hoje.getTime()) {
+        return `Hoje às ${horaStr.slice(0,5)}`;
+    } else if (dataObj.getTime() === ontem.getTime()) {
+        return `Ontem às ${horaStr.slice(0,5)}`;
+    } else {
+        return `${dataStr} às ${horaStr.slice(0,5)}`;
+    }
+}
 
 function carregarPosts() {
     fetch(`../../php_funcoes/carregarPosts.php?offset=${offset}&usuario_id=${idusuario}`)
@@ -68,7 +88,11 @@ function carregarPosts() {
 
                 const likeClass = post.curtiu ? "liked" : "";
 
+                const dataHoraPub = formatarDataHoraCompleta(post.data_publicacao, post.hora_publicacao);
+                const dataHoraObs = formatarDataHoraCompleta(post.data_observacao, post.hora_observacao);
+
                 bloco.innerHTML = `
+                    <span id="datahora">${dataHoraPub}</span>
                     <div class="imagem-post">
                         <img src="${post.url_imagem}" alt="Imagem de ${post.nome_popular}" draggable="false" onclick="abrirModal('${post.url_imagem}')">
                     </div>
@@ -84,11 +108,15 @@ function carregarPosts() {
                         <div class="autorendereco">
                             <div class="endereco">
                                 <i class="fa-solid fa-location-dot"></i>
-                                <span>${post.endereco}</span>
+                                <span>${post.nome_lugar}</span>
                             </div>
                             <div class="autor">   
                                 <i class="fa-solid fa-camera"></i>          
                                 <span>Por ${post.nome} ${post.sobrenome}</span>
+                            </div>
+                            <div class="autor">   
+                                <i class="fa-solid fa-calendar"></i>       
+                                <span>${dataHoraObs}</span>
                             </div>
                         </div>
 
@@ -98,14 +126,14 @@ function carregarPosts() {
                             <span id="likes-${post.id}">${post.qtde_likes}</span>
                         </div>
                     </div>
-
-                    
                 `;
                 feed.appendChild(bloco);
             });
             offset += limite;
         });
 }
+
+
 
 document.getElementById("btn-ver-mais").addEventListener("click", carregarPosts);
 window.addEventListener("DOMContentLoaded", carregarPosts);

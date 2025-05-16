@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <?php
 session_start();
 
@@ -7,7 +8,7 @@ if (!isset($_SESSION["logado"]) || $_SESSION["logado"] != TRUE) {
     echo "<h1>Seja bem-vindo, " . $_SESSION["user"] . "</h1>";
 }
 ?>
-<!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -17,7 +18,7 @@ if (!isset($_SESSION["logado"]) || $_SESSION["logado"] != TRUE) {
     <link rel="stylesheet" href="../padroes/padraoPag.css">
     <link rel="stylesheet" href="compartilhar.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css"/>
 </head>
 
 <body>
@@ -36,42 +37,47 @@ if (!isset($_SESSION["logado"]) || $_SESSION["logado"] != TRUE) {
             <form action="../../php_funcoes/upload.php" method="POST" enctype="multipart/form-data">
 
                 <div class="info">
-                    <label for="imagem" class="texto">Selecione uma imagem:</label><br>
-                    <input type="file" name="imagem" accept="image/*" required><br><br>
+                    <span class="texto">Selecione uma imagem:</span><br>
+                    <input type="file" name="imagem" accept="image/*" id="imagem" required><br><br>
                     <div class="flex">
                         <label for="nomepopular">Nome Popular:</label>
-                        <input type="text" name="nomepopular" id="nomepopular" required>
+                        <input type="text" name="nomepopular" id="nomepopular" autocomplete="off" required>
+                        <div id="dropdown-list" class="dropdown-list"></div>
                     </div>
-                    <div id="div-btnbuscar">
-                        <button onclick="buscarTaxonomia()" id="buscar">Buscar</button>
-                    </div>
+                   
                     <br>
                     <div class="flex">
                         <label for="nomecientifico">Nome Científico:</label>
                         <input type="text" name="nomecientifico" id="nomecientifico" required>
                     </div>
-                    <label for="classtaxonomica" class="texto">Classificação Taxonomica:</label>
+                    <span class="texto">Classificação Taxonomica:</span>
                     <div class="flex">
                         <label for="classe">Classe:</label><input type="text" name="classe" id="classe" required>
+                    </div>
+                    <div class="flex">
+                        <label for="ordem">Ordem:</label>
+                        <input type="text" name="ordem" id="ordem" required>
                     </div>
                     <div class="flex">
                         <label for="familia">Família:</label><input type="text" name="familia" id="familia" required>
                     </div>
                     <div class="flex">
-                        <label for="especie">Espécie:</label><input type="text" name="especie" id="especie" required>
+                        <label for="data">Data:</label><input type="date" name="data" id="data" required>
                     </div>
                     <div class="flex">
-                        <label for="data">Data:</label><input type="date" name="data" required>
+                        <label for="hora">Hora:</label><input type="time" name="hora" id="hora" required>
                     </div>
-                    <div class="flex">
-                        <label for="hora">Hora:</label><input type="time" name="hora" required>
-                    </div>
-                    <label for="comentario">Comentário</label><textarea name="comentario"></textarea><br>
+                    <label for="comentario">Comentário</label><textarea name="comentario"
+                        id="comentario"></textarea><br>
                 </div>
                 <div class="geo">
-                    <label for="geolocalizacao">Geolocalização:</label>
+                    <span>Geolocalização:</span>
                     <div id="map" style="height: 400px; width: 100%;"></div>
-
+                    <div class="flexlugar">
+                        <label for="nomelugar">Nome do lugar / ponto de referência:</label>
+                        <input type="text" name="nomelugar" id="nomelugar" required>
+                    </div>
+                    <br>
                     <div class="flex">
                         <label for="latitude">Latitude:</label>
                         <input type="text" name="latitude" id="latitude" readonly required>
@@ -90,9 +96,11 @@ if (!isset($_SESSION["logado"]) || $_SESSION["logado"] != TRUE) {
 <script>
     sessionStorage.setItem("logado", "<?php echo isset($_SESSION['logado']) && $_SESSION['logado'] === true ? 'true' : 'false'; ?>");
 </script>
-<script src="../padroes/mostraPerfil.js"></script>
+<script src="https://kit.fontawesome.com/c68ccb89e7.js" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
 <script src="compartilhar.js"></script>
+<script src="../padroes/mostraPerfil.js"></script>
+
 
 </html>
