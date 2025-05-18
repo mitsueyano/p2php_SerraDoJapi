@@ -1,10 +1,5 @@
 <?php
-session_start();
-
-if (!isset($_SESSION["logado"]) || $_SESSION["logado"] != TRUE) {
-} else {
-    echo "<h1>Seja bem-vindo, " . $_SESSION["user"] . "</h1>";
-}
+    session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +14,7 @@ if (!isset($_SESSION["logado"]) || $_SESSION["logado"] != TRUE) {
 
 <body>
     <div id="header">
-        <h1>ECOFRAME</h1>
+        <h1>ecoframe</h1>
         <span>Foto: José Aparecido dos Santos</span>
     </div>
     <div id="navbar">
@@ -37,12 +32,16 @@ if (!isset($_SESSION["logado"]) || $_SESSION["logado"] != TRUE) {
             <div class="flex">
                 <div class="divopcao" id="opcao-especies" onclick="window.location.href ='../especies/especies.php';">
                     <img src="../img/especies_HanifiSarikaya.jpg" alt="Imagem de uma abelha polinizando">
-                    <span>Espécies</span>
+                    <div>
+                        <span>Espécies</span>
+                    </div>
                 </div>
                 <div class="divopcao" id="opcao-ocorrencias"
                     onclick=" window.location.href ='../ocorrencias/ocorrencias.php';">
                     <img src="../img/placaanimal.png" alt="Placa de animal na pista">
-                    <span>Ocorrências</span>
+                    <div>
+                        <span>Ocorrências</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -71,7 +70,6 @@ if (!isset($_SESSION["logado"]) || $_SESSION["logado"] != TRUE) {
 
     </div>
 </body>
-
 </html>
 <script>
     sessionStorage.setItem("logado", "<?php echo isset($_SESSION['logado']) && $_SESSION['logado'] === true ? 'true' : 'false'; ?>");

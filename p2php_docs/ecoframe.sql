@@ -90,7 +90,13 @@ INSERT INTO registros_biologicos (
 (1, 'Jacaré-do-papo-amarelo', 10, '2025-04-10', '12:40:00', 'Tomando sol em área alagada.', 1, '', 0, 0, '2025-04-10', '12:00:00'),
 (2, 'Gavião-carijó', 11, '2025-03-19', '09:10:00', 'Sobrevoando zona de mata.', 1, '', 0, 0, '2025-03-19', '12:00:00'),
 (3, 'Mico-leão-dourado', 12, '2025-01-22', '14:15:00', 'Saltando entre galhos.', 1, '', 0, 0, '2025-01-22', '12:00:00'),
-(1, 'Tamanduá-mirim', 13, '2025-02-18', '07:55:00', 'Movimentando-se entre árvores baixas.', 1, '', 0, 0, '2025-02-18', '12:00:00');
+(1, 'Tamanduá-mirim', 13, '2025-02-18', '07:55:00', 'Movimentando-se entre árvores baixas.', 1, '', 0, 0, '2025-02-18', '12:00:00'),
+(2, 'Papagaio-verdadeiro', 1, '2025-05-10', '09:45:00', 'Cantando em galho alto de árvore próxima a trilha.', 1, '', 0, 0, '2025-05-10', '12:00:00'),
+(3, 'Papagaio-verdadeiro', 1, '2025-05-11', '07:20:00', 'Sobrevoando área de mata fechada.', 2, '', 0, 0, '2025-05-11', '12:00:00'),
+(1, 'Papagaio-verdadeiro', 1, '2025-05-12', '10:00:00', 'Par de papagaios interagindo em ninho.', 1, '', 0, 0, '2025-05-12', '12:00:00'),
+(2, 'Papagaio-verdadeiro', 1, '2025-05-13', '16:35:00', 'Avistado comendo frutos em palmeira.', 3, '', 0, 0, '2025-05-13', '12:00:00'),
+(3, 'Papagaio-verdadeiro', 1, '2025-05-14', '11:10:00', 'Vocalização intensa em grupo de 3 indivíduos.', 2, '', 0, 0, '2025-05-14', '12:00:00'),
+(1, 'Papagaio-verdadeiro', 1, '2025-05-17', '08:05:00', 'Empoleirado em poste próximo à mata.', 1, '', 0, 0, '2025-05-17', '12:00:00');
 
 -- Tabela de curtidas
 CREATE TABLE curtidas_usuarios(

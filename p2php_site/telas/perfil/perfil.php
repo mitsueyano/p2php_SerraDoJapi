@@ -1,11 +1,5 @@
 <?php
     session_start();
-
-    if (!isset($_SESSION["logado"]) || $_SESSION["logado"] != TRUE) {
-    }
-    else {
-        echo "<h1>Seja bem-vindo, ".$_SESSION["user"]."</h1>";
-    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +12,7 @@
     </head>
     <body>
         <div id="header">
-            <h1>ECOFRAME</h1>
+            <h1>ecoframe</h1>
             <span>Foto: José Aparecido dos Santos</span>
         </div>
         <div id="navbar">

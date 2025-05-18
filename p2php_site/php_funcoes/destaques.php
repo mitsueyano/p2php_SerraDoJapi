@@ -4,7 +4,7 @@
     $limite = 8;
 
     $query = "
-        SELECT rb.*, u.nome, u.sobrenome, ct.especie, g.endereco,
+        SELECT rb.*, u.nome, u.sobrenome, ct.especie, g.nome_lugar,
             (SELECT COUNT(*) FROM curtidas_usuarios cu WHERE cu.id_registro = rb.id) AS qtde_likes
         FROM registros_biologicos rb
         JOIN usuarios u ON rb.id_usuario = u.id

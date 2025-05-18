@@ -1,8 +1,181 @@
-h2{
+#conteudo {
+    position: relative;
+    background-color: #F2F2F2;
+}
+#caixa{
+    display: flex;
+    gap: 10px;
+    box-sizing: border-box;
     width: 100%;
+}
+#titulo {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
+    color: #495927;
+    font-weight: 600;
+    font-size: 15pt;
 }
 
-#barra-lateral{
-    
+/* Navbar filtro */
+#barra {
+    width: 100%;
+    margin-bottom: 10px;
 }
+.flex {
+    width: 30%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.flex button {
+    padding: 8px;
+    width: 20%;
+    border: 2px solid #4959278f;
+    background-color: transparent;
+    color: #495927cc;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 0 5px;
+    font-family: "Prompt", sans-serif;
+}
+
+.flex button:hover {
+    background-color: #4959278f;
+    color: #fff;
+}
+
+.flex button.ativo {
+    background-color: #4959278f;
+    color: #fff;
+}
+
+/* Navbar letras */
+#navbar-letras {
+    position: sticky;
+    top: 0;
+    background-color: #f2f2f2;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #4959274d;
+    border-right: 1px solid #4959274d;
+    border-left: 1px solid #4959274d;
+}
+#navbar-letras a {
+    font-size: 15pt;
+    width: 25px;
+    height: 100%;
+    text-align: center;
+    font-weight: 700;
+    background: #f2f2f2;
+    text-decoration: none;
+    color: #495927cc;
+    line-height: 30px;
+}
+#navbar-letras a:hover {
+    background: #4959278f;
+    color: #fff;
+}
+
+/* Lista espécies */
+#lista-especies {
+    width: 50%;
+    max-height: 75vh;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 8px #49592726;
+    padding: 0 10px 10px 10px;
+    font-family: "Prompt", sans-serif;
+    color: #495927e6;
+    overflow: auto;
+    box-sizing: border-box;
+}
+.especie-item {
+    padding: 5px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Info espécie */
+#div-info-especie{
+    width: 50%;
+    max-height: 75vh;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 10px;
+    overflow: auto;
+    position: relative;
+}
+#linknaturalist{
+    position: absolute;
+    top: 0;
+    left: 5px;
+}
+
+.galeria {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    overflow: auto;
+    align-items: center;
+    justify-content: center;
+}
+
+.galeria-item {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    max-width: 200px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 300px;
+}
+
+.galeria-img {
+    width: 100%;
+    max-height: 200px;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+
+
+.galeria-info small {
+    font-size: 0.85rem;
+}
+
+
+*::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;    
+}
+
+*::-webkit-scrollbar-track {
+    background: #f2f2f2;
+    border-radius: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #4959274d;
+    border-radius: 10px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background-color: #49592780;
+}
+
+

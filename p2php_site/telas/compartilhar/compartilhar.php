@@ -1,12 +1,6 @@
 <!DOCTYPE html>
 <?php
-session_start();
-
-if (!isset($_SESSION["logado"]) || $_SESSION["logado"] != TRUE) {
-    header("Location: ../login/login.php");
-} else {
-    echo "<h1>Seja bem-vindo, " . $_SESSION["user"] . "</h1>";
-}
+    session_start();
 ?>
 
 <html lang="en">
@@ -23,7 +17,7 @@ if (!isset($_SESSION["logado"]) || $_SESSION["logado"] != TRUE) {
 
 <body>
     <div id="header">
-        <h1>ECOFRAME</h1>
+        <h1>ecoframe</h1>
         <span>Foto: José Aparecido dos Santos</span>
     </div>
     <div id="navbar">
@@ -74,7 +68,7 @@ if (!isset($_SESSION["logado"]) || $_SESSION["logado"] != TRUE) {
                     <span>Geolocalização:</span>
                     <div id="map" style="height: 400px; width: 100%;"></div>
                     <div class="flexlugar">
-                        <label for="nomelugar">Nome do lugar / ponto de referência:</label>
+                        <label for="nomelugar">Nome do lugar / Referência:</label>
                         <input type="text" name="nomelugar" id="nomelugar" required>
                     </div>
                     <br>
@@ -91,6 +85,8 @@ if (!isset($_SESSION["logado"]) || $_SESSION["logado"] != TRUE) {
                 </div>
             </form>
         </div>
+        <span>Quer comunicar algo? <a href="../regOcorrencia/regOcorrencia.php">Registre uma Ocorrência</a>.</span>
+        
     </div>
 </body>
 <script>

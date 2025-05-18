@@ -133,7 +133,5 @@ function carregarPosts() {
         });
 }
 
-
-
 document.getElementById("btn-ver-mais").addEventListener("click", carregarPosts);
 window.addEventListener("DOMContentLoaded", carregarPosts);

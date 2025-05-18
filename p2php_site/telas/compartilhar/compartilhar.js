@@ -21,7 +21,6 @@ function preencherNomeLugar(latlng) {
                 const addr = data.address;
 
                 const pontoReferencia = addr.amenity || addr.shop || addr.tourism || addr.building || "";
-                const numero = addr.house_number || "";
                 const rua = addr.road || addr.pedestrian || addr.footway || addr.cycleway || addr.path || "";
                 const bairro = addr.neighbourhood || addr.suburb || "";
                 const cidade = addr.city || addr.town || addr.village || "";
@@ -29,15 +28,10 @@ function preencherNomeLugar(latlng) {
                 let partes = [];
 
                 if (pontoReferencia) partes.push(pontoReferencia);
-                if (rua) {
-                    if (numero) {
-                        partes.push(`${rua}, ${numero}`);
-                    } else {
-                        partes.push(rua);
-                    }
-                }
+                if (rua) partes.push(rua);
                 if (bairro) partes.push(bairro);
                 if (cidade) partes.push(cidade);
+                
 
                 campoNome.value = partes.join(", ") || data.display_name || "";
             } else {
@@ -108,7 +102,7 @@ map.on('click', function (e) {
     preencherNomeLugar(e.latlng); // Já chama a função de geocodificação reversa
 });
 
-// ... o restante do código continua igual
+
 
 // ELEMENTOS
 const inputNomePopular = document.getElementById("nomepopular");
@@ -179,22 +173,22 @@ async function buscarTaxonomia() {
             spanNome.style.marginRight = "10px";
             div.appendChild(spanNome);
 
-            // Wikipedia
-            if (item.wikipedia_url) {
-                const linkWiki = document.createElement("a");
-                linkWiki.href = item.wikipedia_url.replace("en.wikipedia", "pt.wikipedia");
-                linkWiki.target = "_blank";
-                linkWiki.rel = "noopener noreferrer";
-                linkWiki.style.color = "#007bff";
-                linkWiki.style.textDecoration = "none";
-                linkWiki.style.marginLeft = "5px";
+            if (item.id) {
+    const linkINat = document.createElement("a");
+    linkINat.href = `https://www.inaturalist.org/taxa/${item.id}`;
+    linkINat.target = "_blank";
+    linkINat.rel = "noopener noreferrer";
+    linkINat.style.color = "#007bff";
+    linkINat.style.textDecoration = "none";
+    linkINat.style.marginLeft = "5px";
 
-                const icon = document.createElement("i");
-                icon.className = "fa-regular fa-circle-question";
-                linkWiki.appendChild(icon);
+    const icon = document.createElement("i");
+    icon.className = "fa-regular fa-circle-question";
+    linkINat.appendChild(icon);
 
-                div.appendChild(linkWiki);
-            }
+    div.appendChild(linkINat);
+}
+
 
             spanNome.addEventListener("click", () => selecionarTaxon(item));
             dropdownList.appendChild(div);
@@ -239,3 +233,11 @@ async function selecionarTaxon(taxon) {
         limparCampos();
     }
 }
+
+window.addEventListener("load", function () {
+    const header = document.getElementById("header");
+    window.scrollTo({
+        top: header.offsetHeight,
+        behavior: "smooth"
+    });
+});
