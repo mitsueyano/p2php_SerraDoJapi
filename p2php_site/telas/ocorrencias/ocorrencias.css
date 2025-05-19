@@ -1,0 +1,129 @@
+#conteudo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+h3{
+    color: #495927;
+}
+#div-registrar-ocorrencia{
+    width: 85%;
+    text-align: end;
+}
+#div-registrar-ocorrencia a{
+    padding: 6px;
+    border: 1px solid #495927;
+    text-decoration: none;
+    color: #495927;
+    font-weight: bold;
+}
+#div-registrar-ocorrencia a:hover{
+    background-color: #495927;
+    color: #fff;
+}
+
+#caixa {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.ocorrencia {
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.img-ocorrencia {
+    background-color: #495927;
+    position: relative;
+    width: 100%; 
+    height: 200px;
+    color: white; 
+    padding: 10px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.fundo-blur {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  backdrop-filter: blur(50px);
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+  border-radius: 8px;
+}
+
+.titulo-ocorrencia, .olho-icone {
+  position: relative;
+  z-index: 2;
+}
+
+.titulo-ocorrencia {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+    color: white;
+    font-size: 1.2rem;
+    z-index: 2;
+}
+
+.olho-icone {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.2rem;
+    color: white;
+    z-index: 2;
+    cursor: pointer;
+}
+
+.desc {
+    padding: 15px;
+    margin: 10px 0 0 0;
+    color: #555;
+    font-size: 0.95rem;
+    font-style:italic !important;
+    min-height: 15vh;
+}
+.autor-ocorrencia {
+    padding: 15px;
+    margin: 10px 0 0 0;
+    color: #555;
+    font-size: 0.95rem;
+}
+
+.olho-icone {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+    color: white;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+    z-index: 2;
+}
+
+.olho-aberto {
+    display: none; /* escondido por padrão */
+}
+
+
+/* Botão "Ver mais" */
+#ver-mais {
+    background-color: #334027;
+    padding: 10px 20px;
+    font-size: 12pt;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 0 5px #334027;
+    color: #fff;
+    transition: 0.1s ease-out;
+}
+#ver-mais:hover {
+    transform: scale(1.05);
+}

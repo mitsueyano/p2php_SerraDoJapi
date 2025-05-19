@@ -28,7 +28,10 @@ CREATE TABLE geolocalizacao (
 INSERT INTO geolocalizacao (latitude, longitude, nome_lugar) VALUES
 (-23.1857, -46.8978, 'Serra do Japi, Jundiaí - SP'),         
 (-22.9519, -43.2105, 'Floresta da Tijuca, RJ'),              
-(-3.1072, -60.0261, 'Reserva Adolpho Ducke, Manaus - AM');  
+(-3.1072, -60.0261, 'Reserva Adolpho Ducke, Manaus - AM'),
+(-27.0984, -48.6100, 'Rodovia BR-101, SC'),
+(-25.6953, -54.4367, 'Parque Nacional do Iguaçu, PR'),
+(-9.3891, -40.5027, 'Zona rural de Petrolina, PE');
 
 -- Tabela de classificação taxonômica
 CREATE TABLE classificacao_taxonomica (
@@ -122,6 +125,29 @@ INSERT INTO registros_biologicos (
 (2, 'Ipê-amarelo', 9, '2025-05-13', '14:30:00', 'Árvore com flores amarelas.', 2, '', 0, 0, '2025-05-13', '12:00:00'),
 (3, 'Capim-limão', 10, '2025-05-12', '16:45:00', 'Planta aromática para chá.', 3, '', 0, 0, '2025-05-12', '12:00:00');
 
+-- Tabela de Ocorrências
+CREATE TABLE ocorrencias (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT NOT NULL,
+    id_geolocalizacao INT NOT NULL,
+    data_publicacao DATE NOT NULL,
+    hora_publicacao TIME NOT NULL,
+    img_url_ocorrencia VARCHAR(255) NOT NULL,
+    titulo_ocorrencia VARCHAR(255) NOT NULL,
+    descricao_ocorrencia TEXT NOT NULL,
+    sensivel BOOLEAN DEFAULT FALSE,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id),
+    FOREIGN KEY (id_geolocalizacao) REFERENCES geolocalizacao(id)
+);
+
+INSERT INTO ocorrencias (id_usuario, id_geolocalizacao, data_publicacao, hora_publicacao, img_url_ocorrencia, titulo_ocorrencia, descricao_ocorrencia, sensivel) VALUES
+(1, 1,'2025-05-19', '10:15:00', 'https://super.abril.com.br/wp-content/uploads/2020/10/SI_Inteligencia_animal_Abre.jpg?quality=70&strip=info&crop=1&resize=1080,565', 'Nova trilha ecológica aberta ao público', 'Uma nova trilha foi aberta na Serra do Japi para visitantes interessados em turismo ecológico. A iniciativa visa fomentar a educação ambiental e preservar a biodiversidade local.', true),
+(2, 2,'2025-05-18', '09:00:00', 'https://super.abril.com.br/wp-content/uploads/2020/10/SI_Inteligencia_animal_Abre.jpg?quality=70&strip=info&crop=1&resize=1080,565', 'Projeto de reflorestamento é iniciado', 'O projeto “Verde Sempre” iniciou o plantio de mais de 5.000 mudas na Floresta da Tijuca com o objetivo de restaurar áreas degradadas nos últimos anos.',true),
+(3, 3,'2025-05-17', '15:45:00', 'https://super.abril.com.br/wp-content/uploads/2020/10/SI_Inteligencia_animal_Abre.jpg?quality=70&strip=info&crop=1&resize=1080,565', 'Nova espécie de inseto descoberta na reserva', 'Pesquisadores do INPA descobriram uma nova espécie de besouro na Reserva Adolpho Ducke. A espécie ainda está em processo de classificação científica.', false),
+(1, 4,'2025-05-16', '18:30:00', 'https://s2.glbimg.com/MhXnNwzZ5WwuhO6pJ-FXYlKfTjE=/0x0:1500x1000/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_bc8228b6673f488aa253bbcb03c80ec5/internal_photos/bs/2023/Y/K/Mt9UbdTXWVa6QnbcIRlQ/animal-acidente.jpg', 'Capivara causa acidente em rodovia', 'Um acidente foi registrado na BR-101 após uma capivara atravessar a pista repentinamente. Motoristas alertam para a necessidade de sinalização em áreas de fauna.', true),
+(1, 5,'2025-05-15', '12:10:00', '', 'Filhote de macaco resgatado por veterinários', 'Visitantes encontraram um filhote de macaco ferido próximo à trilha principal. Ele foi encaminhado para atendimento e está em recuperação.', false),
+(1, 6,'2025-05-14', '07:50:00', '', 'Tamanduá é atropelado e resgatado por ONG', 'Um tamanduá-bandeira foi atropelado em estrada rural e socorrido por voluntários da ONG Vida Selvagem. O animal está em observação veterinária.', false);
+
 
 -- Tabela de curtidas
 CREATE TABLE curtidas_usuarios(
@@ -137,3 +163,4 @@ SELECT * FROM classificacao_taxonomica;
 SELECT * FROM geolocalizacao;
 SELECT * FROM registros_biologicos;
 SELECT * FROM curtidas_usuarios;
+SELECT * FROM ocorrencias;

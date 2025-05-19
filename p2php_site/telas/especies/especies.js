@@ -125,7 +125,7 @@ function infoEspecie(nome) {
           info.className = 'galeria-info';
           info.innerHTML = `
             <span class="info"><strong>Usuário:</strong> ${registro.usuario || 'Desconhecido'}</span><br>
-            <span class="info"><strong>Data:</strong> ${registro.data_observacao || 'Sem data'}</span><br>
+            <span class="info"><strong>Data:</strong> ${formatarData(registro.data_observacao)}</span><br>
             <span class="info"><strong>Local:</strong> ${registro.nome_lugar || 'Sem localização'}</span>
           `;
 
@@ -145,6 +145,12 @@ function infoEspecie(nome) {
       console.error('Erro ao buscar dados da espécie:', err);
       document.getElementById('div-info-especie').innerHTML = '<p>Erro ao carregar informações.</p>';
     });
+}
+
+function formatarData(dataISO) {
+  if (!dataISO) return 'Sem data';
+  const [ano, mes, dia] = dataISO.split('-');
+  return `${dia}/${mes}/${ano}`;
 }
 
 

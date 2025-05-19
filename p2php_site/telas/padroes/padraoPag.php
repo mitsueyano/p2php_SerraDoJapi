@@ -1,11 +1,5 @@
 <?php
     session_start();
-
-    if (!isset($_SESSION["logado"]) || $_SESSION["logado"] != TRUE) {
-    }
-    else {
-        echo "<h1>Seja bem-vindo, ".$_SESSION["user"]."</h1>";
-    }
 ?>
 <!DOCTYPE html>
     <html lang="en">

@@ -2,7 +2,7 @@
     session_start();
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
@@ -10,6 +10,7 @@
     <title>Explorar</title>
     <link rel="stylesheet" href="../padroes/padraoPag.css">
     <link rel="stylesheet" href="explorar.css">
+    <script src="https://kit.fontawesome.com/c68ccb89e7.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -17,34 +18,32 @@
         <h1>ecoframe</h1>
         <span>Foto: José Aparecido dos Santos</span>
     </div>
+
     <div id="navbar">
         <a href="../index/index.php">INÍCIO</a>
         <a href="../explorar/explorar.php" class="selected">EXPLORAR</a>
         <a href="../login/login.php" id="login-link">ENTRE / CADASTRE-SE</a>
         <a href="../perfil/perfil.php" id="perfil-link" style="display: none;">PERFIL</a>
     </div>
+
     <div id="conteudo">
         <p id="pergunta">O que você quer observar hoje?</p>
         <div id="div-barra-pesquisa">
             <div id="barra-pesquisa">
-                <input type="text" name="" id="input-pesquisa" placeholder="Pesquise...">
+                <input type="text" id="input-pesquisa" placeholder="Pesquise...">
             </div>
             <div class="flex">
                 <div class="divopcao" id="opcao-especies" onclick="window.location.href ='../especies/especies.php';">
                     <img src="../img/especies_HanifiSarikaya.jpg" alt="Imagem de uma abelha polinizando">
-                    <div>
-                        <span>Espécies</span>
-                    </div>
+                    <div><span>Espécies</span></div>
                 </div>
-                <div class="divopcao" id="opcao-ocorrencias"
-                    onclick=" window.location.href ='../ocorrencias/ocorrencias.php';">
+                <div class="divopcao" id="opcao-ocorrencias" onclick="window.location.href ='../ocorrencias/ocorrencias.php';">
                     <img src="../img/placaanimal.png" alt="Placa de animal na pista">
-                    <div>
-                        <span>Ocorrências</span>
-                    </div>
+                    <div><span>Ocorrências</span></div>
                 </div>
             </div>
         </div>
+
         <div id="divfeed">
             <div id="navbar-feed">
                 <span id="texto">Registros da comunidade</span>
@@ -54,27 +53,30 @@
                     <a href="">Populares</a>
                 </div>
             </div>
+
             <div id="compartilhe">
                 <a href="../compartilhar/compartilhar.php" id="btn-compartilhe">Compartilhe sua Observação</a>
             </div>
-            <div id="feed">
-            </div>
+
+            <div id="feed"></div>
+
             <div id="ver-mais-container">
                 <button id="btn-ver-mais">Ver mais</button>
             </div>
         </div>
+
         <div id="modal" class="modal" onclick="fecharModal()">
             <span class="fechar" onclick="fecharModal()"><i class="fa-solid fa-x"></i></span>
             <img class="modal-conteudo" id="imgModal" draggable="false">
         </div>
-
     </div>
+
+    <!-- Sessão JavaScript -->
+    <script>
+        sessionStorage.setItem("logado", "<?php echo isset($_SESSION['logado']) && $_SESSION['logado'] === true ? 'true' : 'false'; ?>");
+        sessionStorage.setItem("id_usuario", "<?php echo $_SESSION['id_usuario'] ?? ''; ?>");
+    </script>
+    <script src="../padroes/mostraPerfil.js"></script>
+    <script src="explorar.js"></script>
 </body>
 </html>
-<script>
-    sessionStorage.setItem("logado", "<?php echo isset($_SESSION['logado']) && $_SESSION['logado'] === true ? 'true' : 'false'; ?>");
-    sessionStorage.setItem("id_usuario", "<?php echo $_SESSION['id_usuario'] ?? ''; ?>");
-</script>
-<script src="../padroes/mostraPerfil.js"></script>
-<script src="explorar.js"></script>
-<script src="https://kit.fontawesome.com/c68ccb89e7.js" crossorigin="anonymous"></script>

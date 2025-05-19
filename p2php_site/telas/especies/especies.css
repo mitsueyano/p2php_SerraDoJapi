@@ -175,7 +175,7 @@
     border-radius: 8px;
     padding: 10px;
     background: #fff;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px #0000001a;
     min-width: 300px;
     max-width: 300px;
     box-sizing: border-box;
@@ -194,7 +194,7 @@
     object-fit: cover;
 }
 
-.galeria-info small {
+.galeria-info {
     width: 100%;
     text-align: start;
 }

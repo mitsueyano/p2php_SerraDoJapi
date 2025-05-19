@@ -66,7 +66,6 @@ $letras = range('A', 'Z');
 
             </div>
         </div>
-
         <div id="caixa">
             <div id="lista-especies">
                 <div id="navbar-letras">
@@ -74,9 +73,6 @@ $letras = range('A', 'Z');
                         <a href="#marcador-letra-<?php echo $letra; ?>"><?php echo $letra; ?></a>
                     <?php endforeach; ?>
                 </div>
-
-
-
             </div>
             <div id="div-info-especie"></div>
         </div>

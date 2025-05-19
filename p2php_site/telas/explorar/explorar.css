@@ -47,10 +47,14 @@
     align-items: center;
     background-color: #fff;
     border-radius: 3px;
-    box-shadow: 0 0 2px #000;
     margin-left: 15px;
     margin-right: 15px;
     transition: 0.1s ease-out;
+    color: #334027;
+    font-weight: bold;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    padding: 5px;
+    border: 1px solid transparent;
 }
 .divopcao img {
     border-radius: 53x;
@@ -66,11 +70,13 @@
 }
 .divopcao:hover {
     cursor: pointer;
-    transform: scale(1.05);
+    border-bottom: 1px solid #334027;
+    border-top: 1px solid #334027;
 }
 
 /* Botão compartilhe */
 #btn-compartilhe {
+    transition: 0.1s ease-out;
     margin-left: 10px;
     text-decoration: none;
     padding: 5px;
@@ -140,6 +146,7 @@
     overflow: hidden;
     border-top: 2px solid transparent;
     border-bottom: 2px solid transparent;
+    transition: 0.1s ease-out;
 }
 .bloco-post:hover {
     border-bottom: 2px solid #334027;
@@ -265,13 +272,14 @@
     margin-top: 20px;
 }
 #btn-ver-mais {
-    background-color: #7D8C46;
+    background-color: #334027;
     padding: 10px 20px;
     font-size: 12pt;
     cursor: pointer;
     border: none;
-    box-shadow: 0 0 5px #7D8C46;
+    box-shadow: 0 0 5px #334027;
     color: #fff;
+    transition: 0.1s ease-out;
 }
 #btn-ver-mais:hover {
     transform: scale(1.05);

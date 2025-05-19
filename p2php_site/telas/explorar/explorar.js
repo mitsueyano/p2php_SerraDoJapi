@@ -3,6 +3,7 @@ const limite = 8;
 const feed = document.getElementById("feed");
 const idusuario = sessionStorage.getItem("id_usuario");
 
+// Função para curtir/descurtir
 function like(idpost) {
     console.log(idpost, idusuario);
 
@@ -23,18 +24,18 @@ function like(idpost) {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ post_id: idpost, usuario_id: idusuario })
         })
-        .then((response) => {
+        .then(response => {
             if (!response.ok) throw new Error("Erro HTTP " + response.status);
             return response.json();
         })
-        .then((data) => {
+        .then(data => {
             console.log(data);
             if (!data.success) {
                 likeIcon.classList.toggle("liked");
                 likeCount.textContent = data.liked ? count - 1 : count + 1;
             }
         })
-        .catch((error) => {
+        .catch(error => {
             console.error("Erro no fetch:", error);
             likeIcon.classList.toggle("liked");
             likeCount.textContent = count;
@@ -42,7 +43,7 @@ function like(idpost) {
     }
 }
 
-// Funções do modal para imagem
+// Modal da imagem
 function abrirModal(urlImagem) {
     const modal = document.getElementById("modal");
     const img = document.getElementById("imgModal");
@@ -53,27 +54,29 @@ function abrirModal(urlImagem) {
 function fecharModal() {
     document.getElementById("modal").style.display = "none";
 }
+
+// Formata a data e hora da publicação e observação
 function formatarDataHoraCompleta(dataStr, horaStr) {
-    // dataStr no formato dd/mm/yyyy, horaStr no formato hh:mm:ss ou hh:mm
     const partes = dataStr.split('/');
-    if (partes.length !== 3) return dataStr + " às " + horaStr.slice(0,5);
+    if (partes.length !== 3) return dataStr + " às " + horaStr.slice(0, 5);
 
     const dataObj = new Date(partes[2], partes[1] - 1, partes[0]);
-    
+
     const hoje = new Date();
-    hoje.setHours(0,0,0,0);
+    hoje.setHours(0, 0, 0, 0);
     const ontem = new Date(hoje);
     ontem.setDate(hoje.getDate() - 1);
 
     if (dataObj.getTime() === hoje.getTime()) {
-        return `Hoje às ${horaStr.slice(0,5)}`;
+        return `Hoje às ${horaStr.slice(0, 5)}`;
     } else if (dataObj.getTime() === ontem.getTime()) {
-        return `Ontem às ${horaStr.slice(0,5)}`;
+        return `Ontem às ${horaStr.slice(0, 5)}`;
     } else {
-        return `${dataStr} às ${horaStr.slice(0,5)}`;
+        return `${dataStr} às ${horaStr.slice(0, 5)}`;
     }
 }
 
+// Carrega os posts com base no offset
 function carregarPosts() {
     fetch(`../../php_funcoes/carregarPosts.php?offset=${offset}&usuario_id=${idusuario}`)
         .then(response => response.json())
@@ -129,9 +132,22 @@ function carregarPosts() {
                 `;
                 feed.appendChild(bloco);
             });
+
             offset += limite;
+
+            // Esconder o botão se veio menos posts do que o limite
+            if (posts.length < limite) {
+                document.getElementById("btn-ver-mais").style.display = "none";
+            }
+        })
+        .catch(error => {
+            console.error("Erro ao carregar posts:", error);
         });
 }
 
+
+// Botão "Ver mais"
 document.getElementById("btn-ver-mais").addEventListener("click", carregarPosts);
+
+// Carrega posts ao iniciar
 window.addEventListener("DOMContentLoaded", carregarPosts);

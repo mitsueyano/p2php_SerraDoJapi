@@ -85,6 +85,7 @@
     border: 2px solid #fff;
     font-size: 20pt;
     cursor: pointer;
+    transition: 0.1s ease-out;
 }
 #btn-compartilhe:hover{
     background-color: #fff;
@@ -138,6 +139,7 @@
     object-fit:cover;
     display: block;
     border-radius: 8px;
+    transition: 0.1s ease-out;
 }
 .bloco-destaques img:hover{
     cursor: pointer;
