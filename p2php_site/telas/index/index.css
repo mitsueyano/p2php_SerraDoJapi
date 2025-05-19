@@ -71,7 +71,7 @@
 }
 #textogeral p{
     width: 30%;
-    font-size: 1.5vw;
+    font-size: 3vh;
     text-align: end;
 }
 /* Botão compartilhe */
@@ -83,7 +83,7 @@
     color: #fff;
     border-radius: 2px;
     border: 2px solid #fff;
-    font-size: 1.7vw;
+    font-size: 20pt;
     cursor: pointer;
 }
 #btn-compartilhe:hover{

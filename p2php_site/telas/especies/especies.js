@@ -1,70 +1,163 @@
-function carregarEspecie(nome) {
-    fetch(`../../php_funcoes/carregaEspecie.php?nome=${encodeURIComponent(nome)}`)
-        .then(res => res.json())
-        .then(data => {
-            const div = document.getElementById("div-info-especie");
-            div.innerHTML = `<h3>${nome}</h3>`;
+function carregarEspecies(tipo) {
+  fetch(`../../php_funcoes/carregaEspecie.php?tipo=${encodeURIComponent(tipo)}`)
+    .then(res => res.json())
+    .then(especies => {
+      const lista = document.getElementById('lista-especies');
+      var letras = document.getElementById("navbar-letras").cloneNode(true);
+      lista.innerHTML = '';
+      lista.appendChild(letras);
+      scroll(); // ativa os eventos dos links
 
-            if (data.imagens.length === 0) {
-                div.innerHTML += "<p>Nenhuma imagem disponível.</p>";
-            } else {
-                const galeria = document.createElement("div");
-                galeria.classList.add("galeria");
+      // ✅ Mensagem padrão ao carregar lista
+      const divInfo = document.getElementById('div-info-especie');
+      divInfo.innerHTML = '<p>Clique em uma espécie para ver mais informações.</p>';
 
-                data.imagens.forEach(img => {
-                    const item = document.createElement("div");
-                    item.classList.add("galeria-item");
+      if (especies.length === 0) {
+        lista.innerHTML = '<p>Nenhuma espécie encontrada.</p>';
+        return;
+      }
 
-                    const imagem = document.createElement("img");
-                    imagem.src = img.caminho_imagem;
-                    imagem.alt = nome;
-                    imagem.classList.add("galeria-img");
+      const especiesPorLetra = {};
+      especies.forEach(nome => {
+        const letra = nome[0].toUpperCase();
+        if (!especiesPorLetra[letra]) especiesPorLetra[letra] = [];
+        especiesPorLetra[letra].push(nome);
+      });
 
-                    const info = document.createElement("div");
-                    info.classList.add("galeria-info");
-                    info.innerHTML = `
-                        <small><strong>Usuário:</strong> ${img.usuario}</small><br>
-                        <small><strong>Data:</strong> ${img.data}</small><br>
-                        <small><strong>Local:</strong> ${img.localizacao}</small>
-                    `;
+      Object.keys(especiesPorLetra).sort().forEach(letra => {
+        const marcador = document.createElement('span');
+        marcador.id = `marcador-letra-${letra}`;
+        marcador.className = 'marcador-letra';
+        lista.appendChild(marcador);
 
-                    item.appendChild(imagem);
-                    item.appendChild(info);
-                    galeria.appendChild(item);
-                });
+        const tituloLetra = document.createElement('h3');
+        tituloLetra.id = `letra-${letra}`;
+        tituloLetra.textContent = letra;
+        lista.appendChild(tituloLetra);
 
-                div.appendChild(galeria);
-            }
-
-            div.innerHTML += `<span id="linknaturalist"><a href="${data.link}" target="_blank">iNaturalist</a></span>`;
-        })
-        .catch(err => {
-            console.error(err);
-            document.getElementById("div-info-especie").innerHTML = "<p>Erro ao carregar dados.</p>";
+        especiesPorLetra[letra].forEach(nome => {
+          const div = document.createElement('div');
+          div.className = 'especie-item';
+          div.textContent = nome;
+          div.onclick = () => infoEspecie(nome);
+          lista.appendChild(div);
         });
+      });
+
+    })
+    .catch(err => {
+      console.error('Erro ao carregar espécies:', err);
+    });
 }
 
-document.querySelectorAll('#navbar-letras a').forEach(link => {
-  link.addEventListener('click', function(e) {
-    e.preventDefault();
 
-    const id = this.getAttribute('href').substring(1);
-    const listaEspecies = document.getElementById('lista-especies');
-    const alvo = document.getElementById(id);
+// Código para navegação por letras na navbar-letras:
+function scroll(){
+    document.querySelectorAll('#navbar-letras a').forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const id = this.getAttribute('href').substring(1);
+        const listaEspecies = document.getElementById('lista-especies');
+        const alvo = document.getElementById(id);
+        if (alvo && listaEspecies) {
+        const offsetRelativo = alvo.offsetTop - listaEspecies.offsetTop;
+        listaEspecies.scrollTo({
+            top: offsetRelativo,
+            behavior: 'smooth'
+        });
+        }
+    });
+    });
+}
 
-    if (alvo && listaEspecies) {
-      listaEspecies.scrollTo({
-        top: alvo.offsetTop,
-        behavior: 'smooth'
-      });
-    }
+// Controle de botão ativo no filtro:
+const botoesFiltro = document.querySelectorAll('#filtro button');
+botoesFiltro.forEach(botao => {
+  botao.addEventListener('click', () => {
+    botoesFiltro.forEach(b => b.classList.remove('ativo'));
+    botao.classList.add('ativo');
+    carregarEspecies(botao.id.replace('btn-', ''));
   });
 });
 
-window.addEventListener("load", function () {
+function infoEspecie(nome) {
+  fetch(`../../php_funcoes/buscaEspecie.php?especie=${encodeURIComponent(nome)}`)
+    .then(res => res.text())
+    .then(texto => {
+      try {
+        const dados = JSON.parse(texto);
+        const divInfo = document.getElementById('div-info-especie');
+        divInfo.innerHTML = '';
+
+        if (dados.erro) {
+          divInfo.innerHTML = `<p>Erro: ${dados.erro}</p>`;
+          console.error('Erro do PHP:', dados.erro);
+          return;
+        }
+
+        if (dados.length === 0) {
+          divInfo.innerHTML = '<p>Informações não encontradas para esta espécie.</p>';
+          return;
+        }
+
+        const titulo = document.createElement('div');
+        titulo.id="divtitulo"
+        titulo.innerHTML = `<h3 id="titulo">${nome}</h3>`;
+        divInfo.appendChild(titulo);
+
+        // Criar div da galeria
+        const galeria = document.createElement('div');
+        galeria.className = 'galeria';
+
+        dados.forEach(registro => {
+          // Se tiver imagem, cria um item na galeria com estrutura completa (imagem + info)
+          const galeriaItem = document.createElement('div');
+          galeriaItem.className = 'galeria-item';
+
+          // Imagem
+          const imagem = document.createElement('img');
+          imagem.src = registro.url_imagem;
+          imagem.alt = nome;
+          imagem.className = 'galeria-img';
+
+          // Info da imagem
+          const info = document.createElement('div');
+          info.className = 'galeria-info';
+          info.innerHTML = `
+            <span class="info"><strong>Usuário:</strong> ${registro.usuario || 'Desconhecido'}</span><br>
+            <span class="info"><strong>Data:</strong> ${registro.data_observacao || 'Sem data'}</span><br>
+            <span class="info"><strong>Local:</strong> ${registro.nome_lugar || 'Sem localização'}</span>
+          `;
+
+          galeriaItem.appendChild(imagem);
+          galeriaItem.appendChild(info);
+          galeria.appendChild(galeriaItem);
+        });
+
+        divInfo.appendChild(galeria);
+
+      } catch (e) {
+        console.error('Erro ao parsear JSON:', e, 'Texto recebido:', texto);
+        document.getElementById('div-info-especie').innerHTML = '<p>Erro ao carregar informações.</p>';
+      }
+    })
+    .catch(err => {
+      console.error('Erro ao buscar dados da espécie:', err);
+      document.getElementById('div-info-especie').innerHTML = '<p>Erro ao carregar informações.</p>';
+    });
+}
+
+
+// ✅ Carrega tudo ao abrir a página
+window.addEventListener('load', () => {
+    carregarEspecies('todos');
+
+    // ✅ Mensagem inicial na div de info
+    document.getElementById('div-info-especie').innerHTML = '<p>Clique em uma espécie para ver mais informações.</p>';
+
     const header = document.getElementById("header");
     window.scrollTo({
         top: header.offsetHeight,
-        behavior: "smooth" 
+        behavior: "smooth"
     });
 });

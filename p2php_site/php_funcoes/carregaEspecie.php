@@ -1,47 +1,28 @@
 <?php
 include('conectaBD.php');
 
-if (!isset($_GET['nome'])) {
-    http_response_code(400);
-    echo "Nome da espécie não especificado.";
-    exit;
+$tipoSelecionado = isset($_GET['tipo']) ? $_GET['tipo'] : 'todos';
+$tiposValidos = ['todos', 'animais', 'insetos', 'plantas'];
+if (!in_array($tipoSelecionado, $tiposValidos)) {
+    $tipoSelecionado = 'todos';
 }
 
-$nome = $_GET['nome'];
+if ($tipoSelecionado == 'todos') {
+    $query = "SELECT especie FROM classificacao_taxonomica ORDER BY especie";
+    $resultado = $conexao->query($query);
+} else {
+    $query = "SELECT especie FROM classificacao_taxonomica WHERE tipo = ? ORDER BY especie";
+    $stmt = $conexao->prepare($query);
+    $stmt->bind_param("s", $tipoSelecionado);
+    $stmt->execute();
+    $resultado = $stmt->get_result();
+}
 
-$stmt = $conexao->prepare("
-    SELECT 
-    rb.url_imagem AS caminho_imagem,
-    CONCAT(u.nome, ' ', u.sobrenome) AS usuario,
-    rb.data_observacao,
-    rb.hora_observacao,
-    g.nome_lugar AS localizacao
-    FROM registros_biologicos rb
-    INNER JOIN usuarios u ON rb.id_usuario = u.id
-    INNER JOIN classificacao_taxonomica ct ON rb.id_taxonomia = ct.id
-    INNER JOIN geolocalizacao g ON rb.id_geolocalizacao = g.id
-    WHERE ct.especie = ?
-");
-$stmt->bind_param("s", $nome);
-$stmt->execute();
-$resultado = $stmt->get_result();
-
-$imagens = [];
+$especies = [];
 while ($row = $resultado->fetch_assoc()) {
-    $dataCompleta = $row['data_observacao'] . ' ' . $row['hora_observacao'];
-    $dt = new DateTime($dataCompleta);
-    $row['data'] = $dt->format('d/m/Y H:i');
-
-    $imagens[] = [
-        'caminho_imagem' => $row['caminho_imagem'],
-        'usuario' => $row['usuario'],
-        'data' => $row['data'],
-        'localizacao' => $row['localizacao']
-    ];
+    $especies[] = $row['especie'];
 }
 
-
-echo json_encode([
-    "imagens" => $imagens,
-    "link" => "https://www.inaturalist.org/search?q=" . urlencode($nome)
-]);
+header('Content-Type: application/json');
+echo json_encode($especies);
+exit;

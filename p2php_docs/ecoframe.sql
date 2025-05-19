@@ -18,30 +18,6 @@ INSERT INTO usuarios (cpf, nome, sobrenome, email, senha, nivel_acesso, link_lat
 ('987.654.321-11', 'Bruno', 'Souza', 'bruno.souza@example.com', '$2y$10$20eejaVT.RDTEmC5q1NRm.Vc9c.z4w8lp0OqG84IRvknhHWN/CVEO', 'especialista', 'http://lattes.cnpq.br/1234567890123456'),
 ('456.789.123-22', 'Carla', 'Pereira', 'carla.pereira@example.com', '$2y$10$ncJQk.ZKyivWQ.En1KdNpOZo3ZTMKzwXajLfw26m4uCELhbA/zSH2', 'comum', NULL);
 
--- Tabela de classificação taxonômica
-CREATE TABLE classificacao_taxonomica (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    classe VARCHAR(100) NOT NULL,
-    ordem VARCHAR(100) NOT NULL,
-    familia VARCHAR(100) NOT NULL,
-    especie VARCHAR(100) NOT NULL
-);
-INSERT INTO classificacao_taxonomica (classe, ordem, familia, especie) VALUES
-('Aves', 'Psittaciformes', 'Psittacidae', 'Amazona aestiva'),             
-('Mammalia', 'Carnivora', 'Felidae', 'Leopardus pardalis'),          
-('Amphibia', 'Anura', 'Hylidae', 'Scinax fuscovarius'),          
-('Mammalia', 'Pilosa', 'Myrmecophagidae', 'Myrmecophaga tridactyla'),  
-('Mammalia', 'Rodentia', 'Caviidae', 'Hydrochoerus hydrochaeris'),       
-('Mammalia', 'Cingulata', 'Dasypodidae', 'Dasypus novemcinctus'),         
-('Aves', 'Strigiformes', 'Strigidae', 'Athene cunicularia'),                 
-('Mammalia', 'Pilosa', 'Bradypodidae', 'Bradypus variegatus'),         
-('Reptilia', 'Squamata', 'Boidae', 'Eunectes murinus'),                  
-('Reptilia', 'Crocodylia', 'Alligatoridae', 'Caiman latirostris'),         
-('Aves', 'Accipitriformes', 'Accipitridae', 'Rupornis magnirostris'),           
-('Mammalia', 'Primates', 'Callitrichidae', 'Leontopithecus rosalia'),    
-('Mammalia', 'Pilosa', 'Myrmecophagidae', 'Tamandua tetradactyla');
- 
-
 -- Tabela de geolocalização
 CREATE TABLE geolocalizacao (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -52,7 +28,36 @@ CREATE TABLE geolocalizacao (
 INSERT INTO geolocalizacao (latitude, longitude, nome_lugar) VALUES
 (-23.1857, -46.8978, 'Serra do Japi, Jundiaí - SP'),         
 (-22.9519, -43.2105, 'Floresta da Tijuca, RJ'),              
-(-3.1072, -60.0261, 'Reserva Adolpho Ducke, Manaus - AM');   
+(-3.1072, -60.0261, 'Reserva Adolpho Ducke, Manaus - AM');  
+
+-- Tabela de classificação taxonômica
+CREATE TABLE classificacao_taxonomica (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    classe VARCHAR(100) NOT NULL,
+    ordem VARCHAR(100) NOT NULL,
+    familia VARCHAR(100) NOT NULL,
+    especie VARCHAR(100) NOT NULL,
+    tipo VARCHAR (20) NOT NULL
+);
+INSERT INTO classificacao_taxonomica (classe, ordem, familia, especie, tipo) VALUES
+('Aves', 'Psittaciformes', 'Psittacidae', 'Amazona aestiva', 'animais'),             
+('Mammalia', 'Carnivora', 'Felidae', 'Leopardus pardalis', 'animais'),          
+('Amphibia', 'Anura', 'Hylidae', 'Scinax fuscovarius', 'animais'),          
+('Mammalia', 'Pilosa', 'Myrmecophagidae', 'Myrmecophaga tridactyla', 'animais'),
+
+('Insecta', 'Lepidoptera', 'Nymphalidae', 'Morpho menelaus', 'insetos'),
+('Insecta', 'Coleoptera', 'Coccinellidae', 'Harmonia axyridis', 'insetos'),
+('Insecta', 'Diptera', 'Culicidae', 'Aedes aegypti', 'insetos'),
+('Insecta', 'Hymenoptera', 'Apidae', 'Apis mellifera', 'insetos'),
+
+('Magnoliopsida', 'Rosales', 'Moraceae', 'Ficus benjamina', 'plantas'),
+('Liliopsida', 'Poales', 'Poaceae', 'Saccharum officinarum', 'plantas'),
+('Magnoliopsida', 'Fabales', 'Fabaceae', 'Mimosa pudica', 'plantas'),
+('Magnoliopsida', 'Asterales', 'Asteraceae', 'Helianthus annuus', 'plantas');
+
+ 
+
+ 
 
 -- Tabela de registros biológicos com data_publicacao
 CREATE TABLE registros_biologicos (
@@ -79,24 +84,44 @@ INSERT INTO registros_biologicos (
     id_usuario, nome_popular, id_taxonomia, data_observacao, hora_observacao, descricao, id_geolocalizacao, url_imagem, qtde_likes, qtde_coment, data_publicacao, hora_publicacao
 ) VALUES
 (1, 'Papagaio-verdadeiro', 1, '2025-05-16', '08:30:00', 'Avistado em árvore frutífera.', 1, 'https://res.cloudinary.com/djbatjpjn/image/upload/v1746915864/hdhsdtqgv7ea5cbhtl4z.png', 0, 0, '2025-05-16', '12:00:00'),
+(1, 'Papagaio-verdadeiro', 1, '2025-05-10', '07:30:00', 'Visto empoleirado em árvore alta.', 1, 'https://res.cloudinary.com/djbatjpjn/image/upload/v1746915864/hdhsdtqgv7ea5cbhtl4z.png', 0, 0, '2025-05-10', '12:00:00'),
+(2, 'Papagaio-verdadeiro', 1, '2025-05-11', '06:45:00', 'Grupo vocalizando próximo a rio.', 1, 'https://res.cloudinary.com/djbatjpjn/image/upload/v1746915864/hdhsdtqgv7ea5cbhtl4z.png', 0, 0, '2025-05-11', '12:00:00'),
+(3, 'Papagaio-verdadeiro', 1, '2025-05-12', '08:10:00', 'Apenas um indivíduo em voo.', 1, 'https://res.cloudinary.com/djbatjpjn/image/upload/v1746915864/hdhsdtqgv7ea5cbhtl4z.png', 0, 0, '2025-05-12', '12:00:00'),
+(1, 'Papagaio-verdadeiro', 1, '2025-05-13', '09:20:00', 'Dois indivíduos alimentando-se de frutas.', 1, 'https://res.cloudinary.com/djbatjpjn/image/upload/v1746915864/hdhsdtqgv7ea5cbhtl4z.png', 0, 0, '2025-05-13', '12:00:00'),
+(2, 'Papagaio-verdadeiro', 1, '2025-05-14', '07:50:00', 'Observado próximo a área urbana.', 1, 'https://res.cloudinary.com/djbatjpjn/image/upload/v1746915864/hdhsdtqgv7ea5cbhtl4z.png', 0, 0, '2025-05-14', '12:00:00'),
+(3, 'Papagaio-verdadeiro', 1, '2025-05-15', '10:00:00', 'Papagaio solitário vocalizando.', 1, 'https://res.cloudinary.com/djbatjpjn/image/upload/v1746915864/hdhsdtqgv7ea5cbhtl4z.png', 0, 0, '2025-05-15', '12:00:00'),
+(1, 'Papagaio-verdadeiro', 1, '2025-05-16', '06:40:00', 'Casal de papagaios em árvore frutífera.', 1, 'https://res.cloudinary.com/djbatjpjn/image/upload/v1746915864/hdhsdtqgv7ea5cbhtl4z.png', 0, 0, '2025-05-16', '12:00:00'),
+(2, 'Papagaio-verdadeiro', 1, '2025-05-17', '08:30:00', 'Trio observado voando em círculo.', 1, 'https://res.cloudinary.com/djbatjpjn/image/upload/v1746915864/hdhsdtqgv7ea5cbhtl4z.png', 0, 0, '2025-05-17', '12:00:00'),
 (2, 'Jaguatirica', 2, '2025-05-16', '22:15:00', 'Atravessando trilha noturna.', 2, 'https://res.cloudinary.com/djbatjpjn/image/upload/v1746915960/ytbx8r46k4r9fv3qnirn.png', 0, 0, '2025-05-16', '11:30:15'),
 (3, 'Perereca-de-banheiro', 3, '2025-05-15', '19:05:00', 'Pousada em janela durante chuva.', 3, 'https://res.cloudinary.com/djbatjpjn/image/upload/v1746916025/tviwtun4vxqcivfeiysy.png', 0, 0, '2025-05-15', '09:32:50'),
 (1, 'Tamanduá-bandeira', 4, '2025-01-15', '10:20:00', 'Avistado próximo a campo aberto.', 1, 'https://res.cloudinary.com/djbatjpjn/image/upload/v1747399815/imagem_2025-05-16_094936847_lfogo5.png', 0, 0, '2025-01-15', '09:43:26'),
-(2, 'Capivara', 5, '2025-04-03', '17:45:00', 'Grupo se alimentando na margem do rio.', 1, '', 0, 0, '2025-04-03', '11:00:00'),
-(3, 'Tatu-galinha', 6, '2025-03-14', '06:50:00', 'Observado escavando o solo.', 1, '', 0, 0, '2025-03-14', '12:00:00'),
-(1, 'Coruja-buraqueira', 7, '2025-05-01', '20:10:00', 'Empoleirada em cerca de madeira.', 1, '', 0, 0, '2025-05-01', '06:24:00'),
-(2, 'Bicho-preguiça', 8, '2025-01-30', '13:30:00', 'Em descanso em galho alto.', 1, '', 0, 0, '2025-01-30', '12:00:00'),
-(3, 'Sucuri-verde', 9, '2025-02-22', '15:00:00', 'Deslocando-se próxima a curso d’água.', 1, '', 0, 0, '2025-02-22', '12:00:00'),
-(1, 'Jacaré-do-papo-amarelo', 10, '2025-04-10', '12:40:00', 'Tomando sol em área alagada.', 1, '', 0, 0, '2025-04-10', '12:00:00'),
-(2, 'Gavião-carijó', 11, '2025-03-19', '09:10:00', 'Sobrevoando zona de mata.', 1, '', 0, 0, '2025-03-19', '12:00:00'),
-(3, 'Mico-leão-dourado', 12, '2025-01-22', '14:15:00', 'Saltando entre galhos.', 1, '', 0, 0, '2025-01-22', '12:00:00'),
-(1, 'Tamanduá-mirim', 13, '2025-02-18', '07:55:00', 'Movimentando-se entre árvores baixas.', 1, '', 0, 0, '2025-02-18', '12:00:00'),
-(2, 'Papagaio-verdadeiro', 1, '2025-05-10', '09:45:00', 'Cantando em galho alto de árvore próxima a trilha.', 1, '', 0, 0, '2025-05-10', '12:00:00'),
-(3, 'Papagaio-verdadeiro', 1, '2025-05-11', '07:20:00', 'Sobrevoando área de mata fechada.', 2, '', 0, 0, '2025-05-11', '12:00:00'),
-(1, 'Papagaio-verdadeiro', 1, '2025-05-12', '10:00:00', 'Par de papagaios interagindo em ninho.', 1, '', 0, 0, '2025-05-12', '12:00:00'),
-(2, 'Papagaio-verdadeiro', 1, '2025-05-13', '16:35:00', 'Avistado comendo frutos em palmeira.', 3, '', 0, 0, '2025-05-13', '12:00:00'),
-(3, 'Papagaio-verdadeiro', 1, '2025-05-14', '11:10:00', 'Vocalização intensa em grupo de 3 indivíduos.', 2, '', 0, 0, '2025-05-14', '12:00:00'),
-(1, 'Papagaio-verdadeiro', 1, '2025-05-17', '08:05:00', 'Empoleirado em poste próximo à mata.', 1, '', 0, 0, '2025-05-17', '12:00:00');
+(1, 'Arara-azul', 1, '2025-05-17', '07:45:00', 'Arara observada no topo da árvore.', 1, 'https://res.cloudinary.com/djbatjpjn/image/upload/v1746915864/hdhsdtqgv7ea5cbhtl4z.png', 0, 0, '2025-05-17', '12:00:00'),
+(2, 'Onça-pintada', 2, '2025-05-17', '19:30:00', 'Onça caminhando pela trilha.', 2, '', 0, 0, '2025-05-17', '12:00:00'),
+(3, 'Sapo-cururu', 3, '2025-05-16', '21:00:00', 'Sapo perto do lago.', 3, '', 0, 0, '2025-05-16', '12:00:00'),
+(1, 'Tatu-canastra', 4, '2025-05-15', '16:20:00', 'Tatu cruzando a estrada.', 1, '', 0, 0, '2025-05-15', '12:00:00'),
+(2, 'Gavião-carijó', 1, '2025-05-14', '10:00:00', 'Gavião voando no céu.', 1, 'https://res.cloudinary.com/djbatjpjn/image/upload/v1746915864/hdhsdtqgv7ea5cbhtl4z.png', 0, 0, '2025-05-14', '12:00:00'),
+(3, 'Tamanduá-mirim', 4, '2025-05-13', '13:45:00', 'Pequeno tamanduá visto em mata.', 1, '', 0, 0, '2025-05-13', '12:00:00'),
+(1, 'Borboleta Morphos', 5, '2025-05-13', '10:20:00', 'Borboleta azul brilhante vista em campo aberto.', 1, '', 0, 0, '2025-05-13', '12:00:00'),
+(2, 'Joaninha Asiática', 6, '2025-05-14', '14:05:00', 'Joaninha em folhas de arbusto.', 2, '', 0, 0, '2025-05-14', '12:00:00'),
+(3, 'Mosquito Aedes', 7, '2025-05-15', '18:40:00', 'Mosquito encontrado próximo à água parada.', 3, '', 0, 0, '2025-05-15', '12:00:00'),
+(1, 'Borboleta Azul', 8, '2025-05-10', '09:00:00', 'Borboleta azul vista perto do riacho.', 1, '', 0, 0, '2025-05-10', '12:00:00'),
+(1, 'Borboleta Monarca', 5, '2025-05-17', '09:00:00', 'Borboleta laranja e preta.', 1, '', 0, 0, '2025-05-17', '12:00:00'),
+(2, 'Joaninha Comum', 6, '2025-05-16', '15:30:00', 'Joaninha em folha verde.', 2, '', 0, 0, '2025-05-16', '12:00:00'),
+(3, 'Mosca-doméstica', 7, '2025-05-15', '11:15:00', 'Mosca perto de janela.', 3, '', 0, 0, '2025-05-15', '12:00:00'),
+(1, 'Abelha Européia', 8, '2025-05-14', '14:50:00', 'Abelha coletando pólen.', 1, '', 0, 0, '2025-05-14', '12:00:00'),
+(2, 'Vaga-lume', 5, '2025-05-13', '20:30:00', 'Inseto com luzes no corpo.', 2, '', 0, 0, '2025-05-13', '12:00:00'),
+(3, 'Formiga Carpinteira', 6, '2025-05-12', '08:45:00', 'Formiga carregando folha.', 3, '', 0, 0, '2025-05-12', '12:00:00'),
+(2, 'Figueira-benjamim', 9, '2025-05-10', '09:15:00', 'Árvore de interior comum.', 1, '', 0, 0, '2025-05-10', '12:00:00'),
+(3, 'Cana-de-açúcar', 10, '2025-05-11', '07:30:00', 'Plantação de cana próxima à trilha.', 2, '', 0, 0, '2025-05-11', '12:00:00'),
+(1, 'Sensitiva', 11, '2025-05-12', '11:45:00', 'Planta que fecha as folhas ao toque.', 1, '', 0, 0, '2025-05-12', '12:00:00'),
+(2, 'Figueira-da-India', 12, '2025-05-13', '08:50:00', 'Árvore comum em áreas urbanas.', 2, '', 0, 0, '2025-05-13', '12:00:00'),
+(1, 'Samambaia', 9, '2025-05-17', '08:00:00', 'Planta encontrada em sombra.', 1, '', 0, 0, '2025-05-17', '12:00:00'),
+(2, 'Bambu', 10, '2025-05-16', '09:30:00', 'Bambus próximos ao riacho.', 2, '', 0, 0, '2025-05-16', '12:00:00'),
+(3, 'Maracujá', 11, '2025-05-15', '12:20:00', 'Planta com frutos amarelos.', 3, '', 0, 0, '2025-05-15', '12:00:00'),
+(1, 'Girassol', 12, '2025-05-14', '10:10:00', 'Flores girando para o sol.', 1, '', 0, 0, '2025-05-14', '12:00:00'),
+(2, 'Ipê-amarelo', 9, '2025-05-13', '14:30:00', 'Árvore com flores amarelas.', 2, '', 0, 0, '2025-05-13', '12:00:00'),
+(3, 'Capim-limão', 10, '2025-05-12', '16:45:00', 'Planta aromática para chá.', 3, '', 0, 0, '2025-05-12', '12:00:00');
+
 
 -- Tabela de curtidas
 CREATE TABLE curtidas_usuarios(
