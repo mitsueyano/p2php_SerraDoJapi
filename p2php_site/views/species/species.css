@@ -1,0 +1,207 @@
+#content {
+    position: relative;
+    background-color: #F2F2F2;
+}
+#box{
+    display: flex;
+    gap: 10px;
+    box-sizing: border-box;
+    width: 100%;
+}
+#divtitle{
+    width: 90%;
+    border-bottom: 1px solid #495927;
+    margin-bottom: 20px;
+    position: absolute;
+    top: 0;
+    background-color: #fff;
+}
+#title {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #495927;
+    font-weight: 600;
+    font-size: 15pt;
+}
+
+#bar {
+    width: 100%;
+    margin-bottom: 5px;
+}
+.flex {
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+@media (max-width: 1200px) {
+    .flex{
+        min-width: 50%;
+    }
+}
+@media (max-width: 690px) {
+    .flex{
+        min-width: 60%;
+    }
+}
+@media (max-width: 600px) {
+    .flex{
+        min-width: 80%;
+    }
+}
+@media (max-width: 400px) {
+    .flex{
+        min-width: 100%;
+    }
+}
+
+.flex button {
+    padding: 6px;
+    width: 20%;
+    border: 2px solid #4959278f;
+    background-color: transparent;
+    color: #495927cc;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 0 5px;
+    font-family: "Prompt", sans-serif;
+}
+
+.flex button:hover {
+    background-color: #4959278f;
+    color: #fff;
+}
+
+.flex button.active {
+    background-color: #4959278f;
+    color: #fff;
+}
+
+/* Navbar letras */
+#navbar-letters {
+    position: sticky;
+    top: -0;
+    background-color: #f2f2f2;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    border-bottom: 1px solid #4959274d;
+
+}
+#navbar-letters a {
+    font-size: 15pt;
+    width: 25px;
+    height: 100%;
+    text-align: center;
+    font-weight: 700;
+    background: #f2f2f2;
+    text-decoration: none;
+    color: #495927cc;
+    line-height: 30px;
+}
+#navbar-letters a:hover {
+    background: #4959278f;
+    color: #fff;
+}
+
+/* Lista espécies */
+#species-list {
+    width: 50%;
+    height: 75vh;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 8px #49592726;
+    padding: 0px 10px 10px 10px;
+    font-family: "Prompt", sans-serif;
+    color: #000;
+    overflow: auto;
+    box-sizing: border-box;
+    border-top: 1px solid #495927;
+    border-bottom: 1px solid #495927;
+}
+.specie-item {
+    padding: 5px 0;
+    border-bottom: 1px solid #ddd;
+}
+.specie-item:hover{
+    cursor: default;
+    background-color: #49592721;
+}
+
+/* Info espécie */
+#div-info-specie{
+    border-top: 1px solid #495927;
+    border-bottom: 1px solid #495927;
+    width: 50%;
+    height: 75vh;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 10px;
+    overflow: auto;
+    position: relative;
+}
+#linkinaturalist{
+    position: absolute;
+    top: 0;
+    left: 5px;
+}
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    overflow: auto;
+    justify-content: center;
+    padding-top: 9vh;
+}
+@media (max-width: 730px) {
+    .gallery {
+        padding-top: 100px;
+    }
+}
+
+.gallery-item {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    background: #fff;
+    box-shadow: 0 2px 5px #0000001a;
+    min-width: 300px;
+    max-width: 300px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 300px;
+}
+
+.gallery-img {
+    width: 100%;
+    min-height: 200px;
+    max-height: 200px;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+.gallery-info {
+    width: 100%;
+    text-align: start;
+}
+
+.info{
+    font-size: 10pt;
+}
+
+.hidden{
+    display: none;
+}

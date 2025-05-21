@@ -1,0 +1,147 @@
+
+#description{
+    display: flex;
+    justify-content: space-around;
+    text-align: justify;
+    width: 100%;
+}
+#motto{
+    font-size: 2.5vw;
+    color: #334027;
+    margin-top: 0;
+}
+#text{
+    width: 45%;
+}
+#data{
+    width: 55vh;
+    height: 55vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 3vh;
+    gap: 5%;
+    background-color: rgba(125, 140, 70, 0.178);
+    border-radius: 100%;
+}
+.num{
+    color: #334027;
+    font-size: 6vh;
+    font-weight: bold;
+}
+.section{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Texto Geral */
+#div-generaltext{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 25px;
+}
+#imggeneraltext{
+    width: 90%;
+    height: 50vh;
+    padding: 20px;
+    background-image: url('../img/martimpescador_AoTak.jpg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+#generaltext{
+    padding: 20px 40px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    background: linear-gradient(90deg, rgba(82, 27, 27, 0) 35%, rgba(0, 0, 0, 0.8) 75%);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: end;
+}
+#generaltext p{
+    width: 30%;
+    font-size: 3vh;
+    text-align: end;
+}
+/* Botão compartilhe */
+#btn-share{
+    text-decoration: none;
+    background-color: transparent;
+    padding: 10px;
+    text-align: center;
+    color: #fff;
+    border-radius: 2px;
+    border: 2px solid #fff;
+    font-size: 20pt;
+    cursor: pointer;
+    transition: 0.1s ease-out;
+}
+#btn-share:hover{
+    background-color: #fff;
+    color: #000;
+}
+
+
+#highlights{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 10px;
+}
+#highlights > p{
+    color: #334027;
+    font-size: 2vw;
+}
+#highlights-bar{
+    align-items: center;
+    width: 85%;
+    padding: 5px;
+    border-top: 1px solid #334027;
+    border-bottom: 1px solid #334027;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+@media (max-width: 1024px) {
+    #highlights-bar {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    #highlights-bar {
+        grid-template-columns: 1fr;
+    }
+}
+.box-highlights{
+    height: 30vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box-highlights img{
+    width: 100%;
+    height: 100%;
+    object-fit:cover;
+    display: block;
+    border-radius: 8px;
+    transition: 0.1s ease-out;
+}
+.box-highlights img:hover{
+    cursor: pointer;
+    filter: brightness(70%);
+}
+
+
