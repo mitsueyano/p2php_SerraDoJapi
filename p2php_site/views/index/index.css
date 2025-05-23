@@ -1,4 +1,3 @@
-
 #description{
     display: flex;
     justify-content: space-around;
@@ -6,13 +5,14 @@
     width: 100%;
 }
 #motto{
-    font-size: 2.5vw;
+    font-size: 2.5em;
     color: #334027;
     margin-top: 0;
 }
 #text{
     width: 45%;
 }
+
 #data{
     width: 55vh;
     height: 55vh;
@@ -20,7 +20,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    font-size: 3vh;
+    font-size: 1.6rem;
     gap: 5%;
     background-color: rgba(125, 140, 70, 0.178);
     border-radius: 100%;
@@ -30,6 +30,7 @@
     font-size: 6vh;
     font-weight: bold;
 }
+
 .section{
     width: 50%;
     display: flex;
@@ -37,7 +38,7 @@
     align-items: center;
 }
 
-/* Texto Geral */
+
 #div-generaltext{
     display: flex;
     justify-content: center;
@@ -73,7 +74,6 @@
     font-size: 3vh;
     text-align: end;
 }
-/* Botão compartilhe */
 #btn-share{
     text-decoration: none;
     background-color: transparent;
@@ -82,7 +82,7 @@
     color: #fff;
     border-radius: 2px;
     border: 2px solid #fff;
-    font-size: 20pt;
+    font-size: 2em;
     cursor: pointer;
     transition: 0.1s ease-out;
 }
@@ -90,7 +90,6 @@
     background-color: #fff;
     color: #000;
 }
-
 
 #highlights{
     display: flex;
@@ -101,7 +100,7 @@
 }
 #highlights > p{
     color: #334027;
-    font-size: 2vw;
+    font-size: 2em;
 }
 #highlights-bar{
     align-items: center;
@@ -118,7 +117,6 @@
         grid-template-columns: repeat(2, 1fr);
     }
 }
-
 @media (max-width: 600px) {
     #highlights-bar {
         grid-template-columns: 1fr;
@@ -129,8 +127,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    font-size: 1.1rem;
 }
-
 .box-highlights img{
     width: 100%;
     height: 100%;
@@ -139,9 +138,22 @@
     border-radius: 8px;
     transition: 0.1s ease-out;
 }
-.box-highlights img:hover{
-    cursor: pointer;
-    filter: brightness(70%);
+
+.box-highlights:hover img {
+    filter: brightness(50%);
 }
-
-
+.box-highlights .description {
+    position: absolute;
+    flex-direction: column;
+    top: 0;
+    left: 0;
+    padding: 5px;
+    display: none;
+    color: #fff;
+    width: 100%;
+    transition: 0.1s ease-out;
+}
+.box-highlights:hover .description {
+    display: flex;
+    cursor: default;
+}

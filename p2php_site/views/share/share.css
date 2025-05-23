@@ -32,15 +32,19 @@ form > div{
     font-size: 13pt;
     padding: 10px;
 }
-.flex-place{
+.flexplace{
     width: 80%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
 }
-.flex-place input{
+.flexplace input{
     width: 100%;
+}
+#image{
+    margin: 10px;
+    border: none;
 }
 form input{
     border: 1px solid #7D8C46;
@@ -62,12 +66,33 @@ form input:focus{
     justify-content: center;
     align-items: center;
     color: #334027;
-    font-weight: bold;
+    font-weight: 500;
+    gap: 5px;
 }
-#notidentified{
+.flexcheck input{
+    outline: none !important;
+    scale: 1.5;
+}
+#flexradio{
+    width: 60%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+#flexradio div{
+    margin: 5px;
+    display: flex;
+    align-items: center;
+}
+#flexradio input{
+    scale: 1.5;
+    outline: none;
+    margin-right: 10px;
+}
+#identified{
     margin-right: 5px;
 }
-#notidentified:hover {
+#identified:hover {
     cursor: pointer;
 }
 .text{

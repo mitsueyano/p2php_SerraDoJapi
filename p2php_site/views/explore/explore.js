@@ -1,11 +1,11 @@
 let offset = 0;
-const limit = 8;
+let currentFilter = 'recentes';
+
+const limit = 12;
 const feed = document.getElementById("feed");
 const userid = sessionStorage.getItem("userid");
 
 function like(postid) {
-    console.log(postid, userid);
-
     if (sessionStorage.getItem("loggedin") !== "true") {
         console.log("Usuário não logado");
         window.location.href = "../login/login.php";
@@ -75,23 +75,33 @@ function datetime(dateStr, timeStr) {
 }
 
 function loadPosts() {
-    fetch(`../../php/loadposts.php?offset=${offset}&userid=${userid}`)
+    fetch(`../../php/loadposts.php?offset=${offset}&limit=${limit}&userid=${userid}&filter=${currentFilter}`)
         .then(response => response.json())
         .then(posts => {
-            if (posts.length === 0) {
+            if (posts.length === 0 && offset === 0) {
+                feed.innerHTML = "<p>Nenhum post encontrado.</p>";
+                document.getElementById("btn-see-more").style.display = "none";
+                return;
+            } else if (posts.length === 0) {
                 document.getElementById("btn-see-more").style.display = "none";
                 return;
             }
+
             posts.forEach(post => {
                 const container = document.createElement("div");
                 container.className = "post-container";
+                if (post.especie == "Não identificado"){
+                    scientificName = "";
+                } else {
+                    scientificName = "(" + post.especie + ")";
+                }
+                
 
                 const likeClass = post.liked ? "liked" : "";
-
                 const datetimePub = datetime(post.data_publicacao, post.hora_publicacao);
                 const datetimeObs = datetime(post.data_observacao, post.hora_observacao);
 
-                container.innerHTML = `
+                container.innerHTML = ` 
                     <span id="datetime">${datetimePub}</span>
                     <div class="image-post">
                         <img src="${post.url_imagem}" alt="Imagem de ${post.nome_popular}" draggable="false" onclick="openModal('${post.url_imagem}')">
@@ -99,7 +109,7 @@ function loadPosts() {
                     <div class="text-post">
                         <div class="flexname">
                             <span class="common-name">${post.nome_popular}</span>
-                            <span class="specie">(${post.especie})</span>
+                            <span class="specie">${scientificName}</span>
                         </div>                        
                         <div class="description">
                             <span class="description">${post.descricao}</span>
@@ -127,6 +137,7 @@ function loadPosts() {
                         </div>
                     </div>
                 `;
+                
                 feed.appendChild(container);
             });
 
@@ -139,6 +150,16 @@ function loadPosts() {
         .catch(error => {
             console.error("Erro ao carregar posts:", error);
         });
+}
+
+function applyFilter(filter) {
+    if (currentFilter === filter) return; 
+
+    currentFilter = filter;
+    offset = 0;
+    feed.innerHTML = "";
+    document.getElementById("btn-see-more").style.display = "flex";
+    loadPosts();
 }
 
 

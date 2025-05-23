@@ -59,7 +59,7 @@ document.querySelector("form").addEventListener("submit", function (e) {
 
 const yesRadio = document.getElementById('yes');
 const noRadio = document.getElementById('no');
-const Lattesfield = document.getElementById('Lattesfield');
+const Lattesfield = document.getElementById('lattesfield');
 
 function updateLattesfield() {
     Lattesfield.style.display = yesRadio.checked ? 'block' : 'none';

@@ -57,18 +57,19 @@ h3{
   border-radius: 8px;
 }
 
-.incident-title, .eye-icon {
+.title-incident{
   position: relative;
   z-index: 2;
 }
 
-.incident-title {
+.title-incident {
     position: absolute;
     bottom: 10px;
     left: 10px;
     right: 10px;
     color: white;
-    font-size: 1.2rem;
+    font-size: 1.2em !important;
+    font-weight: 500;
     z-index: 2;
 }
 
@@ -87,7 +88,7 @@ h3{
     font-size: 0.95rem;
 }
 
-.olho-icone {
+.eye-icon {
     position: absolute;
     top: 10px;
     right: 10px;

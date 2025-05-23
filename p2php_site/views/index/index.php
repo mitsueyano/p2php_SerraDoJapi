@@ -10,6 +10,7 @@
     <title>INÍCIO</title>
     <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="../default/default.css">
+    <script src="https://kit.fontawesome.com/c68ccb89e7.js" crossorigin="anonymous"></script>
 </head>
 
 <body>

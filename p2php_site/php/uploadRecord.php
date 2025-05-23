@@ -17,20 +17,19 @@ $dotenv->load();
 
 Configuration::instance([
     'cloud' => [
-        'cloud_name' => $_ENV['CLOUDINARY_CLOUD_NAME'], 
+        'cloud_name' => $_ENV['CLOUDINARY_CLOUD_NAME'],
         'api_key' => $_ENV['CLOUDINARY_API_KEY'],
         'api_secret' => $_ENV['CLOUDINARY_API_SECRET'],
     ],
     'url' => ['secure' => true]
 ]);
 
-if (isset($_FILES['image'])) {
-
-    $common_name = $_POST['common-name'] ?? '';
-    $class = $_POST['class'] ?? '';
-    $order = $_POST['order'] ?? '';
-    $family = $_POST['family'] ?? '';
-    $specie = $_POST['scientific-name'] ?? '';
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $common_name = $_POST['common-name'] ?? 'Não identificado';
+    $class = $_POST['class'] ?? null;
+    $order = $_POST['order'] ?? null;
+    $family = $_POST['family'] ?? null;
+    $specie = $_POST['scientific-name'] ?? null;
     $date = $_POST['date'] ?? null;
     $time = $_POST['time'] ?? null;
     $comment = $_POST['comment'] ?? '';
@@ -38,12 +37,14 @@ if (isset($_FILES['image'])) {
     $longitude = $_POST['longitude'] ?? null;
     $place_name = $_POST['placename'] ?? '';
     $user_id = $_SESSION["userid"] ?? null;
+    $identified = isset($_POST["identified"]) ? 0 : 1;
+    $invader = isset($_POST["invader"]) ? 1 : 0;
 
     date_default_timezone_set('America/Sao_Paulo');
     $publication_date = date("Y-m-d");
     $publication_time = date("H:i:s");
 
-    if (!$user_id || !$date || !$time || !$latitude || !$longitude || !$class || !$order || !$family || !$specie || !$place_name) {
+    if (!$user_id || !$date || !$time || !$latitude || !$longitude || !$place_name) {
         die("Dados obrigatórios ausentes.");
     }
 
@@ -53,18 +54,39 @@ if (isset($_FILES['image'])) {
     ]);
     $img_url = $result['secure_url'];
 
+    if ($identified === true) {
+        $stmt = $conn->prepare("SELECT id FROM categoria WHERE nome = ?");
+        $stmt->bind_param("s", $category_name);
+        $stmt->execute();
+        $stmt->bind_result($category_id);
+        if (!$stmt->fetch()) {
+            die("Categoria inválida.");
+        }
+        $stmt->close();
 
-    $stmt = $conn->prepare("INSERT INTO classificacao_taxonomica (classe, ordem, familia, especie) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("ssss", $class, $order, $family, $specie);
-    $stmt->execute();
-    $taxon_id = $stmt->insert_id;
-    $stmt->close();
+        $stmt = $conn->prepare("SELECT id FROM classificacao_taxonomica WHERE nome_popular = ? AND classe = ? AND ordem = ? AND familia = ? AND especie = ? AND id_categoria = ?");
+        $stmt->bind_param("sssssi", $common_name, $class, $order, $family, $specie, $category_id);
+        $stmt->execute();
+        $stmt->bind_result($taxon_id);
+        if ($stmt->fetch()) {
+            $stmt->close();
+        } else {
+            $stmt->close();
+            $stmt = $conn->prepare("INSERT INTO classificacao_taxonomica (nome_popular, classe, ordem, familia, especie, id_categoria) VALUES (?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("sssssi", $common_name, $class, $order, $family, $specie, $category_id);
+            $stmt->execute();
+            $taxon_id = $stmt->insert_id;
+            $stmt->close();
+        }
+    } else {
+        $taxon_id = NULL;
+        $category = NULL;
+    }
 
     $stmt = $conn->prepare("SELECT id FROM geolocalizacao WHERE latitude = ? AND longitude = ? AND nome_lugar = ?");
     $stmt->bind_param("dds", $latitude, $longitude, $place_name);
     $stmt->execute();
     $stmt->bind_result($geo_id);
-
     if ($stmt->fetch()) {
         $stmt->close();
     } else {
@@ -77,14 +99,14 @@ if (isset($_FILES['image'])) {
     }
 
     $stmt = $conn->prepare("
-        INSERT INTO registros_biologicos 
-        (id_usuario, nome_popular, id_taxonomia, data_observacao, hora_observacao, descricao, id_geolocalizacao, url_imagem, data_publicacao, hora_publicacao) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    ");
+    INSERT INTO registros_biologicos 
+    (id_usuario, id_taxonomia, data_observacao, hora_observacao, descricao, id_geolocalizacao, url_imagem, qtde_likes, qtde_coment, data_publicacao, hora_publicacao, identificacao, especie_invasora) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, 0, 0, ?, ?, ?, ?)
+");
+
     $stmt->bind_param(
-        "isisssisss",
+        "iisssissssi",
         $user_id,
-        $common_name,
         $taxon_id,
         $date,
         $time,
@@ -92,8 +114,11 @@ if (isset($_FILES['image'])) {
         $geo_id,
         $img_url,
         $publication_date,
-        $publication_time
+        $publication_time,
+        $identified,
+        $invader
     );
+
 
     if ($stmt->execute()) {
         header("Location: ../views/explore/explore.php");
@@ -103,5 +128,7 @@ if (isset($_FILES['image'])) {
 
     $stmt->close();
     $conn->close();
+} else {
+    echo "Método inválido.";
 }
 ?>

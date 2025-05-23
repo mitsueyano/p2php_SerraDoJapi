@@ -28,10 +28,13 @@ session_start();
 
     <div id="content">
         <p id="title">O que você quer observar hoje?</p>
+
         <div id="div-search-bar">
+            <!--
             <div id="search-bar">
                 <input type="text" id="input-search-bar" placeholder="Pesquise...">
             </div>
+            -->
             <div class="flex">
                 <div class="div-option" id="option-species" onclick="window.location.href ='../species/species.php';">
                     <img src="../img/species_HanifiSarikaya.jpg" alt="Imagem de uma abelha polinizando">
@@ -50,8 +53,8 @@ session_start();
                 <span id="text">Registros da comunidade</span>
                 <div id="filter">
                     <span>Filtrar por:</span>
-                    <a href="">Recentes</a>
-                    <a href="">Populares</a>
+                    <button type="button" onclick="applyFilter('recentes')">Recentes</button>
+                    <button type="button" onclick="applyFilter('populares')">Populares</button>
                 </div>
             </div>
 
@@ -71,7 +74,6 @@ session_start();
             <img class="modal-content" id="imgModal" draggable="false">
         </div>
     </div>
-
     <script>
         sessionStorage.setItem("loggedin", "<?php echo isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true ? 'true' : 'false'; ?>");
         sessionStorage.setItem("userid", "<?php echo $_SESSION['userid'] ?? ''; ?>");

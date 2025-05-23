@@ -14,9 +14,46 @@
     border-radius: 5px;
     min-width: 320px;
     margin-bottom: 10px;
+    padding-top: 20px;
+}
+#animal-fields{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-/* Formulário */
+#options{
+    width: 80%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+#options button {
+    padding: 6px;
+    width: 30%;
+    margin: 5px;
+    border: 2px solid #334027;
+    background-color: transparent;
+    color: #334027;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 1em;
+}
+#options button:hover {
+    background-color: #334027;
+    color: #fff;
+}
+
+#options button.active {
+    background-color: #334027;
+    color: white;
+    font-weight: bold;
+}
+
+
 form{
     display: flex;
     width: 100%;
@@ -29,18 +66,28 @@ form > div{
     justify-content: center;
     height: 100%;
     width: 100%;
-    font-size: 13pt;
+    font-size: 1.1em;
     padding: 10px;
 }
-.flex-place{
+.flexplace{
     width: 80%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
 }
-.flex-place input{
+.flexplace input{
     width: 100%;
+}
+.flextitle{
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1em;
+}
+.flextitle input{
+    margin-left: 5px;
 }
 form input{
     border: 1px solid #7D8C46;
@@ -61,26 +108,58 @@ form input:focus{
     width: 80%;
     justify-content: center;
     align-items: center;
-    color: #334027;
-    font-weight: bold;
+    flex-direction: column;
 }
-#notidentified{
+.flexcheck div{
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+.flexcheck input{
+    outline: none !important;
+    scale: 1.5;
+    margin-right: 10px !important;
+}
+#identified{
+    outline: none !important;
+    scale: 1.5;
+}
+#flexradio{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#flexradio div{
+    margin: 5px;
+    display: flex;
+    align-items: center;
+}
+#flexradio input{
+    scale: 1.5;
+    outline: none;
+    margin-right: 10px;
+}
+#identified{
     margin-right: 5px;
 }
-#notidentified:hover {
+#identified:hover {
     cursor: pointer;
 }
 .text{
     color: #334027;
-    font-size: 3.2vh;
+    font-size: 1.2em;
 }
 textarea{
     min-width: 80%;
-    min-height: 100px;
+    min-height: 80px;
     max-width: 80%;
-    max-height: 100px;
+    max-height: 80px;
 }
-
+#image{
+    margin: 10px;
+    border: none;
+}
 #latitude, #longitude{
     border-color: #ccc;
 }

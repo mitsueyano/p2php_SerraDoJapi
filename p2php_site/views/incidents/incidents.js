@@ -27,7 +27,7 @@ function loadincidents() {
         imgincidentDiv.style.backgroundSize = 'cover';
         imgincidentDiv.style.backgroundPosition = 'center';
 
-        if (incident.graphic) {
+        if (incident.sensivel) {
             const blur = document.createElement('div');
             blur.className = 'blur';
             imgincidentDiv.appendChild(blur);
@@ -57,9 +57,9 @@ function loadincidents() {
             });
         }
 
-        const title = document.createElement('h2');
+        const title = document.createElement('span');
         title.className = 'title-incident';
-        title.textContent = incident.title;
+        title.textContent = incident.titulo;
         imgincidentDiv.appendChild(title);
 
         const descDiv = document.createElement('div');
@@ -73,7 +73,7 @@ function loadincidents() {
         const date = new Date(incident.data).toLocaleDateString('pt-BR');
         const time = incident.hora.slice(0, 5);
         const authorP = document.createElement('p');
-        authorP.className = 'author-incident';
+        authorP.className = 'incident-author';
         authorP.textContent = `Por ${incident.autor} em ${date} às ${time}`;
         descDiv.appendChild(authorP);
 
@@ -99,3 +99,6 @@ window.addEventListener('load', () => {
         behavior: "smooth"
     });
 });
+
+const checkbox = document.getElementById('identified');
+const items = document.querySelectorAll('.items');

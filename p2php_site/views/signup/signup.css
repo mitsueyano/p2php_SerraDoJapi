@@ -6,7 +6,7 @@
 }
 #section{
     width: 35%;
-    min-height: 90%;
+    min-height: 70%;
     background-color: #fff;
     display: flex;
     justify-content: center;
@@ -38,6 +38,9 @@ form input:focus{
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+#lattesfield{
+    width: 60%;
 }
 .box{
     width: 50%;

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <?php
-    session_start();
-    if (isset($_SESSION ["loggedin"]) != "loggedin"){
-        header("Location: ../login/login.php");
-    }
+session_start();
+if (isset($_SESSION["loggedin"]) != "loggedin") {
+    header("Location: ../login/login.php");
+}
 ?>
 
 <html lang="en">
@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="../default/default.css">
     <link rel="stylesheet" href="incidentreport.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
 </head>
 
 <body>
@@ -33,32 +33,58 @@
         <div id="box">
             <form action="../../php/uploadIncident.php" method="POST" enctype="multipart/form-data">
                 <div class="info">
-                    <span class="text">Selecione uma imagem:</span><br>
-                    <input type="file" name="image" accept="image/*" id="image" required><br>
-                    <div class="flexcheck">
-                        <input type="checkbox" name="notidentified" id="notidentified"><label for="notidentified">Não identificado</label>
+                    <span class="text">Tipo de ocorrência</span>
+                    <div id="options">
+                        <button type="button" value="animal" class="active">Animal</button>
+                        <button type="button" value="environmental">Ambiental</button>
+                        <input type="text" name="incident_type" id="incident_type" hidden>
                     </div>
-                    <div class="flex">
-                        <label for="common-name">Nome Popular:</label>
-                        <input type="text" name="common-name" id="common-name" autocomplete="off" required>
-                        <div id="dropdown-list" class="dropdown-list"></div>
-                    </div>
-                   
-                    <br>
-                    <div class="flex">
-                        <label for="scientific-name">Nome Científico:</label>
-                        <input type="text" name="scientific-name" id="scientific-name" required>
-                    </div>
-                    <span class="texto">Classificação Taxonomica:</span>
-                    <div class="flex">
-                        <label for="class">Classe:</label><input type="text" name="class" id="class" required>
-                    </div>
-                    <div class="flex">
-                        <label for="order">Ordem:</label>
-                        <input type="text" name="order" id="order" required>
-                    </div>
-                    <div class="flex">
-                        <label for="family">Família:</label><input type="text" name="family" id="family" required>
+                    <span class="text">Selecione uma imagem</span>
+                    <input type="file" name="image" accept="image/*" id="image" required>
+                    <span class="text">Informações gerais</span>
+                    <div id="animal-fields">
+                        <div class="flexcheck">
+                            <div>
+                                <input type="checkbox" name="identified" id="identified"><label for="identified">Espécie não identificada</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="invader" id="invader"><label for="invader">Espécie Invasora</label>
+                            </div>
+                        </div>
+                        <div id="flexradio">
+                            <div>
+                                <input class="items" type="radio" name="category" id="fauna" value="Fauna" required>
+                                <label for="fauna">Fauna</label>
+                            </div>
+                            <div>
+                                <input class="items" type="radio" name="category" id="flora" value="Flora">
+                                <label for="flora">Flora</label>
+                            </div>
+                        </div>
+                        <div class="flex">
+                            <label for="common-name">Nome Popular:</label>
+                            <input type="text" class="items" name="common-name" id="common-name" autocomplete="off"
+                                required>
+                            <div id="dropdown-list" class="dropdown-list"></div>
+                        </div>
+                        <br>
+                        <div class="flex">
+                            <label for="scientific-name">Nome Científico:</label>
+                            <input type="text" class="items" name="scientific-name" id="scientific-name" required>
+                        </div>
+                        <span class="texto">Classificação Taxonômica:</span>
+                        <div class="flex">
+                            <label for="class">Classe:</label>
+                            <input type="text" class="items" name="class" id="class" required>
+                        </div>
+                        <div class="flex">
+                            <label for="order">Ordem:</label>
+                            <input type="text" class="items" name="order" id="order" required>
+                        </div>
+                        <div class="flex">
+                            <label for="family">Família:</label>
+                            <input type="text" class="items" name="family" id="family" required>
+                        </div>
                     </div>
                     <div class="flex">
                         <label for="date">Data:</label><input type="date" name="date" id="date" required>
@@ -66,8 +92,8 @@
                     <div class="flex">
                         <label for="time">Hora:</label><input type="time" name="time" id="time" required>
                     </div>
-                    <label for="description">Descrição</label><textarea name="description"
-                        id="description"></textarea><br>
+                    <div class="flextitle"><label for="incident_title">Título:</label><input type="text" name="incident_title" required></div>
+                    <label for="description">Descrição</label><textarea name="description" id="description"></textarea>
                 </div>
                 <div class="geo">
                     <span>Geolocalização:</span>
@@ -85,7 +111,7 @@
                         <label for="longitude">Longitude:</label>
                         <input type="text" name="longitude" id="longitude" readonly required>
                     </div>
-                    <br><br>
+                    <br>
                     <input type="submit" value="Registrar" id="share">
                 </div>
             </form>

@@ -32,32 +32,43 @@
         <div id="box">
             <form action="../../php/uploadRecord.php" method="POST" enctype="multipart/form-data">
                 <div class="info">
-                    <span class="text">Selecione uma imagem:</span><br>
-                    <input type="file" name="image" accept="image/*" id="image" required><br>
+                    <span class="text">Selecione uma imagem:</span>
+                    <input type="file" name="image" accept="image/*" id="image" required>
                     <div class="flexcheck">
-                        <input type="checkbox" name="notidentified" id="notidentified"><label for="notidentified">Não identificado</label>
+                        <input type="checkbox" name="identified" id="identified"><label for="identified">Não identificado</label>
+                        <input type="checkbox" name="invader" id="invader"><label for="invader">Espécie Invasora</label>
+                    </div>
+                    <div id="flexradio">
+                        <div>
+                            <input class="items" type="radio" name="category" id="fauna" value="Fauna" required>
+                            <label for="fauna">Fauna</label>
+                        </div>
+                        <div>
+                            <input class="items" type="radio" name="category" id="flora" value="Flora">
+                            <label for="flora">Flora</label>  
+                        </div>
                     </div>
                     <div class="flex">
                         <label for="common-name">Nome Popular:</label>
-                        <input type="text" name="common-name" id="common-name" autocomplete="off" required>
+                        <input type="text" class="items" name="common-name" id="common-name" autocomplete="off" required>
                         <div id="dropdown-list" class="dropdown-list"></div>
                     </div>
                    
                     <br>
                     <div class="flex">
                         <label for="scientific-name">Nome Científico:</label>
-                        <input type="text" name="scientific-name" id="scientific-name" required>
+                        <input type="text" class="items" name="scientific-name" id="scientific-name" required>
                     </div>
                     <span class="texto">Classificação Taxonomica:</span>
                     <div class="flex">
-                        <label for="class">Classe:</label><input type="text" name="class" id="class" required>
+                        <label for="class">Classe:</label><input type="text" class="items" name="class" id="class" required>
                     </div>
                     <div class="flex">
                         <label for="order">Ordem:</label>
-                        <input type="text" name="order" id="order" required>
+                        <input type="text" class="items" name="order" id="order" required>
                     </div>
                     <div class="flex">
-                        <label for="family">Família:</label><input type="text" name="family" id="family" required>
+                        <label for="family">Família:</label><input type="text" class="items" name="family" id="family" required>
                     </div>
                     <div class="flex">
                         <label for="date">Data:</label><input type="date" name="date" id="date" required>

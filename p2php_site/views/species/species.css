@@ -10,7 +10,6 @@
 }
 #divtitle{
     width: 90%;
-    border-bottom: 1px solid #495927;
     margin-bottom: 20px;
     position: absolute;
     top: 0;
@@ -22,20 +21,56 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    color: #495927;
-    font-weight: 600;
-    font-size: 15pt;
-}
-
-#bar {
-    width: 100%;
+    font-size: 1.8em;
     margin-bottom: 5px;
+}
+#bar {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#div-search-bar{
+    margin: 10px;
+    width: 50%;
+    height: 1.5em;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+#div-search-bar i{
+    color: #495927;
+    font-size: 1.3em;
+    position: absolute;
+    left: 15px;
+}
+#search-bar{
+    padding: 5px;
+    font-size: 12pt;
+    border: 1px solid #7D8C46;
+    border-radius: 10px;
+    width: 100%;
+    background-color: #F2F2F2;
+    padding-left: 50px;
+}
+#search-bar:focus {
+    outline: 1px solid #7D8C46;
+}
+#class-filter{
+    width: 100%;
+    height: 5vh;
+    background-color: #495927;
 }
 .flex {
     width: 40%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+.flexItem{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
 }
 @media (max-width: 1200px) {
     .flex{
@@ -60,15 +95,15 @@
 
 .flex button {
     padding: 6px;
-    width: 20%;
+    width: 40%;
+    margin: 5px;
     border: 2px solid #4959278f;
     background-color: transparent;
     color: #495927cc;
     border-radius: 4px;
     font-weight: 600;
     cursor: pointer;
-    margin: 0 5px;
-    font-family: "Prompt", sans-serif;
+    font-size: 1em;
 }
 
 .flex button:hover {
@@ -108,6 +143,13 @@
     background: #4959278f;
     color: #fff;
 }
+#navbar-letters a.disabled {
+    color: gray;
+    pointer-events: none;
+    cursor: default;
+    opacity: 0.4;
+}
+
 
 /* Lista espécies */
 #species-list {
@@ -125,12 +167,18 @@
     border-bottom: 1px solid #495927;
 }
 .specie-item {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
     padding: 5px 0;
     border-bottom: 1px solid #ddd;
 }
 .specie-item:hover{
     cursor: default;
     background-color: #49592721;
+}
+.spanClass{
+    color: #495927;
 }
 
 /* Info espécie */

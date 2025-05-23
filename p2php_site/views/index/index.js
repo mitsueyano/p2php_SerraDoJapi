@@ -36,6 +36,11 @@ fetch("../../php/loadhighlights.php")
 
             highlight.innerHTML = `
                 <img src="${post.url_imagem}" alt="${post.nome_popular}")">
+                <div class="description">
+                    <span>${post.nome_popular}</span>
+                    <span>(${post.especie})</span>
+                    <span><i class="fa-solid fa-user"></i> ${post.nomeusuario} ${post.sobrenome}</span>
+                </div>
             `;
 
             bar.appendChild(highlight);

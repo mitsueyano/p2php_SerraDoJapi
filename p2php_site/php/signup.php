@@ -2,29 +2,30 @@
 
     include '../php/connectDB.php';
 
-    $nome = $_POST["name"];
-    $sobrenome = $_POST["lastname"];
-    $cpf = $_POST["cpf"];
-    $email = $_POST["email"];
-    $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
-    $category = $_POST["category"];
-    $nivel = ($category === "sim") ? "especialista" : "comum";
-    $lattes = ($nivel === "especialista" && !empty($_POST["lattes"])) ? $_POST["lattes"] : null;
+$nome = $_POST["name"];
+$sobrenome = $_POST["lastname"];
+$cpf = $_POST["cpf"];
+$email = $_POST["email"];
+$password = password_hash($_POST["password"], PASSWORD_DEFAULT);
+$category = strtolower($_POST["category"]); // segurança extra
+$nivel = ($category === "sim") ? "especialista" : "comum";
+$lattes = ($nivel === "especialista" && !empty($_POST["lattes"])) ? $_POST["lattes"] : null;
+$position = ($nivel === "especialista" && !empty($_POST["position"])) ? $_POST["position"] : null;
 
-    $query = "INSERT INTO usuarios (cpf, nome, sobrenome, email, senha, nivel_acesso, link_lattes)
-              VALUES ('$cpf', '$nome', '$sobrenome', '$email', '$password', '$nivel', " . ($lattes ? "'$lattes'" : "NULL") . ")";
+$stmt = $conn->prepare("INSERT INTO usuarios (cpf, nome, sobrenome, email, senha, nivel_acesso, link_lattes, cargo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+$stmt->bind_param("ssssssss", $cpf, $nome, $sobrenome, $email, $password, $nivel, $lattes, $position);
 
-    $result = mysqli_query($conn, $query);
-    if (!$result) {
-        die("Erro ao cadastrar usuário: " . mysqli_error($conn));
-    } else {
-            session_start();
-            $_SESSION["logado"] = true;
-            $_SESSION["user"] = $nome;
-            $_SESSION["nivel"] = $nivel;
-            $_SESSION["id_usuario"] = mysqli_insert_id($conn);
+if (!$stmt->execute()) {
+    die("Erro ao cadastrar usuário: " . $stmt->error);
+} else {
+    session_start();
+    $_SESSION["logado"] = true;
+    $_SESSION["user"] = $nome;
+    $_SESSION["nivel"] = $nivel;
+    $_SESSION["id_usuario"] = $stmt->insert_id;
 
-            header("Location: ../views/profile/profile.php");
-            exit();
-    }
+    header("Location: ../views/profile/profile.php");
+    exit();
+}
+
 ?>

@@ -11,7 +11,7 @@
     </head>
     <body>
         <div id="header">
-            <h1>ECOFRAME</h1>
+            <h1>ecoframe</h1>
             <span>Foto: José Aparecido dos Santos</span>
         </div>
         <div id="navbar">

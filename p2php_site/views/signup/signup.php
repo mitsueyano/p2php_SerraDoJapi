@@ -49,14 +49,16 @@
                             <label for="cv">Sou um especialista:</label>
                         </div>
                         <div class="box">      
-                            <input type="radio" name="category" id="yes" value="yes">
+                            <input type="radio" name="category" id="yes" value="sim">
                             <label for="yes" id="yeslabel">Sim</label>
                             
-                            <input type="radio" name="category" id="no" value="no" checked>
+                            <input type="radio" name="category" id="no" value="nao" checked>
                             <label for="no">Não</label>
                         </div>                  
                     </div>
-                    <div id="Lattesfield" style="display: none; margin-top: 10px;">
+                    <div id="lattesfield" style="display: none; margin-top: 10px;">
+                        <label for="position">Cargo:</label>
+                        <input type="text" name="position" id="position" style="width: 100%;">
                         <label for="lattes">Link do currículo Lattes:</label>
                         <input type="url" name="lattes" id="lattes" placeholder="https://lattes.cnpq.br/..." style="width: 100%;">
                     </div>

@@ -120,6 +120,7 @@ html, body {
     width: 100%;    
     background-color: #F2F2F2;
     padding: 20px;
+    min-height: 90vh;
 }
 
 *::-webkit-scrollbar {
