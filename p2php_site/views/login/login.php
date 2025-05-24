@@ -35,6 +35,3 @@
     </body>
 </html>
 <script src="../login/login.js"></script>
-<script>
-    sessionStorage.setItem("loggedin", "<?php echo isset($_SESSION['loggedin']) && $_SESSION['logggedin'] === true ? 'true' : 'false'; ?>");
-</script>

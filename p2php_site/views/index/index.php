@@ -69,6 +69,3 @@
 </html>
 <script src="../default/showprofile.js"></script>
 <script src="../index/index.js"></script>
-<script>
-    sessionStorage.setItem("loggedin", "<?php echo isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true ? 'true' : 'false'; ?>");
-</script>

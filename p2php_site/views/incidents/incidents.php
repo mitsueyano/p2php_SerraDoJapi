@@ -33,9 +33,6 @@
         <script src="https://kit.fontawesome.com/c68ccb89e7.js" crossorigin="anonymous"></script>
         <script src="../default/showprofile.js"></script>
         <script src="incidents.js"></script>
-        <script>
-            sessionStorage.setItem("loggedin", "<?php echo isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true ? 'true' : 'false'; ?>");
-        </script>
     </body>
 
     </html>

@@ -118,9 +118,6 @@ if (isset($_SESSION["loggedin"]) != "loggedin") {
         </div>
     </div>
 </body>
-<script>
-    sessionStorage.setItem("loggedin", "<?php echo isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true ? 'true' : 'false'; ?>");
-</script>
 <script src="https://kit.fontawesome.com/c68ccb89e7.js" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>

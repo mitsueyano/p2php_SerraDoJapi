@@ -58,9 +58,6 @@ $letters = range('A', 'Z');
     </div>
     <script src="../default/showprofile.js"></script>
     <script src="species.js"></script>
-    <script>
-        sessionStorage.setItem("loggedin", "<?php echo isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true ? 'true' : 'false'; ?>");
-    </script>
 </body>
 
 </html>

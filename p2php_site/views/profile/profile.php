@@ -28,10 +28,7 @@
 </html>
 <script src="../default/showprofile.js"></script>
 <script>
-    sessionStorage.setItem("loggedin", "<?php echo isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true ? 'true' : 'false'; ?>");
-    
     document.getElementById("btn-logout").addEventListener("click", function () {
-        sessionStorage.clear();
         window.location.href = "../../php/logout.php";
     });
 </script>

@@ -1,9 +1,14 @@
 <?php
+session_start();
 require_once("connectDB.php");
 
 $limit = isset($_GET['limit']) ? intval($_GET['limit']) : 12;
 $offset = isset($_GET['offset']) ? intval($_GET['offset']) : 0;
-$userid = isset($_GET['userid']) ? intval($_GET['userid']) : null;
+$userid = 0;
+
+if (isset($_SESSION['userid'])) {
+    $userid = $_SESSION['userid'];
+}
 
 $filter = $_GET['filter'] ?? 'recentes';
 

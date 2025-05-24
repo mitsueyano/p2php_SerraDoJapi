@@ -3,7 +3,7 @@
         'name' => 'luiza/p2php_site',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '42884cdb16802c6736325d0894b932be060cb886',
+        'reference' => '702f5fcf97dd67b4d65bfccfb7314bfef2225240',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -67,7 +67,7 @@
         'luiza/p2php_site' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '42884cdb16802c6736325d0894b932be060cb886',
+            'reference' => '702f5fcf97dd67b4d65bfccfb7314bfef2225240',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

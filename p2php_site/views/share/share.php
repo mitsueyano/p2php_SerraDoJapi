@@ -6,7 +6,6 @@
     }
 ?>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,9 +30,20 @@
     <div id="content">
         <div id="box">
             <form action="../../php/uploadRecord.php" method="POST" enctype="multipart/form-data">
-                <div class="info">
+                <div class="image-pick">
                     <span class="text">Selecione uma imagem:</span>
-                    <input type="file" name="image" accept="image/*" id="image" required>
+                    <div id="div-image-selection" onclick="upload()">
+                        <div id="image-overlay">
+                            <span id="image-overlay-text">Clique para selecionar uma imagem</span>
+                        </div>
+                        <div id="image-selected">
+                            <img src="" width="400px" height="400px" alt="" id="image-preview" class="hidden">
+                        </div>
+                        
+                    </div>
+                    <input type="file" name="image" accept="image/*" id="image" hidden required onchange="previewImage(event)">
+                </div>
+                <div class="info">
                     <div class="flexcheck">
                         <input type="checkbox" name="identified" id="identified"><label for="identified">Não identificado</label>
                         <input type="checkbox" name="invader" id="invader"><label for="invader">Espécie Invasora</label>
@@ -102,10 +112,7 @@
         </div>
         <span>Quer comunicar algo? <a href="../incidents/incidents.php">Registre uma ocorrência</a>.</span>
     </div>
-</body>
-<script>
-    sessionStorage.setItem("loggedin", "<?php echo isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true ? 'true' : 'false'; ?>");
-</script>
+</body>;
 <script src="https://kit.fontawesome.com/c68ccb89e7.js" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>

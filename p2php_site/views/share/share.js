@@ -26,3 +26,18 @@ checkbox.addEventListener('change', () => {
         });
     }
 });
+
+const upload = () => {
+    document.querySelector('#image').click()
+}
+
+function previewImage(event) {
+    const input = event.target;
+    const preview = document.getElementById("image-preview");
+
+    if (input.files && input.files[0]) {
+      const fileURL = URL.createObjectURL(input.files[0]);
+      preview.src = fileURL;
+      preview.classList.remove("hidden");
+    }
+}

@@ -5,7 +5,7 @@
     align-items: center;
 }
 #box{
-    width: 75%;
+    width: 85%;
     background-color: #fff;
     display: flex;
     justify-content: center;
@@ -24,9 +24,7 @@ form{
 form > div{
     display: flex;
     flex-direction: column;
-    gap: 5px;
     align-items: center;
-    justify-content: center;
     height: 100%;
     width: 100%;
     font-size: 13pt;
@@ -45,6 +43,66 @@ form > div{
 #image{
     margin: 10px;
     border: none;
+}
+#div-image-selection{
+    width: 420px;
+    height: 420px;
+    background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%237D8C46' stroke-width='5' stroke-dasharray='21' stroke-dashoffset='11' stroke-linecap='square'/%3e%3c/svg%3e");
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+}
+
+#div-image-selection:hover::after{
+    content: "Clique para selecionar uma imagem";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #7d8c4680;
+    color: #fff;
+    font-size: 13pt;
+}
+#image-selected{
+    width: 400px;
+    height: 400px;
+    position: relative;
+}
+#image-overlay{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+#image-preview{
+    object-fit: cover;
+}
+#btn-image-selection{
+    padding: 10px;
+    text-align: center;
+    color: #fff;
+    border-radius: 2px;
+    border: 1px solid #334027;
+    background-color: #334027;
+    font-size: 2.5vh;
+    transition: 0.1s ease-out;
+}
+#btn-image-selection{
+    cursor: pointer;
+    transform: scale(1.05);
 }
 form input{
     border: 1px solid #7D8C46;
@@ -182,4 +240,7 @@ textarea{
 }
 .dropdown-item:hover {
     background-color: #eee;
+}
+.hidden{
+    display: none;
 }

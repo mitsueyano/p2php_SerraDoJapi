@@ -1,7 +1,9 @@
 <?php
-require '../vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
+use Dotenv\Dotenv;
+
+$dotenv = Dotenv::createImmutable(__DIR__ . '/../');
 $dotenv->load();
 
 $server = $_ENV['DB_HOST'];
@@ -12,6 +14,6 @@ $database = $_ENV['DB_NAME'];
 $conn = mysqli_connect($server, $user, $password, $database);
 
 if (!$conn) {
-    echo "Não conectado ao banco de dados";
+    die("Não conectado ao banco de dados");
 }
 ?>
