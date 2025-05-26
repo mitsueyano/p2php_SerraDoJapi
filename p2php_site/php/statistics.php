@@ -3,7 +3,7 @@ include("connectDB.php");
 
 $query = "SELECT 
                 (SELECT COUNT(*) FROM registros_biologicos) AS total_registros,
-                (SELECT COUNT(DISTINCT id_taxonomia) FROM registros_biologicos) AS total_especies,
+                (SELECT COUNT(*) FROM classificacao_taxonomica) AS total_especies,
                 (SELECT COUNT(*) FROM usuarios) AS total_colaboradores";
 
 

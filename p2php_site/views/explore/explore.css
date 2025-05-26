@@ -310,3 +310,8 @@
     cursor: pointer;
     color: #fff;
 }
+
+#username{
+    display: inline;
+    color: #7D8C46;
+}

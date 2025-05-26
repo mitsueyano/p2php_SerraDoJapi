@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <?php
-    session_start();
-    if (isset($_SESSION ["loggedin"]) != "loggedin"){
-        header("Location: ../login/login.php");
-    }
+session_start();
+if (isset($_SESSION["loggedin"]) != "loggedin") {
+    header("Location: ../login/login.php");
+}
 ?>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +14,7 @@
     <link rel="stylesheet" href="../default/default.css">
     <link rel="stylesheet" href="share.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
 </head>
 
 <body>
@@ -24,8 +25,13 @@
     <div id="navbar">
         <a href="../index/index.php">INÍCIO</a>
         <a href="../explore/explore.php" class="selected">EXPLORAR</a>
-        <a href="../login/login.php" id="login-link">ENTRE / CADASTRE-SE</a>
-        <a href="../profile/profile.php" id="profile-link" style="display: none;">PERFIL</a>
+        <?php
+        if (isset($_SESSION['loggedin'])) {
+            echo '<a href="../profile/profile.php?username=' . $_SESSION['username'] . '" id="profile-link">PERFIL</a>';
+        } else {
+            echo '<a href="../login/login.php" id="login-link">ENTRE / CADASTRE-SE</a>';
+        }
+        ?>
     </div>
     <div id="content">
         <div id="box">
@@ -39,14 +45,15 @@
                         <div id="image-selected">
                             <img src="" width="400px" height="400px" alt="" id="image-preview" class="hidden">
                         </div>
-                        
+
                     </div>
-                    <input type="file" name="image" accept="image/*" id="image" hidden required onchange="previewImage(event)">
+                    <input type="file" name="image" accept="image/*" id="image" hidden required
+                        onchange="previewImage(event)">
                 </div>
                 <div class="info">
                     <div class="flexcheck">
-                        <input type="checkbox" name="identified" id="identified"><label for="identified">Não identificado</label>
-                        <input type="checkbox" name="invader" id="invader"><label for="invader">Espécie Invasora</label>
+                        <input type="checkbox" name="identified" id="identified"><label for="identified">Espécie não identificada</label>
+                        <input type="checkbox" name="invader" id="invader"><label for="invader">Espécie invasora</label>
                     </div>
                     <div id="flexradio">
                         <div>
@@ -55,15 +62,16 @@
                         </div>
                         <div>
                             <input class="items" type="radio" name="category" id="flora" value="Flora">
-                            <label for="flora">Flora</label>  
+                            <label for="flora">Flora</label>
                         </div>
                     </div>
                     <div class="flex">
                         <label for="common-name">Nome Popular:</label>
-                        <input type="text" class="items" name="common-name" id="common-name" autocomplete="off" required>
+                        <input type="text" class="items" name="common-name" id="common-name" autocomplete="off"
+                            required>
                         <div id="dropdown-list" class="dropdown-list"></div>
                     </div>
-                   
+
                     <br>
                     <div class="flex">
                         <label for="scientific-name">Nome Científico:</label>
@@ -71,14 +79,16 @@
                     </div>
                     <span class="texto">Classificação Taxonomica:</span>
                     <div class="flex">
-                        <label for="class">Classe:</label><input type="text" class="items" name="class" id="class" required>
+                        <label for="class">Classe:</label><input type="text" class="items" name="class" id="class"
+                            required>
                     </div>
                     <div class="flex">
                         <label for="order">Ordem:</label>
                         <input type="text" class="items" name="order" id="order" required>
                     </div>
                     <div class="flex">
-                        <label for="family">Família:</label><input type="text" class="items" name="family" id="family" required>
+                        <label for="family">Família:</label><input type="text" class="items" name="family" id="family"
+                            required>
                     </div>
                     <div class="flex">
                         <label for="date">Data:</label><input type="date" name="date" id="date" required>
@@ -86,8 +96,7 @@
                     <div class="flex">
                         <label for="time">Hora:</label><input type="time" name="time" id="time" required>
                     </div>
-                    <label for="comment">Comentário</label><textarea name="comment"
-                        id="comment"></textarea><br>
+                    <label for="comment">Comentário</label><textarea name="comment" id="comment"></textarea><br>
                 </div>
                 <div class="geo">
                     <span>Geolocalização:</span>
@@ -105,19 +114,17 @@
                         <label for="longitude">Longitude:</label>
                         <input type="text" name="longitude" id="longitude" readonly required>
                     </div>
-                    <br><br>
-                    <input type="submit" value="Compartilhar" id="share">
                 </div>
             </form>
         </div>
-        <span>Quer comunicar algo? <a href="../incidents/incidents.php">Registre uma ocorrência</a>.</span>
+        <span id="linkincident">Quer comunicar algo? <a href="../incidents/incidents.php">Registre uma ocorrência</a>.</span>
+        <input type="submit" value="Compartilhar" id="share">
     </div>
 </body>;
 <script src="https://kit.fontawesome.com/c68ccb89e7.js" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
 <script src="share.js"></script>
-<script src="../default/showprofile.js"></script>
 <script src="../default/map.js"></script>
 <script src="../default/speciesAPI.js"></script>
 

@@ -9,15 +9,17 @@ CREATE TABLE usuarios (
     nome VARCHAR(100) NOT NULL,
     sobrenome VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
+    nome_usuario VARCHAR(20) NOT NULL UNIQUE,
     senha VARCHAR(255) NOT NULL,
     nivel_acesso ENUM('comum', 'especialista') NOT NULL,
     link_lattes VARCHAR(255),
-    cargo VARCHAR(50)
+    cargo VARCHAR(50),
+    imagem_perfil VARCHAR(255)
 );
-INSERT INTO usuarios (cpf, nome, sobrenome, email, senha, nivel_acesso, link_lattes, cargo) VALUES
-('123.456.789-00', 'Regina', 'Silva', 'ana.silva@example.com', '$2y$10$KckpFTTAbDgDtCGKEtnlUODlkKFPziZ52/zxDumCGGM6/0uBN50pu', 'comum', NULL, NULL),
-('987.654.321-11', 'Bruno', 'Souza', 'bruno.souza@example.com', '$2y$10$20eejaVT.RDTEmC5q1NRm.Vc9c.z4w8lp0OqG84IRvknhHWN/CVEO', 'especialista', 'http://lattes.cnpq.br/1234567890123456', 'Aracnólogo'),
-('456.789.123-22', 'Carla', 'Pereira', 'carla.pereira@example.com', '$2y$10$ncJQk.ZKyivWQ.En1KdNpOZo3ZTMKzwXajLfw26m4uCELhbA/zSH2', 'comum', NULL, NULL);
+INSERT INTO usuarios (cpf, nome, sobrenome, email, nome_usuario, senha, nivel_acesso, link_lattes, cargo, imagem_perfil) VALUES
+('123.456.789-00', 'Regina', 'Silva', 'ana.silva@example.com', 'reSilva', '$2y$10$KckpFTTAbDgDtCGKEtnlUODlkKFPziZ52/zxDumCGGM6/0uBN50pu', 'especialista', NULL, NULL, "https://png.pngtree.com/background/20241213/original/pngtree-dumb-nerd-silly-dachshund-background-funny-puppy-photo-picture-image_11604570.jpg"),
+('987.654.321-11', 'Bruno', 'Souza', 'bruno.souza@example.com', 'bruSouza', '$2y$10$20eejaVT.RDTEmC5q1NRm.Vc9c.z4w8lp0OqG84IRvknhHWN/CVEO', 'especialista', 'http://lattes.cnpq.br/1234567890123456', 'Aracnólogo', NULL),
+('456.789.123-22', 'Carla', 'Pereira', 'carla.pereira@example.com', 'caPereira', '$2y$10$ncJQk.ZKyivWQ.En1KdNpOZo3ZTMKzwXajLfw26m4uCELhbA/zSH2', 'comum', NULL, NULL, NULL);
 
 -- Tabela de geolocalização
 CREATE TABLE geolocalizacao (

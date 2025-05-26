@@ -90,7 +90,7 @@ function loadPosts() {
         const container = document.createElement("div");
         container.className = "post-container";
         if (post.especie == "Não identificado") {
-          scientificName = "";
+          scientificName = "<br>";
         } else {
           scientificName = "(" + post.especie + ")";
         }
@@ -127,7 +127,7 @@ function loadPosts() {
                             </div>
                             <div class="author">   
                                 <i class="fa-solid fa-camera"></i>          
-                                <span>Por ${post.nome} ${post.sobrenome}</span>
+                                <span style="display: inline;">Por <a href="../profile/profile.php?username=${post.nome_usuario}" id="username">${post.nome_usuario}</a></span>
                             </div>
                             <div class="author">   
                                 <i class="fa-solid fa-calendar"></i>       

@@ -18,8 +18,13 @@
         <div id="navbar">
             <a href="../index/index.php">INÍCIO</a>
             <a href="../explore/explore.php">EXPLORAR</a>
-            <a href="../login/login.php" id="login-link" class="selected">ENTRE / CADASTRE-SE</a>
-            <a href="../profile/profile.php" id="perfil-link" style="display: none;" class="selected">PERFIL</a>
+        <?php 
+            if(isset($_SESSION['loggedin'])) {
+                echo '<a href="../profile/profile.php?username=' . $_SESSION['username'] . '" id="profile-link">PERFIL</a>';
+            } else {
+                echo '<a href="../login/login.php" id="login-link" class="selected">ENTRE / CADASTRE-SE</a>';
+            }
+        ?>
         </div>
         <div id="content">
             <div id="box">

@@ -25,8 +25,13 @@ $letters = range('A', 'Z');
     <div id="navbar">
         <a href="../index/index.php">INÍCIO</a>
         <a href="../explore/explore.php" class="selected">EXPLORAR</a>
-        <a href="../login/login.php" id="login-link">ENTRE / CADASTRE-SE</a>
-        <a href="../profile/profile.php" id="profile-link" style="display:none;">PERFIL</a>
+                <?php 
+            if(isset($_SESSION['loggedin'])) {
+                echo '<a href="../profile/profile.php?username=' . $_SESSION['username'] . '" id="profile-link">PERFIL</a>';
+            } else {
+                echo '<a href="../login/login.php" id="login-link">ENTRE / CADASTRE-SE</a>';
+            }
+        ?>
     </div>
     <div id="content">
         <span id="title">Espécies registradas</span>
@@ -56,7 +61,6 @@ $letters = range('A', 'Z');
             </div>
         </div>
     </div>
-    <script src="../default/showprofile.js"></script>
     <script src="species.js"></script>
 </body>
 
