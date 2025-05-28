@@ -111,8 +111,13 @@ function createPostElement(post, postId) {
 
   const datetimePub = datetime(post.data_publicacao, post.hora_publicacao);
   const datetimeObs = datetime(post.data_observacao, post.hora_observacao);
-
-  card.innerHTML = `
+  if (userData.own) card.innerHTML = `
+    <div id="actions">
+        <i id="removePost" onclick="buildModal({'type': 'o registro', 'name': '${post.nome_popular}', 'id': ${post.id}})" class="fa-solid fa-trash-can"></i>
+        <i id="editPost" onclick="editPost(${post.id})" class="fa-solid fa-pen-to-square"></i>
+    </div>
+  `
+  card.innerHTML = card.innerHTML + `
     <span id="datetime">${datetimePub}</span>
     <div class="image-post">
         <img src="${post.url_imagem}" alt="Imagem de ${post.nome_popular}" draggable="false" onclick="openModal('${post.url_imagem}')">
@@ -148,7 +153,7 @@ function createPostElement(post, postId) {
         </div>
     </div>
   `;
-
+  card.id = "post" + postId
   return card;
 }
 
@@ -302,4 +307,84 @@ function datetime(dateStr, timeStr) {
   } else {
     return `${dateStr} às ${timeStr.slice(0, 5)}`;
   }
+}
+
+function removePost(postId) {
+    document.getElementById('modal-btn-yes-text').classList.add('hidden')
+    document.getElementById('remove-post-loading').classList.remove('hidden')
+    fetch(`../../php/deletepost.php/${postId}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(response => {
+    if (!response.ok) {
+      return response.json().then(err => Promise.reject(err));
+    }
+    return response.json();
+  })
+  .then(data => {
+    console.log('Sucesso:', data);
+    alert('Post excluído com sucesso!');
+    // Aqui você pode remover o post da interface ou recarregar a lista
+    killModal()
+    while (document.getElementById("post" + postId) !== null) {
+      document.getElementById("post" + postId).remove()
+    }
+  })
+  .catch(error => {
+    // Tratamento de erros
+    console.error('Erro ao excluir post:', error);
+    
+    if (error.error) {
+      // Erro vindo do backend (já parseado)
+      alert(`Erro: ${error.error}`);
+    } else if (error.message) {
+      // Erro de rede ou outro erro do fetch
+      alert(`Falha na requisição: ${error.message}`);
+    } else {
+      // Erro genérico
+      alert('Ocorreu um erro ao excluir o post');
+    }
+    document.getElementById('modal-btn-yes-text').classList.add('hidden')
+    document.getElementById('remove-post-loading').classList.remove('hidden')
+  });
+}
+
+function editPost(postId) {
+  alert("MALUQUICE MALUCA ACONTECENDO")
+}
+
+function buildModal(info){
+    const modalHTML = `
+      <div class="modal">
+          <div class="modal-top">
+              <i onclick="killModal()" id="modal-close" class="fa-solid fa-xmark"></i>
+          </div>
+          <div class="modal-body">
+              <p>Deseja mesmo excluir ${info.type} ${info.name}?</p>
+          </div>
+          <div class="modal-bottom">
+              <button onclick="killModal()" id="modal-btn-cancel">Cancelar</button>
+              <button onclick="removePost(${info.id})"id="modal-btn-yes"><span id="modal-btn-yes-text">Sim</span><div id="remove-post-loading" class="loading-spinner hidden"></div></button>
+          </div>
+      </div>
+    `
+    const modal = document.createElement("div")
+    modal.classList.add('modal-container')
+    modal.innerHTML = modalHTML
+    modal.addEventListener("click", (ev) => {
+      const modalContainer = document.querySelector('.modal-container');
+      if (modalContainer && ev.target === modalContainer) {
+          killModal();
+      }
+    })
+    document.body.appendChild(modal)
+    document.body.classList.add('scroll-lock')
+}
+
+function killModal(){
+  document.body.classList.remove('scroll-lock')
+  document.querySelector('.modal-container').remove()
 }

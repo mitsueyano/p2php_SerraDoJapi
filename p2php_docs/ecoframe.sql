@@ -146,11 +146,13 @@ INSERT INTO ocorrencias (id_usuario, id_geolocalizacao, data_publicacao, hora_pu
 
 
 -- Tabela de curtidas
-CREATE TABLE curtidas_usuarios(
-	id_usuario INT NOT NULL,
+CREATE TABLE curtidas_usuarios (
+    id_usuario INT NOT NULL,
     id_registro INT NOT NULL,
-	FOREIGN KEY (id_usuario) REFERENCES usuarios(id),
-    FOREIGN KEY (id_registro) REFERENCES registros_biologicos(id)
+    data_curtida DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id_usuario, id_registro),
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id),
+    FOREIGN KEY (id_registro) REFERENCES registros_biologicos(id) ON DELETE CASCADE
 );
 
 -- Visualizações

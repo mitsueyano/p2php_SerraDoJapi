@@ -2,6 +2,7 @@
 session_start();
 include("../../php/connectDB.php");
 
+
 if ($_SESSION['loggedin'] !== true) {
     header("Location: ../login/login.php");
     exit;
@@ -54,6 +55,7 @@ $estatisticas = [
     <link rel="stylesheet" href="../default/default.css">
     <link rel="stylesheet" href="../incidents/incidents.css">
     <link rel="stylesheet" href="profile.css">
+    <link rel="preload" as="image" href="<?php echo $usuario['imagem'] ?>">
 </head>
 <body>
     <div id="header">
@@ -117,12 +119,13 @@ $estatisticas = [
             </div>
         </div>
     </div>
-
+</body>
     <script src="https://kit.fontawesome.com/c68ccb89e7.js" crossorigin="anonymous"></script>
     <script>
         // Dados do usuário disponíveis para JS quando necessário
         const userData = {
             username: "<?= $usuario['nome_usuario'] ?>",
+            own: <?= $own ?>,
             isSpecialist: <?= $usuario['especialista'] ? 'true' : 'false' ?>,
             stats: {
                 registros: <?= $estatisticas['registros'] ?>,
@@ -132,5 +135,4 @@ $estatisticas = [
         };
     </script>
     <script src="profile.js"></script>
-</body>
 </html>

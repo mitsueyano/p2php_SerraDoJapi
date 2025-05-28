@@ -185,12 +185,45 @@
     border-radius: 2px;
     overflow: hidden;
     transition: 0.1s ease-out;
+    position: relative;
 }
 .post-container:hover {
     border-top: 2px solid #334027;
     border-bottom: 2px solid #334027;
     cursor: default;
 }
+
+#actions {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    display: flex;
+    gap: 2px;
+    font-size: 12px;
+}
+
+#actions > i {
+    padding: 4px;
+    color: white;
+    cursor: pointer;
+}
+
+#removePost{
+    background-color: #A00000;
+}
+
+#removePost:hover{
+    background-color: #800000;
+}
+
+#editPost{
+    background-color: #7D8C46;
+}
+
+#editPost:hover{
+    background-color: #495927;
+}
+
 
 .image-post {
     width: 100%;
@@ -332,4 +365,101 @@
 }
 #btn-see-more:hover {
     transform: scale(1.05);
+}
+
+.modal-container{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #00000088;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal{
+    display: flex;
+    flex-direction: column;
+    min-width: 500px;
+    background-color: white;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.modal > div{
+    width: 100%;
+    display: flex;
+    padding: 10px;
+}
+
+.modal-top {
+    display: flex;
+    justify-content: end;
+    color: white;
+    background-color: #495927;
+    height: 15%;
+}
+
+#modal-close{
+    cursor: pointer;
+
+}
+
+.modal-body {
+}
+
+.modal-bottom {
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    gap: 5px;
+}
+
+.modal-bottom > button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #e8e8e8;
+    color: #333;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#modal-btn-yes{
+    background-color: #495927;
+    color: white;
+}
+
+#modal-btn-yes:hover{
+    background-color: #334027;
+}
+
+#modal-btn-cancel:hover{
+    background-color: #c8c8c8;
+}
+
+.scroll-lock{
+    overflow-y: hidden;
+}
+
+.loading-spinner {
+  width: 15px;
+  height: 15px;
+  border: 4px solid rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  border-top-color: #ffffff7e; /* Cor da animação */
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.hidden{
+    display: none;
 }
