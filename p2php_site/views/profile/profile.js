@@ -120,7 +120,7 @@ function createPostElement(post, postId) {
   card.innerHTML = card.innerHTML + `
     <span id="datetime">${datetimePub}</span>
     <div class="image-post">
-        <img src="${post.url_imagem}" alt="Imagem de ${post.nome_popular}" draggable="false" onclick="openModal('${post.url_imagem}')">
+        <img src="${post.url_imagem}" alt="Imagem de ${post.nome_popular}" draggable="false" onclick="">
     </div>
     <div class="text-post">
         <div class="flexname">
@@ -353,7 +353,7 @@ function removePost(postId) {
 }
 
 function editPost(postId) {
-  alert("MALUQUICE MALUCA ACONTECENDO")
+  alert("Em desenvolvimento")
 }
 
 function buildModal(info){

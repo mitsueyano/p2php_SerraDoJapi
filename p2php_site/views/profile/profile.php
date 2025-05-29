@@ -10,8 +10,6 @@ if ($_SESSION['loggedin'] !== true) {
 
 $username = $_GET['username'] ?? $_SESSION['username'];
 $own = ($username == $_SESSION['username']);
-
-
 // Busca os dados do usuário
 $query = "SELECT 
     u.*,
@@ -92,13 +90,11 @@ $estatisticas = [
                     <a href="../../php/logout.php" id="logout"><i class="fa-solid fa-right-from-bracket"></i></a>
                 <?php endif; ?>
             </div>
-
             <div class="profile-tabs">
                 <button class="tab active" data-tab="registros">Registros</button>
                 <button class="tab" data-tab="ocorrencias">Ocorrências</button>
                 <button class="tab" data-tab="curtidos">Curtidos</button>
             </div>
-            
             <div class="tab-content active" id="registros">
                 <div class="posts-list"></div>
                 <div id="div-see-more">
@@ -122,17 +118,16 @@ $estatisticas = [
 </body>
     <script src="https://kit.fontawesome.com/c68ccb89e7.js" crossorigin="anonymous"></script>
     <script>
-        // Dados do usuário disponíveis para JS quando necessário
-        const userData = {
-            username: "<?= $usuario['nome_usuario'] ?>",
-            own: <?= $own ?>,
-            isSpecialist: <?= $usuario['especialista'] ? 'true' : 'false' ?>,
-            stats: {
-                registros: <?= $estatisticas['registros'] ?>,
-                ocorrencias: <?= $estatisticas['ocorrencias'] ?>,
-                curtidas: <?= $estatisticas['curtidas'] ?>
-            }
-        };
+    window.userData = { // Adicionando ao objeto window para garantir escopo global
+        username: "<?= $usuario['nome_usuario'] ?>",
+        own: <?= $own ? 'true' : 'false' ?>,
+        isSpecialist: <?= $usuario['especialista'] ? 'true' : 'false' ?>,
+        stats: {
+            registros: <?= $estatisticas['registros'] ?>,
+            ocorrencias: <?= $estatisticas['ocorrencias'] ?>,
+            curtidas: <?= $estatisticas['curtidas'] ?>
+        }
+    };
     </script>
     <script src="profile.js"></script>
 </html>

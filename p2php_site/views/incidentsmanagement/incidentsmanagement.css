@@ -1,0 +1,249 @@
+.alert {
+    display: flex;
+    padding: 5px;
+    width: 100%;
+    background-color: rgb(245, 230, 179);
+    color: rgb(54, 42, 0);
+    justify-content: center;
+    font-size: 14pt;
+}
+
+.incidents-container {
+    margin-top: 10px;
+}
+
+.incident {
+    width: 100%;
+    display: flex;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.card-image {
+    width: 250px;
+    min-height: 200px;
+    background-color: #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.no-image {
+    color: #666;
+    text-align: center;
+    padding: 20px;
+}
+
+.card-content {
+    flex: 1;
+    padding: 20px;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.card-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+}
+
+.card-date {
+    color: #666;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    margin-left: 15px;
+}
+
+.card-description {
+    color: #444;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+.card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    color: #555;
+    font-size: 0.9rem;
+}
+
+.sensitive-tag{
+    padding: 5px 20px;
+    background-color: rgb(245, 192, 179);
+    border-radius: 20px;
+    color: rgb(63, 13, 0);
+}
+
+.meta-item i {
+    margin-right: 5px;
+    color: #4CAF50;
+}
+
+.approval-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+.btn {
+    padding: 8px 20px;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s;
+}
+
+.btn-approve {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.btn-approve:hover {
+    background-color: #3e8e41;
+}
+
+.btn-reject {
+    background-color: #f44336;
+    color: white;
+}
+
+.btn-reject:hover {
+    background-color: #d32f2f;
+}
+
+@media (max-width: 768px) {
+    .incident {
+        flex-direction: column;
+    }
+
+    .card-image {
+        width: 100%;
+        height: 200px;
+    }
+
+    .card-header {
+        flex-direction: column;
+    }
+
+    .card-date {
+        margin-left: 0;
+        margin-top: 5px;
+    }
+
+    .approval-buttons {
+        justify-content: center;
+    }
+
+    .approval-buttons > button{
+        flex: 1;
+    }
+}
+
+.modal-container{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #00000088;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal{
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    max-width: 90vw;
+    background-color: white;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.modal > div{
+    width: 100%;
+    display: flex;
+    padding: 10px;
+}
+
+.modal-top {
+    display: flex;
+    justify-content: end;
+    color: white;
+    background-color: #495927;
+    height: 15%;
+}
+
+#modal-close{
+    cursor: pointer;
+
+}
+
+.modal-body {
+}
+
+.modal-bottom {
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    gap: 5px;
+}
+
+.modal-bottom > button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #e8e8e8;
+    color: #333;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#modal-btn-yes{
+    background-color: #495927;
+    color: white;
+}
+
+#modal-btn-yes:hover{
+    background-color: #334027;
+}
+
+#modal-btn-cancel:hover{
+    background-color: #c8c8c8;
+}
+
+.scroll-lock{
+    overflow-y: hidden;
+}
+
+.hidden{
+    display: none;
+}
