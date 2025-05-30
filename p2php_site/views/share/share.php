@@ -29,7 +29,7 @@ if (isset($_SESSION["loggedin"]) != "loggedin") {
         if (isset($_SESSION['loggedin'])) {
             echo '<a href="../profile/profile.php?username=' . $_SESSION['username'] . '" id="profile-link">PERFIL</a>';
         } else {
-            echo '<a href="../login/login.php" id="login-link">ENTRE / CADASTRE-SE</a>';
+            echo '<a href="../login/login.php" id="login-link">ENTRE</a>';
         }
         ?>
     </div>
@@ -43,7 +43,7 @@ if (isset($_SESSION["loggedin"]) != "loggedin") {
                             <span id="image-overlay-text">Clique para selecionar uma imagem</span>
                         </div>
                         <div id="image-selected">
-                            <img src="" width="400px" height="400px" alt="" id="image-preview" class="hidden">
+                            <div id="image-preview" class="hidden"></div>
                         </div>
 
                     </div>
@@ -120,7 +120,7 @@ if (isset($_SESSION["loggedin"]) != "loggedin") {
         <span id="linkincident">Quer comunicar algo? <a href="../incidents/incidents.php">Registre uma ocorrência</a>.</span>
         <input type="submit" value="Compartilhar" id="share">
     </div>
-</body>;
+</body>
 <script src="https://kit.fontawesome.com/c68ccb89e7.js" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>

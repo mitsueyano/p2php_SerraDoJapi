@@ -1,3 +1,11 @@
+html{
+    scroll-behavior: smooth;
+}
+
+body{
+    height: unset!important;
+}
+
 #content {
     position: relative;
     background-color: #F2F2F2;
@@ -25,18 +33,21 @@
     margin-bottom: 5px;
 }
 #bar {
-    width: 50%;
+    width: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+    gap: 5px;
 }
 #div-search-bar{
-    margin: 10px;
-    width: 50%;
+    flex: 1;
     height: 1.5em;
     display: flex;
     align-items: center;
     position: relative;
+    min-width: 370px;
 }
 #div-search-bar i{
     color: #495927;
@@ -123,9 +134,10 @@
     background-color: #f2f2f2;
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: start;
     gap: 8px;
     border-bottom: 1px solid #4959274d;
+    overflow-x: scroll;
 
 }
 #navbar-letters a {
@@ -153,7 +165,7 @@
 
 /* Lista espécies */
 #species-list {
-    width: 50%;
+    flex: 1;
     height: 75vh;
     background: #fff;
     border-radius: 5px;
@@ -185,7 +197,7 @@
 #div-info-specie{
     border-top: 1px solid #495927;
     border-bottom: 1px solid #495927;
-    width: 50%;
+    flex: 1;
     height: 75vh;
     background-color: #fff;
     display: flex;
@@ -252,4 +264,10 @@
 
 .hidden{
     display: none;
+}
+
+@media (max-width: 670px) {
+    #box{
+        flex-direction: column;
+    }
 }

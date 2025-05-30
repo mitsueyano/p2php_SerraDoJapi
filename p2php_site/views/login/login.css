@@ -1,54 +1,140 @@
-#content{
+/* Estilos base */
+#content {
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 70vh;
+    align-items: start;
+    min-height: 90vh;
+    padding: 20px;
+    box-sizing: border-box;
+    padding-top: 100px;
 }
-#box{
-    min-width: 20%;
-    height: 55%;
+#box {
+    width: 100%;
+    max-width: 450px; /* Largura máxima para desktop */
+    min-height: 400px;
     background-color: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
     box-shadow: 0 0 10px #334027;
-    border-radius: 5px;
+    border-radius: 8px;
+    padding: 30px;
+    box-sizing: border-box;
 }
-form{
+
+form {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    height: 100%;
     width: 100%;
-    font-size: 14pt;
-}
-form input{
-    border: 1px solid #7D8C46;
-    height: 3vh;
-}
-form input:focus{
-    outline: 1px solid #7D8C46;
-}
-.flex{
-    display: flex;
-    flex-direction: column;
+    gap: 25px;
 }
 
-#forgotpassword, #signup{
-    font-size: 10pt;
+.flex {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 8px;
+}
+
+form label {
+    font-size: 1rem;
     color: #334027;
 }
 
-#login{
-    width: 50%;
-    height: 5vh;
+form input {
+    border: 1px solid #7D8C46;
+    padding: 12px 15px;
+    border-radius: 4px;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+form input:focus {
+    outline: 2px solid #7D8C46;
+}
+
+#forgotpassword, #signup {
+    font-size: 0.8rem;
+    color: #334027;
+    text-align: center;
+    text-decoration: none;
+    margin-top: 5px;
+}
+
+#forgotpassword:hover, #signup:hover {
+    text-decoration: underline;
+}
+
+#login {
+    width: 100%;
+    padding: 12px;
     background-color: #7D8C46;
     color: #fff;
     border: none;
-    box-shadow: 1px 1px 5px #7D8C46;
-}
-#login:hover{
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 500;
     cursor: pointer;
-    transform: scale(1.05);
+    transition: transform 0.2s, background-color 0.2s;
+    margin-top: 10px;
+}
+
+#login:hover {
+    transform: scale(1.02);
+    background-color: #6a7a3b;
+}
+
+#error {
+    color: #e74c3c;
+    font-size: 0.9rem;
+    text-align: center;
+    min-height: 20px;
+}
+
+/* Media Queries para responsividade */
+@media (max-width: 768px) {
+    #box {
+        min-height: 350px;
+        padding: 25px;
+    }
+    
+    form {
+        gap: 20px;
+    }
+    
+    form input {
+        padding: 10px 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    #content {
+        padding: 15px;
+        min-height: calc(100vh - 100px);
+    }
+    
+    #box {
+        min-height: 300px;
+        padding: 20px;
+    }
+    
+    form {
+        gap: 15px;
+    }
+    
+    form label {
+        font-size: 0.9rem;
+    }
+    
+    form input {
+        padding: 8px 10px;
+        font-size: 0.9rem;
+    }
+    
+    #login {
+        padding: 10px;
+    }
 }

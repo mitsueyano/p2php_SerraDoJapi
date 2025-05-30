@@ -1,3 +1,5 @@
+var unTaken = true
+
 //Formatar CPF enquanto digita
 document.querySelector('input[name="cpf"]').addEventListener('input', function (e) {
     let value = e.target.value.replace(/\D/g, "");
@@ -55,6 +57,10 @@ document.querySelector("form").addEventListener("submit", function (e) {
         alert("As senhas não coincidem!");
         e.preventDefault();
     }
+    if (unTaken) {
+        alert("Nome de usuário indisponível!");
+        e.preventDefault();
+    }
 });
 
 const yesRadio = document.getElementById('yes');
@@ -69,3 +75,70 @@ yesRadio.addEventListener('change', updateLattesfield);
 noRadio.addEventListener('change', updateLattesfield);
 
 updateLattesfield();
+
+const upload = () => {
+  document.querySelector("#image").click();
+};
+
+function previewImage(event) {
+  const input = event.target;
+  const preview = document.getElementById("image-preview");
+
+  if (input.files && input.files[0]) {
+    const fileURL = URL.createObjectURL(input.files[0]);
+    preview.style.backgroundImage = "url(" + fileURL + ")";
+    preview.classList.remove("hidden");
+  }
+}
+
+const form = document.getElementById("form");
+const imageInput = document.getElementById("image");
+
+document.addEventListener('DOMContentLoaded', function() {
+    const usernameInput = document.getElementById('username');
+    const usernameStatus = document.getElementById('username-status');
+    let debounceTimer;
+    
+    // Debounce function
+    function debounce(func, delay) {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(func, delay);
+    }
+    
+    // Verifica disponibilidade do username
+    function checkUsernameAvailability(username) {
+        if (username.length < 3) {
+            usernameStatus.className = 'username-status';
+            return;
+        }
+        
+        usernameStatus.className = 'username-status loading';
+        
+        fetch('../../php/checkusername.php?username=' + encodeURIComponent(username))
+            .then(response => {
+                if (!response.ok) throw new Error('Erro na verificação');
+                return response.json();
+            })
+            .then(data => {
+                if (data.available) {
+                    usernameStatus.className = 'username-status available';
+                    unTaken = false
+
+                } else {
+                    usernameStatus.className = 'username-status unavailable';
+                    unTaken = true
+                }
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                usernameStatus.className = 'username-status error';
+                unTaken = true
+            });
+    }
+    
+    // Event listener com debounce
+    usernameInput.addEventListener('input', function() {
+        const username = this.value.trim();
+        debounce(() => checkUsernameAvailability(username), 500);
+    });
+});

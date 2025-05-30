@@ -24,7 +24,7 @@ session_start();
         if (isset($_SESSION['loggedin'])) {
             echo '<a href="../profile/profile.php?username=' . $_SESSION['username'] . '" id="profile-link">PERFIL</a>';
         } else {
-            echo '<a href="../login/login.php" id="login-link">ENTRE / CADASTRE-SE</a>';
+            echo '<a href="../login/login.php" id="login-link">ENTRE</a>';
         }
         ?>
     </div>

@@ -1,10 +1,10 @@
-#content{
+#content {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-#box{
+#box {
     width: 90%;
     background-color: #fff;
     display: flex;
@@ -14,38 +14,41 @@
     border-radius: 5px;
     min-width: 320px;
     margin-bottom: 10px;
+    flex-wrap: wrap;
 }
 
-/* Formulário */
-form{
+form {
     display: flex;
     width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
 }
-form > div{
+form > div {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     min-height: 100%;
-    width: 100%;
+    flex: 1;
+    min-width: 452px;
     font-size: 13pt;
     padding: 10px;
 }
-.flexplace{
+.flexplace {
     width: 80%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
 }
-.flexplace input{
+.flexplace input {
     width: 100%;
 }
-#image{
+#image {
     margin: 10px;
     border: none;
 }
-#div-image-selection{
+#div-image-selection {
     width: 420px;
     height: 420px;
     background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%237D8C46' stroke-width='5' stroke-dasharray='21' stroke-dashoffset='11' stroke-linecap='square'/%3e%3c/svg%3e");
@@ -56,8 +59,7 @@ form > div{
     cursor: pointer;
     position: relative;
 }
-
-#div-image-selection:hover::after{
+#div-image-selection:hover::after {
     content: "Clique para selecionar uma imagem";
     position: absolute;
     top: 0;
@@ -72,12 +74,12 @@ form > div{
     color: #fff;
     font-size: 13pt;
 }
-#image-selected{
-    width: 400px;
-    height: 400px;
+#image-selected {
+    width: calc(100% - 20px);
+    height: calc(100% - 20px);
     position: relative;
 }
-#image-overlay{
+#image-overlay {
     height: 100%;
     width: 100%;
     position: absolute;
@@ -86,12 +88,13 @@ form > div{
     display: flex;
     justify-content: center;
     align-items: center;
-
 }
-#image-preview{
-    object-fit: cover;
+#image-preview {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
 }
-#btn-image-selection{
+#btn-image-selection {
     padding: 10px;
     text-align: center;
     color: #fff;
@@ -100,29 +103,28 @@ form > div{
     background-color: #334027;
     font-size: 2.5vh;
     transition: 0.1s ease-out;
-}
-#btn-image-selection{
     cursor: pointer;
     transform: scale(1.05);
 }
-form input{
+form input {
     border: 1px solid #7D8C46;
     height: 3vh;
 }
-form input:focus{
+form input:focus {
     outline: 1px solid #7D8C46;
 }
-#incidentTitle{
+#incidentTitle {
     margin: 5px;
 }
-.flex{
+.flex {
     display: flex;
     width: 100%;
     margin: 5px;
     justify-content: space-between;
     position: relative;
+    max-width: 80%;
 }
-.flexcheck{
+.flexcheck {
     display: flex;
     width: 100%;
     justify-content: center;
@@ -131,60 +133,62 @@ form input:focus{
     font-weight: 500;
     gap: 5px;
 }
-.flexcheck div{
+.flexcheck div {
     display: flex;
     align-items: center;
 }
-.flexcheck input{
+.flexcheck input {
     outline: none !important;
     scale: 1.5;
     margin: 10px !important;
 }
-#flexradio{
+#flexradio {
     width: 100%;
     display: flex;
     justify-content: space-around;
     align-items: center;
 }
-#flexradio div{
+#flexradio div {
     margin: 5px;
     display: flex;
     align-items: center;
 }
-#flexradio input{
+#flexradio input {
     scale: 1.5;
     outline: none;
     margin: 10px !important;
 }
-#flexdatetime{
+#flexdatetime {
     width: 80%;
 }
-#flexdatetime div{
+#flexdatetime div {
     display: flex;
     align-items: center;
 }
-#identified{
+#identified {
     margin-right: 5px;
 }
 #identified:hover {
     cursor: pointer;
 }
-.text{
+.text {
     color: #334027;
     font-size: 3.2vh;
 }
-textarea{
+textarea {
     min-width: 80%;
     min-height: 100px;
     max-width: 80%;
     max-height: 100px;
 }
-
-#latitude, #longitude{
+#linkincident {
+    width: 90%;
+    text-align: end;
+}
+#latitude, #longitude {
     border-color: #ccc;
 }
-
-#share{
+#share {
     height: 10%;
     padding: 10px;
     text-align: center;
@@ -196,7 +200,7 @@ textarea{
     transition: 0.1s ease-out;
     margin: 5px;
 }
-#share:hover{
+#share:hover {
     cursor: pointer;
     transform: scale(1.05);
 }
@@ -206,27 +210,22 @@ textarea{
         width: 100%;
     }
 }
-
 @media (max-width: 740px) {
     form {
         flex-direction: column;
     }
-
     #caixa {
         width: 75%;
     }
 }
-
 @media (max-width: 425px) {
     .flex {
         flex-direction: column;
     }
 }
-
 #dropdown-list.active {
     outline: 1px solid #ccc;
 }
-
 .dropdown-list {
     position: absolute;
     background: white;
@@ -243,27 +242,25 @@ textarea{
     padding: 8px;
     cursor: pointer;
 }
-.dropdown-item span{
+.dropdown-item span {
     width: 95%;
 }
-.dropdown-item a{
+.dropdown-item a {
     visibility: hidden;
 }
-.dropdown-item:hover a{
+.dropdown-item:hover a {
     visibility: visible;
 }
-.dropdown-item a:hover{
+.dropdown-item a:hover {
     transform: scale(1.5);
 }
 .dropdown-item:hover {
     background-color: #eee;
 }
-.hidden{
+.hidden {
     display: none;
 }
-
-
-#options{
+#options {
     width: 80%;
     display: flex;
     justify-content: space-evenly;
@@ -285,9 +282,33 @@ textarea{
     background-color: #334027;
     color: #fff;
 }
-
 #options button.active {
     background-color: #334027;
     color: white;
     font-weight: bold;
+}
+@media (max-width: 1045px) {
+    #linkincident {
+        text-align: center;
+    }
+}
+@media (max-width: 550px) {
+    #box {
+        width: 100%;
+    }
+    #div-image-selection {
+        width: 85vw;
+        height: 85vw;
+        aspect-ratio: 1 / 1;
+    }
+    .image-pick > .text {
+        font-size: 6vw;
+    }
+    #content {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    form > div {
+        min-width: 0;
+    }
 }

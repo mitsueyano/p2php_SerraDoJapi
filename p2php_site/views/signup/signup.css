@@ -2,10 +2,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 70vh;
+    min-height: 70vh;
 }
 #section{
-    width: 35%;
+    width: 60%;
+    min-width: 510px;
     min-height: 70%;
     background-color: #fff;
     display: flex;
@@ -13,6 +14,7 @@
     align-items: center;
     box-shadow: 0 0 10px #334027;
     border-radius: 5px;
+    padding: 20px;
 }
 form{
     display: flex;
@@ -24,11 +26,14 @@ form{
     width: 100%;
     font-size: 13pt;
     padding: 10px;
+    flex: 1;
 }
+
 form input{
     border: 1px solid #7D8C46;
     height: 3vh;
     max-width: 100%;
+    width: 100%;
 }
 form input:focus{
     outline: 1px solid #7D8C46;
@@ -72,4 +77,135 @@ form input:focus{
 #login{
     font-size: 10pt;
     color: #334027;
+}
+
+.image-pick{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+#image{
+    margin: 10px;
+    border: none;
+}
+#div-image-selection{
+    width: 420px;
+    height: 420px;
+    background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%237D8C46' stroke-width='5' stroke-dasharray='21' stroke-dashoffset='11' stroke-linecap='square'/%3e%3c/svg%3e");
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+}
+
+#div-image-selection:hover::after{
+    content: "Clique para selecionar uma imagem";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #7d8c4680;
+    color: #fff;
+    font-size: 16px;
+}
+#image-selected{
+    width: calc(100% - 20px);
+    height: calc(100% - 20px);
+    position: relative;
+}
+#image-overlay{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+
+}
+#image-preview{
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+}
+.username-status {
+    position: absolute;
+    right: -25px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.username-status.loading {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%237D8C46"><path d="M12 2a10 10 0 1 0 10 10h-2a8 8 0 1 1-8-8V2z"/></svg>');
+    animation: spin 1s linear infinite;
+}
+
+.username-status.available {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%232ecc71"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>');
+}
+
+.username-status.unavailable {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23e74c3c"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>');
+}
+
+.username-status.error {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23f39c12"><path d="M11 15h2v2h-2zm0-8h2v6h-2zm.99-5C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/></svg>');
+}
+
+@keyframes spin {
+    0% { transform: translateY(-50%) rotate(0deg); }
+    100% { transform: translateY(-50%) rotate(360deg); }
+}
+
+.flex.un {
+    position: relative;
+}
+
+@media (max-width: 1560px) {
+    #section{
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 580px) {
+    #section{
+        width: 100%;
+        min-width: 0;
+    }
+}
+
+@media (max-width: 580px) {
+    #box{
+        width: 100%;
+    }
+    #div-image-selection{
+        width: 85vw;
+        height: 85vw;
+        aspect-ratio: 1 / 1;
+    }
+    .image-pick > .text{
+        font-size: 6vw;
+    }
+    #content{
+        padding-left: 0;
+        padding-right: 0;
+    }
+    form > div{
+        min-width: 0;
+    }
 }

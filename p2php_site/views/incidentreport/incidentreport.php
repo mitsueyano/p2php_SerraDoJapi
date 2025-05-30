@@ -30,7 +30,7 @@ if (isset($_SESSION["loggedin"]) != "loggedin") {
         if (isset($_SESSION['loggedin'])) {
             echo '<a href="../profile/profile.php?username=' . $_SESSION['username'] . '" id="profile-link">PERFIL</a>';
         } else {
-            echo '<a href="../login/login.php" id="login-link">ENTRE / CADASTRE-SE</a>';
+            echo '<a href="../login/login.php" id="login-link">ENTRE</a>';
         }
         ?>
     </div>
@@ -50,7 +50,7 @@ if (isset($_SESSION["loggedin"]) != "loggedin") {
                             <span id="image-overlay-text">Clique para selecionar uma imagem</span>
                         </div>
                         <div id="image-selected">
-                            <img src="" width="400px" height="400px" alt="" id="image-preview" class="hidden">
+                            <div id="image-preview" class="hidden"></div>
                         </div>
 
                     </div>

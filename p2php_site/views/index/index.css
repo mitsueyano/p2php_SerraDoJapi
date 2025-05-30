@@ -1,16 +1,23 @@
 #description{
     display: flex;
-    justify-content: space-around;
     text-align: justify;
-    width: 100%;
+    width: 70%;
+    gap: 20px;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
 }
+
 #motto{
     font-size: 2.5em;
     color: #334027;
     margin-top: 0;
+    text-align: left;
 }
 #text{
-    width: 45%;
+    flex: 1;
+    max-width: 100%;
+    min-width: 530px;
 }
 
 #data{
@@ -27,7 +34,7 @@
 }
 .num{
     color: #334027;
-    font-size: 6vh;
+    font-size: 2.5em;
     font-weight: bold;
 }
 
@@ -38,16 +45,21 @@
     align-items: center;
 }
 
+.section span:last-child{
+    font-size: 1em;
+}
+
 
 #div-generaltext{
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 25px;
+    font-size: 100%;
 }
 #imggeneraltext{
     width: 90%;
-    height: 50vh;
+    height: 35vw;
     padding: 20px;
     background-image: url('../img/martimpescador_AoTak.jpg');
     background-size: cover;
@@ -62,17 +74,19 @@
     width: 100%;
     height: 100%;
     background: #ffffff;
-    background: linear-gradient(90deg, rgba(82, 27, 27, 0) 35%, rgba(0, 0, 0, 0.8) 75%);
+    background: linear-gradient(90deg, rgba(82, 27, 27, 0) 20%, rgba(0, 0, 0, 0.8) 75%);
     color: #fff;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: end;
+
 }
-#generaltext p{
+#generaltext p {
     width: 30%;
-    font-size: 3vh;
+    font-size: 2vw;
     text-align: end;
+    padding-right: 20px;
 }
 #btn-share{
     text-decoration: none;
@@ -82,7 +96,7 @@
     color: #fff;
     border-radius: 2px;
     border: 2px solid #fff;
-    font-size: 2em;
+    font-size: 2.5vw;
     cursor: pointer;
     transition: 0.1s ease-out;
 }
@@ -116,11 +130,80 @@
     #highlights-bar {
         grid-template-columns: repeat(2, 1fr);
     }
+
+    #generaltext>p{
+        width: 50%;
+        padding: 0;
+    }
+
+    #imggeneraltext{
+        height: 50vw;
+    }
+}
+
+@media (max-width: 800px) {
+    #imggeneraltext{
+        height: 70vw;
+        min-height: 500px;
+    }
+
+    #generaltext>p{
+        font-size: 3vw;
+        padding: 0;
+    }
+
+    #btn-share{
+        font-size: 4vw;
+    }
+
+    #data{
+        gap: 2vw;
+    }
 }
 @media (max-width: 600px) {
     #highlights-bar {
         grid-template-columns: 1fr;
     }
+    #text{
+        min-width: 100%;
+    }
+        .num{
+
+        font-size: 1.6em;
+    }
+
+    .section span:last-child{
+        font-size: .5em;
+    }
+
+    #generaltext{
+        padding: 20px;
+    }
+
+    #data{
+        width: 100%;
+    }
+    #generaltext>p{
+        font-size: 4vw;
+        padding: 0;
+    }
+
+    #btn-share{
+        font-size: 5vw;
+    }
+
+}
+
+@media (max-width: 500px) {
+    #generaltext>p{
+        font-size: 5vw;
+        padding: 0;
+    }
+
+    #btn-share{
+        font-size: 6vw;
+    }
+
 }
 .box-highlights{
     height: 30vh;
@@ -156,4 +239,26 @@
 .box-highlights:hover .description {
     display: flex;
     cursor: default;
+}
+
+
+@media (max-width: 1770px) {
+    #description{
+        width: 90%;
+        flex-direction: column;
+    }
+    #data{
+        background: none;
+        flex-direction: row;
+        height: auto;
+    }
+    .section{
+        width: calc(100% / 3);
+    }
+}
+
+@media (max-width: 1450px) {
+    #imggeneraltext{
+        width: 100%;
+    }
 }

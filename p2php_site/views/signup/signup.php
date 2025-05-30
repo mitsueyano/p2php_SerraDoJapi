@@ -19,14 +19,26 @@
             if(isset($_SESSION['loggedin'])) {
                 echo '<a href="../profile/profile.php?username=' . $_SESSION['username'] . '" id="profile-link">PERFIL</a>';
             } else {
-                echo '<a href="../login/login.php" id="login-link"  class="selected">ENTRE / CADASTRE-SE</a>';
+                echo '<a href="../login/login.php" id="login-link"  class="selected">ENTRE</a>';
             }
-        ?>
         ?>
         </div>
         <div id="content">
             <div id="section">
-            <form action="../../php/signup.php" method="post">
+                <div class="image-pick">
+                    <div id="div-image-selection" onclick="upload()">
+                        <div id="image-overlay">
+                            <span id="image-overlay-text">Clique para selecionar uma imagem</span>
+                        </div>
+                        <div id="image-selected">
+                            <div id="image-preview" class="hidden"></div>
+                        </div>
+
+                    </div>
+                </div>
+                <form action="../../php/signup.php" method="post">
+                    <input type="file" name="image" accept="image/*" id="image" hidden
+                        onchange="previewImage(event)">
                     <div class="flex">
                         <div class="box"><label for="name">Nome:</label></div>
                         <div class="box"><input type="text" name="name" required></div>
@@ -34,6 +46,13 @@
                     <div class="flex">
                         <div class="box"><label for="lastname">Sobrenome:</label></div>
                         <div class="box"><input type="text" name="lastname" required></div>
+                    </div>
+                    <div class="flex un">
+                        <div class="box"><label for="username">Nome de Usuário:</label></div>
+                        <div class="box" style="position: relative;">
+                            <input type="text" name="username" id="username" required>
+                            <span class="username-status" id="username-status"></span>
+                        </div>
                     </div>
                     <div class="flex">
                         <div class="box"><label for="cpf">CPF:</label></div>

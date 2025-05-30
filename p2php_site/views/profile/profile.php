@@ -2,7 +2,6 @@
 session_start();
 include("../../php/connectDB.php");
 
-
 if ($_SESSION['loggedin'] !== true) {
     header("Location: ../login/login.php");
     exit;

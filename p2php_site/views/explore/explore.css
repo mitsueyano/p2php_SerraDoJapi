@@ -73,6 +73,10 @@
     border-top: 1px solid #334027;
 }
 
+#share{
+    margin-top: 5px;
+}
+
 #btn-share {
     transition: 0.1s ease-out;
     margin-left: 10px;
@@ -82,7 +86,7 @@
     color: #334027;
     border-radius: 2px;
     border: 2px solid #334027;
-    font-size: 1vw;
+    font-size: 1em;
 }
 #btn-share:hover {
     cursor: pointer;
@@ -100,13 +104,20 @@
     display: flex;
     justify-content: space-between;
     align-items: baseline;
+    flex-wrap: wrap;
+    margin-top: 10px;
 }
 #text {
     color: #334027;
-    font-size: 2vw;
+    font-size: 2.5rem;
+    flex: 1;
+    min-width: 520px;
 }
 #filter {
     text-align: end;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
 }
 #feed {
     margin-top: 10px;
@@ -124,6 +135,25 @@
     #feed {
         grid-template-columns: 1fr;
         gap: 5px;
+    }
+
+    .flex{
+        gap: 5px;
+    }
+
+    .div-option{
+        flex: 1;
+        margin: 0;
+    }
+
+    #text{
+        font-size: 2em;
+    }
+}
+
+@media (max-width: 450px) {
+    #text{
+        font-size: 1.5em;
     }
 }
 

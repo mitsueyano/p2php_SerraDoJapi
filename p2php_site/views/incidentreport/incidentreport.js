@@ -65,7 +65,7 @@ function previewImage(event) {
 
   if (input.files && input.files[0]) {
     const fileURL = URL.createObjectURL(input.files[0]);
-    preview.src = fileURL;
+    preview.style.backgroundImage = "url(" + fileURL + ")";
     preview.classList.remove("hidden");
   }
 }

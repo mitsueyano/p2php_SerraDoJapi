@@ -142,6 +142,7 @@ function infoSpecie(name) {
         });
 
         divInfo.appendChild(gallery);
+        document.getElementById("div-info-specie").scrollIntoView({behavior: "smooth", block: "nearest"})
 
       } catch (e) {
         console.error('Erro ao parsear JSON:', e, 'Texto recebido:', text);
