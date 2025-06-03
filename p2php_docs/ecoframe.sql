@@ -18,8 +18,8 @@ CREATE TABLE usuarios (
 );
 INSERT INTO usuarios (cpf, nome, sobrenome, email, nome_usuario, senha, nivel_acesso, link_lattes, cargo, imagem_perfil) VALUES
 ('123.456.789-00', 'Regina', 'Silva', 'ana.silva@example.com', 'reSilva', '$2y$10$KckpFTTAbDgDtCGKEtnlUODlkKFPziZ52/zxDumCGGM6/0uBN50pu', 'especialista', NULL, NULL, "https://png.pngtree.com/background/20241213/original/pngtree-dumb-nerd-silly-dachshund-background-funny-puppy-photo-picture-image_11604570.jpg"),
-('987.654.321-11', 'Bruno', 'Souza', 'bruno.souza@example.com', 'bruSouza', '$2y$10$20eejaVT.RDTEmC5q1NRm.Vc9c.z4w8lp0OqG84IRvknhHWN/CVEO', 'especialista', 'http://lattes.cnpq.br/1234567890123456', 'Aracnólogo', NULL),
-('456.789.123-22', 'Carla', 'Pereira', 'carla.pereira@example.com', 'caPereira', '$2y$10$ncJQk.ZKyivWQ.En1KdNpOZo3ZTMKzwXajLfw26m4uCELhbA/zSH2', 'comum', NULL, NULL, NULL);
+('987.654.321-11', 'Bruno', 'Souza', 'bruno.souza@example.com', 'bruSouza', '$2y$10$20eejaVT.RDTEmC5q1NRm.Vc9c.z4w8lp0OqG84IRvknhHWN/CVEO', 'especialista', 'http://lattes.cnpq.br/1234567890123456', 'Aracnólogo', 'https://plasvale.wordpress.com/wp-content/uploads/2013/02/cachorro-de-oculos-wallpaper-69291.jpg'),
+('456.789.123-22', 'Carla', 'Pereira', 'carla.pereira@example.com', 'caPereira', '$2y$10$ncJQk.ZKyivWQ.En1KdNpOZo3ZTMKzwXajLfw26m4uCELhbA/zSH2', 'comum', NULL, NULL, 'https://img.freepik.com/fotos-gratis/cachorro-fofo-usando-oculos_23-2148917262.jpg');
 
 -- Tabela de geolocalização
 CREATE TABLE geolocalizacao (
@@ -154,6 +154,76 @@ CREATE TABLE curtidas_usuarios (
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id),
     FOREIGN KEY (id_registro) REFERENCES registros_biologicos(id) ON DELETE CASCADE
 );
+
+-- Tabela de Comentários
+CREATE TABLE comentarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_registro INT NOT NULL,
+    id_usuario INT NOT NULL,
+    id_comentario_pai INT NULL,
+    conteudo TEXT NOT NULL,
+    data_publicacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_registro) REFERENCES registros_biologicos(id) ON DELETE CASCADE,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id),
+    FOREIGN KEY (id_comentario_pai) REFERENCES comentarios(id) ON DELETE CASCADE
+);
+
+-- Inserções na tabela comentarios
+
+-- Comentários para o primeiro registro biológico (Papagaio-verdadeiro)
+INSERT INTO comentarios (id_registro, id_usuario, conteudo, data_publicacao) VALUES
+(1, 2, 'Que foto incrível do papagaio! As cores estão muito vivas.', '2025-05-21 09:15:00'),
+(1, 3, 'Nunca vi um papagaio-verdadeiro na natureza, que sorte!', '2025-05-21 10:30:00');
+
+-- Respostas ao primeiro comentário do primeiro registro
+INSERT INTO comentarios (id_registro, id_usuario, id_comentario_pai, conteudo, data_publicacao) VALUES
+(1, 1, 1, 'Obrigada, Bruno! Foi um momento mágico.', '2025-05-21 09:30:00'),
+(1, 3, 1, 'Realmente ficou espetacular a foto!', '2025-05-21 11:45:00');
+
+-- Comentário para o registro da Onça-pintada
+INSERT INTO comentarios (id_registro, id_usuario, conteudo, data_publicacao) VALUES
+(5, 3, 'Que encontro incrível! Tomei um susto quando vi.', '2025-05-19 10:20:00');
+
+-- Resposta ao comentário da Onça-pintada
+INSERT INTO comentarios (id_registro, id_usuario, id_comentario_pai, conteudo, data_publicacao) VALUES
+(5, 1, 5, 'Foi um momento de pura emoção, Carla! Ela passou a uns 10 metros de mim.', '2025-05-19 11:05:00');
+
+-- Comentários para o registro da Perereca de banheiro
+INSERT INTO comentarios (id_registro, id_usuario, conteudo, data_publicacao) VALUES
+(6, 2, 'Essa espécie é rara de se encontrar?', '2025-05-23 08:15:00'),
+(6, 3, 'Adorei o nome popular "perereca de banheiro" hahaha', '2025-05-23 09:30:00');
+
+-- Comentário para o registro do Tamanduá-bandeira
+INSERT INTO comentarios (id_registro, id_usuario, conteudo, data_publicacao) VALUES
+(7, 2, 'Parece que ele estava procurando formigas, certo?', '2025-05-20 11:30:00');
+
+-- Comentário para o registro do Ipê-amarelo
+INSERT INTO comentarios (id_registro, id_usuario, conteudo, data_publicacao) VALUES
+(10, 3, 'A floração dos ipês é um espetáculo à parte!', '2025-05-22 10:00:00');
+
+-- Resposta ao comentário do Ipê-amarelo
+INSERT INTO comentarios (id_registro, id_usuario, id_comentario_pai, conteudo, data_publicacao) VALUES
+(10, 1, 10, 'Sim, Carla! Nessa época do ano eles ficam ainda mais bonitos.', '2025-05-22 10:15:00');
+
+-- Comentário para o registro da Jararaca
+INSERT INTO comentarios (id_registro, id_usuario, conteudo, data_publicacao) VALUES
+(12, 2, 'Tem que ter muito cuidado com essa espécie!', '2025-05-22 11:30:00');
+
+-- Comentário para o registro do Cogumelo-do-sol
+INSERT INTO comentarios (id_registro, id_usuario, conteudo, data_publicacao) VALUES
+(14, 3, 'Esse cogumelo tem propriedades medicinais, não é?', '2025-05-22 12:30:00');
+
+-- Resposta ao comentário do Cogumelo-do-sol
+INSERT INTO comentarios (id_registro, id_usuario, id_comentario_pai, conteudo, data_publicacao) VALUES
+(14, 1, 13, 'Sim, Carla! É muito estudado por seus benefícios à saúde.', '2025-05-22 12:45:00');
+
+-- Comentário para o registro da Formiga-cortadeira (sem respostas)
+INSERT INTO comentarios (id_registro, id_usuario, conteudo, data_publicacao) VALUES
+(11, 2, 'Elas são incríveis trabalhando em equipe!', '2025-05-22 11:00:00');
+
+-- Comentário para o registro do Tucunaré (sem respostas)
+INSERT INTO comentarios (id_registro, id_usuario, conteudo, data_publicacao) VALUES
+(9, 3, 'Que tamanho tinha esse tucunaré?', '2025-05-22 09:30:00');
 
 -- Visualizações
 SELECT * FROM usuarios;

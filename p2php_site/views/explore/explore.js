@@ -112,7 +112,7 @@ function loadPosts() {
                         <img src="${post.url_imagem}" alt="Imagem de ${post.nome_popular}" draggable="false" onclick="openModal('${post.url_imagem}')">
                     </div>
                     <div class="text-post">
-                        <div class="flexname">
+                        <div class="flexname" onclick="window.location.href = '../postdetails/postdetails.php?id=${post.id}'">
                             <span class="common-name">${post.nome_popular}</span>
                             <span class="specie">${scientificName}</span>
                         </div>                        
@@ -142,7 +142,6 @@ function loadPosts() {
                         </div>
                     </div>
                 `;
-
         feed.appendChild(container);
       });
 

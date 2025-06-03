@@ -36,7 +36,7 @@
 
                     </div>
                 </div>
-                <form action="../../php/signup.php" method="post">
+                <form action="../../php/signup.php" method="post" enctype="multipart/form-data">
                     <input type="file" name="image" accept="image/*" id="image" hidden
                         onchange="previewImage(event)">
                     <div class="flex">

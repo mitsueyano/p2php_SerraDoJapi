@@ -61,7 +61,7 @@ $estatisticas = [
     </div>
     <div id="content">
         <div class="back">
-            <a href="../explore/explore.php"><i class="fa-solid fa-arrow-left"></i></a>
+            <a href="javascript:history.back()"><i class="fa-solid fa-arrow-left"></i></a>
         </div>
         <div class="page">
             <div class="profile-header">

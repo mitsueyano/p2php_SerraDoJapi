@@ -21,6 +21,7 @@ if ($stmt) {
             $_SESSION["userid"] = $row["id"];
             $_SESSION["access"] = $row['nivel_acesso'];
             $_SESSION["username"] = $row["nome_usuario"];
+            $_SESSION["pfp"] = $row["imagem_perfil"];
 
             header("Location: ../views/explore/explore.php");
             exit();
