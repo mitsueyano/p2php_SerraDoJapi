@@ -35,6 +35,9 @@ if (isset($_SESSION["loggedin"]) != "loggedin") {
         ?>
     </div>
     <div id="content">
+        <div class="back">
+            <a href="javascript:history.back()"><i class="fa-solid fa-arrow-left"></i></a>
+        </div>
         <div id="box">
             <form action="../../php/uploadIncident.php" method="POST" enctype="multipart/form-data" id="form">
                 <div class="image-pick">

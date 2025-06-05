@@ -17,6 +17,21 @@
     flex-wrap: wrap;
 }
 
+.back {
+    width: 80%;
+    padding: 5px;
+    z-index: 10;
+    left: 20px;
+    top: 32%;
+    position:absolute;
+}
+.back a {
+    text-decoration: none;
+    color: #495927;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
 form {
     display: flex;
     width: 100%;
@@ -295,6 +310,9 @@ textarea {
 @media (max-width: 550px) {
     #box {
         width: 100%;
+    }
+    .back{
+        position: static;
     }
     #div-image-selection {
         width: 85vw;

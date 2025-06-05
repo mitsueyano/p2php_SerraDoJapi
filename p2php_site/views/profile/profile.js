@@ -138,7 +138,7 @@ function createPostElement(post, postId) {
             </div>
             <div class="author">   
                 <i class="fa-solid fa-camera"></i>          
-                <span style="display: inline;">Por <a href="#">${post.nome_usuario}</a></span>
+                <span style="display: inline;">Por <a href="profile.php?username=${post.nome_usuario}">${post.nome_usuario}</a></span>
             </div>
             <div class="author">   
                 <i class="fa-solid fa-calendar"></i>       

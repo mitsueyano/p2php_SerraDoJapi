@@ -37,7 +37,12 @@ $sql = "
             FROM curtidas_usuarios cu
             WHERE cu.id_usuario = ? 
             AND cu.id_registro = rb.id
-        ) AS liked
+        ) AS liked,
+        (
+            SELECT COUNT(*) 
+            FROM comentarios c
+            WHERE c.id_registro = rb.id
+        ) AS qtde_coment
     FROM registros_biologicos rb
     JOIN usuarios u ON rb.id_usuario = u.id
     LEFT JOIN classificacao_taxonomica ct ON rb.id_taxonomia = ct.id
@@ -45,6 +50,7 @@ $sql = "
     ORDER BY $orderby
     LIMIT ? OFFSET ?
 ";
+
 
 // Preparar e executar
 $stmt = $conn->prepare($sql);

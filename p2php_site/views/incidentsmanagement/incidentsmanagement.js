@@ -145,10 +145,10 @@ function loadIncidents() {
 
                     <div class="card-meta">
                         <div class="meta-item">
-                            📍 ${i.nome_lugar}
+                            <i class="fa-solid fa-location-dot"></i> ${i.nome_lugar}
                         </div>
                         <div class="meta-item">
-                            👤 Publicado por ${i.autor}
+                            <i class="fa-solid fa-user"></i> Publicado por ${i.autor}
                         </div>
                         <div class="sensitive-tag ${i.sensivel ? "" : "hidden"}"><span>Conteúdo Sensível <i
                                     class="fa-solid fa-triangle-exclamation"></i></span></div>

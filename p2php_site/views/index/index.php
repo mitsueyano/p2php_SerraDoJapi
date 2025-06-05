@@ -58,8 +58,7 @@
         <div id="div-generaltext">
             <div id="imggeneraltext">
                 <div id="generaltext">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio eligendi deserunt explicabo
-                        vero repellat porro. Quam sed deleniti, unde.</p>
+                    <p>Ajude a documentar a vida ao seu redor. Registre aves, plantas e outros organismos que encontrar na natureza. Cada observação conta para a conservação do nosso planeta.</p>
                     <button id="btn-share">Compartilhe sua observação</button>
                 </div>
             </div>

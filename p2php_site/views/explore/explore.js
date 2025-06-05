@@ -76,7 +76,6 @@ function loadPosts() {
   )
     .then((response) => response.json())
     .then((posts) => {
-        console.log(posts)
       if (posts.length === 0 && offset === 0) {
         feed.innerHTML = "<p>Nenhum post encontrado.</p>";
         document.getElementById("btn-see-more").style.display = "none";
@@ -136,7 +135,7 @@ function loadPosts() {
                         </div>
 
                         <div class="post-interactions">
-                            <i class="fa-solid fa-comments comments"></i><span>${post.qtde_coment}</span>
+                            <i class="fa-solid fa-comments comments" onclick="window.location.href = '../postdetails/postdetails.php?id=${post.id}'"></i><span>${post.qtde_coment}</span>
                             <i class="fa-solid fa-heart like ${likeClass}" id="${post.id}" onclick="like(this.id)"></i>
                             <span id="likes-${post.id}">${post.qtde_likes}</span>
                         </div>
