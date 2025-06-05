@@ -94,19 +94,16 @@ INSERT INTO registros_biologicos (
     id_usuario, id_taxonomia, data_observacao, hora_observacao, descricao, id_geolocalizacao, url_imagem, qtde_likes, qtde_coment, data_publicacao, hora_publicacao, identificacao, especie_invasora
 ) VALUES
 (1, 1, '2025-05-20', '10:00:00', 'Papagaio-verdadeiro avistado na copa da árvore', 1, 'https://res.cloudinary.com/djbatjpjn/image/upload/v1746915864/hdhsdtqgv7ea5cbhtl4z.png', 0, 0, '2025-05-21', '08:00:00', TRUE, FALSE),
-(1, 1, '2025-05-20', '10:00:00', 'Papagaio-verdadeiro avistado na copa da árvore', 1, 'https://res.cloudinary.com/djbatjpjn/image/upload/v1746915864/hdhsdtqgv7ea5cbhtl4z.png', 0, 0, '2025-05-21', '08:00:00', TRUE, FALSE),
-(1, 1, '2025-05-20', '10:00:00', 'Papagaio-verdadeiro avistado na copa da árvore', 1, 'https://res.cloudinary.com/djbatjpjn/image/upload/v1746915864/hdhsdtqgv7ea5cbhtl4z.png', 0, 0, '2025-05-21', '08:00:00', TRUE, FALSE),
-(1, 1, '2025-05-20', '10:00:00', 'Papagaio-verdadeiro avistado na copa da árvore', 1, 'https://res.cloudinary.com/djbatjpjn/image/upload/v1746915864/hdhsdtqgv7ea5cbhtl4z.png', 0, 0, '2025-05-21', '08:00:00', TRUE, FALSE),
 (1, 2, '2025-05-18', '14:30:00', 'Onça-pintada vista próxima ao rio', 1, 'https://res.cloudinary.com/djbatjpjn/image/upload/v1746915960/ytbx8r46k4r9fv3qnirn.png', 0, 0, '2025-05-19', '09:00:00', TRUE, FALSE),
 (1, 3, '2025-05-22', '19:45:00', 'Perereca de banheiro encontrada próxima ao banheiro do parque', 1, 'https://res.cloudinary.com/djbatjpjn/image/upload/v1746916025/tviwtun4vxqcivfeiysy.png', 0, 0, '2025-05-23', '07:30:00', TRUE, FALSE),
-(1, 4, '2025-05-19', '11:15:00', 'Tamanduá-bandeira cruzando a trilha', 1, '', 0, 0 , '2025-05-20', '10:00:00', TRUE, FALSE),
-(1, 5, '2025-05-19', '17:45:00', 'Caranguejeira caminhando na trilha', 1, '', 0, 0, '2025-05-22', '08:30:00', TRUE, FALSE),
-(1, 6, '2025-05-18', '09:20:00', 'Tucunaré pescado em rio próximo', 1, '', 0, 0, '2025-05-22', '09:00:00', TRUE, FALSE),
-(1, 7, '2025-05-17', '13:00:00', 'Ipê-amarelo florido na praça central', 1, '', 0, 0, '2025-05-22', '09:30:00', TRUE, FALSE),
-(1, 8, '2025-05-20', '08:45:00', 'Formiga-cortadeira carregando folhas', 1, '', 0, 0, '2025-05-22', '10:30:00', TRUE, FALSE),
-(1, 9, '2025-05-16', '22:10:00', 'Jararaca avistada à beira da trilha', 1, '', 0, 0, '2025-05-22', '11:00:00', TRUE, FALSE),
-(1, NULL, '2025-05-15', '07:30:00', 'Musgo crescendo em tronco úmido', 1, '', 0, 0, '2025-05-22', '11:30:00', TRUE, FALSE),
-(1, 11, '2025-05-21', '18:50:00', 'Cogumelo-do-sol encontrado na mata', 1, '', 0, 0, '2025-05-22', '12:00:00', TRUE, FALSE);
+(1, 4, '2025-05-19', '11:15:00', 'Tamanduá-bandeira cruzando a trilha', 1, 'https://res.cloudinary.com/djbatjpjn/image/upload/v1747399815/imagem_2025-05-16_094936847_lfogo5.png', 0, 0 , '2025-05-20', '10:00:00', TRUE, FALSE),
+(1, 5, '2025-05-19', '17:45:00', 'Caranguejeira caminhando na trilha', 1, 'https://www.portal.zoo.bio.br/IMG/jpg/20210828_111014.jpg', 0, 0, '2025-05-22', '08:30:00', TRUE, FALSE),
+(1, 6, '2025-05-18', '09:20:00', 'Tucunaré pescado em rio próximo', 1, 'https://pescariasa.com.br/wp-content/uploads/2024/01/especies-de-tucunare-presentes-no-brasil-700x467.jpg', 0, 0, '2025-05-22', '09:00:00', TRUE, FALSE),
+(1, 7, '2025-05-17', '13:00:00', 'Ipê-amarelo florido na praça central', 1, 'https://live.staticflickr.com/4372/35964128804_fd13434b90_b.jpg', 0, 0, '2025-05-22', '09:30:00', TRUE, FALSE),
+(1, 8, '2025-05-20', '08:45:00', 'Formiga-cortadeira carregando folhas', 1, 'https://agropos.com.br/wp-content/uploads/2020/09/Imagem-2024-02-15T102829.573.png', 0, 0, '2025-05-22', '10:30:00', TRUE, FALSE),
+(1, 9, '2025-05-16', '22:10:00', 'Jararaca avistada à beira da trilha', 1, 'https://www.portal.zoo.bio.br/local/cache-gd2/b2/423ed49e85515eff13d4dd7ce64590.jpg?1640271823', 0, 0, '2025-05-22', '11:00:00', TRUE, FALSE),
+(1, NULL, '2025-05-15', '07:30:00', 'Musgo crescendo em tronco úmido', 1, 'https://live.staticflickr.com/8502/8327280895_dbe17f5c85_b.jpg', 0, 0, '2025-05-22', '11:30:00', TRUE, FALSE),
+(1, 11, '2025-05-21', '18:50:00', 'Cogumelo-do-sol encontrado na mata', 1, 'https://www.fungicultura.com.br/wp-content/uploads/2022/11/cogumelo-do-sol-1200x900-1.jpg', 0, 0, '2025-05-22', '12:00:00', TRUE, FALSE);
 
 CREATE TABLE tipo_ocorrencia(
 	id INT AUTO_INCREMENT PRIMARY KEY,
@@ -182,48 +179,48 @@ INSERT INTO comentarios (id_registro, id_usuario, id_comentario_pai, conteudo, d
 
 -- Comentário para o registro da Onça-pintada
 INSERT INTO comentarios (id_registro, id_usuario, conteudo, data_publicacao) VALUES
-(5, 3, 'Que encontro incrível! Tomei um susto quando vi.', '2025-05-19 10:20:00');
+(2, 3, 'Que encontro incrível! Tomei um susto quando vi.', '2025-05-19 10:20:00');
 
 -- Resposta ao comentário da Onça-pintada
 INSERT INTO comentarios (id_registro, id_usuario, id_comentario_pai, conteudo, data_publicacao) VALUES
-(5, 1, 5, 'Foi um momento de pura emoção, Carla! Ela passou a uns 10 metros de mim.', '2025-05-19 11:05:00');
+(2, 1, 5, 'Foi um momento de pura emoção, Carla! Ela passou a uns 10 metros de mim.', '2025-05-19 11:05:00');
 
 -- Comentários para o registro da Perereca de banheiro
 INSERT INTO comentarios (id_registro, id_usuario, conteudo, data_publicacao) VALUES
-(6, 2, 'Essa espécie é rara de se encontrar?', '2025-05-23 08:15:00'),
-(6, 3, 'Adorei o nome popular "perereca de banheiro" hahaha', '2025-05-23 09:30:00');
+(3, 2, 'Essa espécie é rara de se encontrar?', '2025-05-23 08:15:00'),
+(3, 3, 'Adorei o nome popular "perereca de banheiro" hahaha', '2025-05-23 09:30:00');
 
 -- Comentário para o registro do Tamanduá-bandeira
 INSERT INTO comentarios (id_registro, id_usuario, conteudo, data_publicacao) VALUES
-(7, 2, 'Parece que ele estava procurando formigas, certo?', '2025-05-20 11:30:00');
+(4, 2, 'Parece que ele estava procurando formigas, certo?', '2025-05-20 11:30:00');
 
 -- Comentário para o registro do Ipê-amarelo
 INSERT INTO comentarios (id_registro, id_usuario, conteudo, data_publicacao) VALUES
-(10, 3, 'A floração dos ipês é um espetáculo à parte!', '2025-05-22 10:00:00');
+(7, 3, 'A floração dos ipês é um espetáculo à parte!', '2025-05-22 10:00:00');
 
 -- Resposta ao comentário do Ipê-amarelo
 INSERT INTO comentarios (id_registro, id_usuario, id_comentario_pai, conteudo, data_publicacao) VALUES
-(10, 1, 10, 'Sim, Carla! Nessa época do ano eles ficam ainda mais bonitos.', '2025-05-22 10:15:00');
+(7, 1, 10, 'Sim, Carla! Nessa época do ano eles ficam ainda mais bonitos.', '2025-05-22 10:15:00');
 
 -- Comentário para o registro da Jararaca
 INSERT INTO comentarios (id_registro, id_usuario, conteudo, data_publicacao) VALUES
-(12, 2, 'Tem que ter muito cuidado com essa espécie!', '2025-05-22 11:30:00');
+(9, 2, 'Tem que ter muito cuidado com essa espécie!', '2025-05-22 11:30:00');
 
 -- Comentário para o registro do Cogumelo-do-sol
 INSERT INTO comentarios (id_registro, id_usuario, conteudo, data_publicacao) VALUES
-(14, 3, 'Esse cogumelo tem propriedades medicinais, não é?', '2025-05-22 12:30:00');
+(11, 3, 'Esse cogumelo tem propriedades medicinais, não é?', '2025-05-22 12:30:00');
 
 -- Resposta ao comentário do Cogumelo-do-sol
 INSERT INTO comentarios (id_registro, id_usuario, id_comentario_pai, conteudo, data_publicacao) VALUES
-(14, 1, 13, 'Sim, Carla! É muito estudado por seus benefícios à saúde.', '2025-05-22 12:45:00');
+(11, 1, 13, 'Sim, Carla! É muito estudado por seus benefícios à saúde.', '2025-05-22 12:45:00');
 
 -- Comentário para o registro da Formiga-cortadeira (sem respostas)
 INSERT INTO comentarios (id_registro, id_usuario, conteudo, data_publicacao) VALUES
-(11, 2, 'Elas são incríveis trabalhando em equipe!', '2025-05-22 11:00:00');
+(8, 2, 'Elas são incríveis trabalhando em equipe!', '2025-05-22 11:00:00');
 
 -- Comentário para o registro do Tucunaré (sem respostas)
 INSERT INTO comentarios (id_registro, id_usuario, conteudo, data_publicacao) VALUES
-(9, 3, 'Que tamanho tinha esse tucunaré?', '2025-05-22 09:30:00');
+(6, 3, 'Que tamanho tinha esse tucunaré?', '2025-05-22 09:30:00');
 
 -- Visualizações
 SELECT * FROM usuarios;

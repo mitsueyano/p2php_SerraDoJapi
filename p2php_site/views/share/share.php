@@ -35,7 +35,7 @@ if (isset($_SESSION["loggedin"]) != "loggedin") {
     </div>
     <div id="content">
         <div id="box">
-            <form action="../../php/uploadRecord.php" method="POST" enctype="multipart/form-data">
+            <form action="../../php/uploadRecord.php" method="POST" enctype="multipart/form-data" id="form"> 
                 <div class="image-pick">
                     <span class="text">Selecione uma imagem:</span>
                     <div id="div-image-selection" onclick="upload()">

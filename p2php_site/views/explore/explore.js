@@ -166,6 +166,15 @@ function applyFilter(filter) {
   loadPosts();
 }
 
+const btnsFilter = document.querySelectorAll('#filter button');
+btnsFilter.forEach(button => {
+  button.addEventListener('click', () => {
+    btnsFilter.forEach(b => b.classList.remove('selectedFilter'));
+    button.classList.add('selectedFilter');
+  });
+});
+
+
 document.getElementById("btn-see-more").addEventListener("click", loadPosts);
 
 window.addEventListener("DOMContentLoaded", loadPosts);

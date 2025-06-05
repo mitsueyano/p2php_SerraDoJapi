@@ -72,12 +72,33 @@
     border-bottom: 1px solid #334027;
     border-top: 1px solid #334027;
 }
-
+#filter button{
+    transition: 0.1s ease-out;
+    margin-left: 10px;
+    text-decoration: none;
+    padding: 5px;
+    text-align: center;
+    color: #334027;
+    border-radius: 2px;
+    border: 2px solid #334027;
+    font-size: 1em;
+}
+#filter button:hover{
+    cursor: pointer;
+    background-color: #334027;
+    color: #fff;
+}
+.selectedFilter{
+    background-color: #334027 !important;
+    color: #fff !important;
+    cursor: default !important;
+}
 #share{
     margin-top: 5px;
 }
 
 #btn-share {
+    font-weight: 500;
     transition: 0.1s ease-out;
     margin-left: 10px;
     text-decoration: none;
