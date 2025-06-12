@@ -262,6 +262,15 @@ body{
     font-size: 10pt;
 }
 
+#linkinaturalist{
+    position: absolute;
+    left: 20px;
+    top: 20px;
+}
+#linkinaturalist a{
+        color: #495927 !important;
+}
+
 .hidden{
     display: none;
 }

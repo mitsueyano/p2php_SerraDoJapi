@@ -153,7 +153,6 @@ try {
 
     // Converter campos booleanos para booleanos reais
     $registro['identificacao'] = (bool)$registro['identificacao'];
-    $registro['especie_invasora'] = (bool)$registro['especie_invasora'];
     $registro['liked'] = (bool)$registro['liked'];
 
     // Formatar os dados para retorno
@@ -192,7 +191,6 @@ try {
             'data_publicacao' => $registro['data_publicacao_formatada'],
             'hora_publicacao' => $registro['hora_publicacao'],
             'identificacao' => $registro['identificacao'],
-            'especie_invasora' => $registro['especie_invasora'],
             'liked' => $registro['liked'],
             'comentarios' => $comentariosFormatados
         ]

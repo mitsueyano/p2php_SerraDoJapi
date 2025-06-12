@@ -15,7 +15,7 @@ session_start();
 
 <body>
     <div id="header">
-        <h1>ecoframe</h1>
+        <h1 onclick="window.location.href='../explore/explore.php'">ecoframe</h1>
         <span>Foto: José Aparecido dos Santos</span>
     </div>
 
@@ -58,7 +58,7 @@ session_start();
                 <span id="text">Registros da comunidade</span>
                 <div id="filter">
                     <span>Filtrar por:</span>
-                    <button type="button" onclick="applyFilter('recentes')">Recentes</button>
+                    <button type="button" onclick="applyFilter('recentes')" class="selectedFilter">Recentes</button>
                     <button type="button" onclick="applyFilter('populares')">Populares</button>
                 </div>
             </div>

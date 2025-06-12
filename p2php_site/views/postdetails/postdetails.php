@@ -10,14 +10,13 @@
 </head>
 <body>
     <div id="header">
-        <h1>ecoframe</h1>
-        <span>Detalhes do Registro</span>
+        <h1 onclick="window.location.href='../explore/explore.php'">ecoframe</h1>
+        <span>Foto: José Aparecido dos Santos</span>
     </div>
     <div class="back">
         <a href="javascript:history.back()"><i class="fa-solid fa-arrow-left"></i></a>
     </div>
     <div id="content-post">
-        <!-- Container principal do post -->
         <div id="post-container">
             <!-- Será preenchido pelo JavaScript -->
         </div>

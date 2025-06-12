@@ -27,11 +27,13 @@ if ($selectedcategory == 'todos') {
 $species = [];
 $totalSpecies = [];
 while ($row = $result->fetch_assoc()) {
+    $nome = $row['especie'];
     $species[] = [
-        'especie' => $row['especie'],
-        'classe' => $row['classe']
+        'especie' => $nome,
+        'classe' => $row['classe'],
     ];
 }
+
 
 header('Content-Type: application/json');
 echo json_encode($species);

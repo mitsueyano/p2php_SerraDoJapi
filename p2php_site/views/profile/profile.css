@@ -1,5 +1,6 @@
 #content{
     justify-content: start;
+    min-height: 100vh !important;
 }
 
 .back {
@@ -419,11 +420,8 @@
 
 #modal-close{
     cursor: pointer;
-
 }
 
-.modal-body {
-}
 
 .modal-bottom {
     display: flex;

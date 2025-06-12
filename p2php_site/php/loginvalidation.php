@@ -18,6 +18,7 @@ if ($stmt) {
         if (password_verify($password, $row["senha"])) {
             $_SESSION["loggedin"] = true;
             $_SESSION["user"] = $row["nome"];
+            $_SESSION["userlastname"] = $row["sobrenome"];
             $_SESSION["userid"] = $row["id"];
             $_SESSION["access"] = $row['nivel_acesso'];
             $_SESSION["username"] = $row["nome_usuario"];

@@ -5,28 +5,31 @@ const postsState = {};
 const limits = {
   registros: 9,
   ocorrencias: 6,
-  curtidos: 9
+  curtidos: 9,
 };
 
 let last_ids = {
   registros: 0,
   ocorrencias: 0,
-  curtidos: 0
+  curtidos: 0,
 };
 
 // Elementos da UI
 const tabs = document.querySelectorAll(".tab");
 const contents = document.querySelectorAll(".tab-content");
-const username = new URLSearchParams(document.location.search).get("username") == null ? userData.username : new URLSearchParams(document.location.search).get("username");
+const username =
+  new URLSearchParams(document.location.search).get("username") == null
+    ? userData.username
+    : new URLSearchParams(document.location.search).get("username");
 
 // Inicialização
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
   // Eventos das abas
-  tabs.forEach(tab => {
+  tabs.forEach((tab) => {
     tab.addEventListener("click", () => {
-      tabs.forEach(t => t.classList.remove("active"));
-      contents.forEach(c => c.classList.remove("active"));
-      
+      tabs.forEach((t) => t.classList.remove("active"));
+      contents.forEach((c) => c.classList.remove("active"));
+
       tab.classList.add("active");
       const tabName = tab.dataset.tab;
       document.getElementById(tabName).classList.add("active");
@@ -38,16 +41,16 @@ document.addEventListener('DOMContentLoaded', () => {
   carregarAba("registros");
 
   // Evento delegado para likes
-  document.addEventListener('click', (e) => {
-    if (e.target.classList.contains('like')) {
+  document.addEventListener("click", (e) => {
+    if (e.target.classList.contains("like")) {
       handleLikeClick(e.target.dataset.postid);
     }
   });
 
   // Evento dos botões "Ver mais"
-  document.querySelectorAll('#btn-see-more').forEach(btn => {
-    btn.addEventListener('click', function() {
-      carregarMais(this.closest('.tab-content').id);
+  document.querySelectorAll("#btn-see-more").forEach((btn) => {
+    btn.addEventListener("click", function () {
+      carregarMais(this.closest(".tab-content").id);
     });
   });
 });
@@ -55,23 +58,47 @@ document.addEventListener('DOMContentLoaded', () => {
 // Funções principais
 function carregarAba(aba) {
   last_ids[aba] = 0;
-  document.querySelector(`#${aba} .posts-list`).innerHTML = "";
+  const container = document.querySelector(`#${aba} .posts-list`);
+  container.innerHTML = "";
   document.querySelector(`#${aba} #div-see-more`).style.display = "flex";
+
+  // Remove "nada encontrado" anterior, se houver
+  const noResults = container.querySelector(".no-results");
+  if (noResults) noResults.remove();
+
   carregarMais(aba);
 }
 
 function carregarMais(aba) {
-  const url = `../../php/loaduser${aba === 'ocorrencias' ? 'incidents' : aba === 'curtidos' ? 'likeds' : 'posts'}.php?targetun=${username}&limit=${limits[aba]}&last_id=${last_ids[aba]}`;
-  
+  const url = `../../php/loaduser${
+    aba === "ocorrencias"
+      ? "incidents"
+      : aba === "curtidos"
+      ? "likeds"
+      : "posts"
+  }.php?targetun=${username}&limit=${limits[aba]}&last_id=${last_ids[aba]}`;
+
   fetch(url)
-    .then(res => res.json())
-    .then(data => {
+    .then((res) => res.json())
+    .then((data) => {
+      const container = document.querySelector(`#${aba} .posts-list`);
+
       if (data.registros?.length) {
         last_ids[aba] = data.last_id;
         renderAba(aba, data.registros);
-        document.querySelector(`#${aba} #div-see-more`).style.display = data.has_more ? "flex" : "none";
+        document.querySelector(`#${aba} #div-see-more`).style.display =
+          data.has_more ? "flex" : "none";
       } else {
         document.querySelector(`#${aba} #div-see-more`).style.display = "none";
+
+        // Adiciona a mensagem "Nada encontrado"
+        if (!container.querySelector(".no-results")) {
+          const msg = document.createElement("div");
+          msg.style.color = "#777";
+          msg.style.fontSize = "1rem";
+          msg.textContent = "Nada encontrado.";
+          container.appendChild(msg);
+        }
       }
     })
     .catch(console.error);
@@ -79,24 +106,27 @@ function carregarMais(aba) {
 
 function renderAba(aba, posts) {
   const container = document.querySelector(`#${aba} .posts-list`);
-  
-  posts.forEach(post => {
+
+  posts.forEach((post) => {
     // Atualiza o estado global do post
     if (!postsState[post.id]) {
       postsState[post.id] = {
         liked: post.liked,
         qtde_likes: post.qtde_likes || 0,
-        elements: []
+        elements: [],
       };
     }
 
-    const element = aba === "ocorrencias" ? createIncidentElement(post) : createPostElement(post, post.id);
+    const element =
+      aba === "ocorrencias"
+        ? createIncidentElement(post)
+        : createPostElement(post, post.id);
     container.appendChild(element);
-    
+
     // Armazena referência ao elemento criado
     postsState[post.id].elements.push({
       element: element,
-      tab: aba
+      tab: aba,
     });
   });
 }
@@ -104,23 +134,29 @@ function renderAba(aba, posts) {
 function createPostElement(post, postId) {
   const card = document.createElement("div");
   card.className = "post-container";
-  
+
   const state = postsState[postId] || { liked: false, qtde_likes: 0 };
-  const scientificName = post.especie === "Não identificado" ? "<br>" : `(${post.especie})`;
+  const scientificName =
+    post.especie === "Não identificado" ? "<br>" : `(${post.especie})`;
   const likeClass = state.liked ? "liked" : "";
 
   const datetimePub = datetime(post.data_publicacao, post.hora_publicacao);
   const datetimeObs = datetime(post.data_observacao, post.hora_observacao);
-  if (userData.own) card.innerHTML = `
+  if (userData.own)
+    card.innerHTML = `
     <div id="actions">
         <i id="removePost" onclick="buildModal({'type': 'o registro', 'name': '${post.nome_popular}', 'id': ${post.id}})" class="fa-solid fa-trash-can"></i>
         <i id="editPost" onclick="editPost(${post.id})" class="fa-solid fa-pen-to-square"></i>
     </div>
-  `
-  card.innerHTML = card.innerHTML + `
+  `;
+  card.innerHTML =
+    card.innerHTML +
+    `
     <span id="datetime">${datetimePub}</span>
-    <div class="image-post">
-        <img src="${post.url_imagem}" alt="Imagem de ${post.nome_popular}" draggable="false" onclick="">
+    <div class="image-post" onclick="window.location.href = '../postdetails/postdetails.php?id=${post.id}'">
+        <img src="${post.url_imagem}" alt="Imagem de ${
+      post.nome_popular
+    }" draggable="false" onclick="">
     </div>
     <div class="text-post">
         <div class="flexname">
@@ -138,7 +174,9 @@ function createPostElement(post, postId) {
             </div>
             <div class="author">   
                 <i class="fa-solid fa-camera"></i>          
-                <span style="display: inline;">Por <a href="profile.php?username=${post.nome_usuario}">${post.nome_usuario}</a></span>
+                <span style="display: inline;">Por <a href="profile.php?username=${
+                  post.nome_usuario
+                }">${post.nome_usuario}</a></span>
             </div>
             <div class="author">   
                 <i class="fa-solid fa-calendar"></i>       
@@ -147,13 +185,15 @@ function createPostElement(post, postId) {
         </div>
 
         <div class="post-interactions">
-            <i class="fa-solid fa-comments comments"></i><span>${post.qtde_coment || 0}</span>
+            <i class="fa-solid fa-comments comments" onclick="window.location.href = '../postdetails/postdetails.php?id=${post.id}'"></i><span>${
+              post.qtde_coment || 0
+            }</span>
             <i class="fa-solid fa-heart like ${likeClass}" data-postid="${postId}"></i>
             <span data-postid="${postId}-count">${state.qtde_likes}</span>
         </div>
     </div>
   `;
-  card.id = "post" + postId
+  card.id = "post" + postId;
   return card;
 }
 
@@ -161,56 +201,56 @@ function createIncidentElement(incident) {
   const incidentDiv = document.createElement("div");
   incidentDiv.className = "incident";
 
-  const imgincidentDiv = document.createElement('div');
-  imgincidentDiv.className = 'img-incident';
+  const imgincidentDiv = document.createElement("div");
+  imgincidentDiv.className = "img-incident";
   imgincidentDiv.style.backgroundImage = `url(${incident.img_url})`;
-  imgincidentDiv.style.backgroundSize = 'cover';
-  imgincidentDiv.style.backgroundPosition = 'center';
+  imgincidentDiv.style.backgroundSize = "cover";
+  imgincidentDiv.style.backgroundPosition = "center";
 
   if (incident.sensivel) {
-      const blur = document.createElement('div');
-      blur.className = 'blur';
-      imgincidentDiv.appendChild(blur);
+    const blur = document.createElement("div");
+    blur.className = "blur";
+    imgincidentDiv.appendChild(blur);
 
-      const open = document.createElement('i');
-      open.className = 'fa-solid fa-eye eye-icon eye-open';
+    const open = document.createElement("i");
+    open.className = "fa-solid fa-eye eye-icon eye-open";
 
-      const closed = document.createElement('i');
-      closed.className = 'fa-solid fa-eye-slash eye-icon';
-      closed.style.display = 'none';
+    const closed = document.createElement("i");
+    closed.className = "fa-solid fa-eye-slash eye-icon";
+    closed.style.display = "none";
 
-      open.addEventListener('click', () => {
-          blur.style.display = 'none';
-          open.style.display = 'none';
-          closed.style.display = 'inline';
-      });
+    open.addEventListener("click", () => {
+      blur.style.display = "none";
+      open.style.display = "none";
+      closed.style.display = "inline";
+    });
 
-      closed.addEventListener('click', () => {
-          blur.style.display = 'block';
-          closed.style.display = 'none';
-          open.style.display = 'inline';
-      });
+    closed.addEventListener("click", () => {
+      blur.style.display = "block";
+      closed.style.display = "none";
+      open.style.display = "inline";
+    });
 
-      imgincidentDiv.append(open, closed);
+    imgincidentDiv.append(open, closed);
   }
 
-  const title = document.createElement('span');
-  title.className = 'title-incident';
+  const title = document.createElement("span");
+  title.className = "title-incident";
   title.textContent = incident.titulo;
   imgincidentDiv.appendChild(title);
 
-  const descDiv = document.createElement('div');
-  descDiv.className = 'desc-incident';
+  const descDiv = document.createElement("div");
+  descDiv.className = "desc-incident";
 
-  const descP = document.createElement('p');
-  descP.className = 'desc';
+  const descP = document.createElement("p");
+  descP.className = "desc";
   descP.textContent = incident.descricao;
   descDiv.appendChild(descP);
 
-  const date = new Date(incident.data).toLocaleDateString('pt-BR');
+  const date = new Date(incident.data).toLocaleDateString("pt-BR");
   const time = incident.hora.slice(0, 5);
-  const authorP = document.createElement('p');
-  authorP.className = 'incident-author';
+  const authorP = document.createElement("p");
+  authorP.className = "incident-author";
   authorP.textContent = `Por ${incident.autor} em ${date} às ${time}`;
   descDiv.appendChild(authorP);
 
@@ -227,10 +267,12 @@ function handleLikeClick(postid) {
   const newCount = newLikeState ? state.qtde_likes + 1 : state.qtde_likes - 1;
 
   // Atualiza todos os elementos do post em todas as abas
-  state.elements.forEach(item => {
+  state.elements.forEach((item) => {
     const likeIcon = item.element.querySelector(`[data-postid="${postid}"]`);
-    const countElement = item.element.querySelector(`[data-postid="${postid}-count"]`);
-    
+    const countElement = item.element.querySelector(
+      `[data-postid="${postid}-count"]`
+    );
+
     if (likeIcon) likeIcon.classList.toggle("liked", newLikeState);
     if (countElement) countElement.textContent = newCount;
   });
@@ -239,7 +281,7 @@ function handleLikeClick(postid) {
   postsState[postid] = {
     ...state,
     liked: newLikeState,
-    qtde_likes: newCount
+    qtde_likes: newCount,
   };
 
   // Envia para o servidor
@@ -248,24 +290,24 @@ function handleLikeClick(postid) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ postid: postid }),
   })
-  .then((response) => {
-    if (response.status === 401) {
-      window.location.href = "../login/login.php?error=Like";
-      return;
-    }
-    return response.json();
-  })
-  .then((data) => {
-    if (!data || !data.success) {
-      // Reverte se houver erro
+    .then((response) => {
+      if (response.status === 401) {
+        window.location.href = "../login/login.php?error=Like";
+        return;
+      }
+      return response.json();
+    })
+    .then((data) => {
+      if (!data || !data.success) {
+        // Reverte se houver erro
+        updatePostState(postid, state.liked, state.qtde_likes);
+      }
+    })
+    .catch((error) => {
+      console.error("Erro no fetch:", error);
+      // Reverte em caso de erro de rede
       updatePostState(postid, state.liked, state.qtde_likes);
-    }
-  })
-  .catch((error) => {
-    console.error("Erro no fetch:", error);
-    // Reverte em caso de erro de rede
-    updatePostState(postid, state.liked, state.qtde_likes);
-  });
+    });
 }
 
 function updatePostState(postid, liked, count) {
@@ -273,10 +315,12 @@ function updatePostState(postid, liked, count) {
   if (!state) return;
 
   // Atualiza todos os elementos do post
-  state.elements.forEach(item => {
+  state.elements.forEach((item) => {
     const likeIcon = item.element.querySelector(`[data-postid="${postid}"]`);
-    const countElement = item.element.querySelector(`[data-postid="${postid}-count"]`);
-    
+    const countElement = item.element.querySelector(
+      `[data-postid="${postid}-count"]`
+    );
+
     if (likeIcon) likeIcon.classList.toggle("liked", liked);
     if (countElement) countElement.textContent = count;
   });
@@ -285,7 +329,7 @@ function updatePostState(postid, liked, count) {
   postsState[postid] = {
     ...state,
     liked: liked,
-    qtde_likes: count
+    qtde_likes: count,
   };
 }
 
@@ -310,54 +354,54 @@ function datetime(dateStr, timeStr) {
 }
 
 function removePost(postId) {
-    document.getElementById('modal-btn-yes-text').classList.add('hidden')
-    document.getElementById('remove-post-loading').classList.remove('hidden')
-    fetch(`../../php/deletepost.php/${postId}`, {
-    method: 'DELETE',
+  document.getElementById("modal-btn-yes-text").classList.add("hidden");
+  document.getElementById("remove-post-loading").classList.remove("hidden");
+  fetch(`../../php/deletepost.php/${postId}`, {
+    method: "DELETE",
     headers: {
-      'Content-Type': 'application/json'
-    }
+      "Content-Type": "application/json",
+    },
   })
-  .then(response => {
-    if (!response.ok) {
-      return response.json().then(err => Promise.reject(err));
-    }
-    return response.json();
-  })
-  .then(data => {
-    console.log('Sucesso:', data);
-    alert('Post excluído com sucesso!');
-    // Aqui você pode remover o post da interface ou recarregar a lista
-    killModal()
-    while (document.getElementById("post" + postId) !== null) {
-      document.getElementById("post" + postId).remove()
-    }
-  })
-  .catch(error => {
-    // Tratamento de erros
-    console.error('Erro ao excluir post:', error);
-    
-    if (error.error) {
-      // Erro vindo do backend (já parseado)
-      alert(`Erro: ${error.error}`);
-    } else if (error.message) {
-      // Erro de rede ou outro erro do fetch
-      alert(`Falha na requisição: ${error.message}`);
-    } else {
-      // Erro genérico
-      alert('Ocorreu um erro ao excluir o post');
-    }
-    document.getElementById('modal-btn-yes-text').classList.add('hidden')
-    document.getElementById('remove-post-loading').classList.remove('hidden')
-  });
+    .then((response) => {
+      if (!response.ok) {
+        return response.json().then((err) => Promise.reject(err));
+      }
+      return response.json();
+    })
+    .then((data) => {
+      console.log("Sucesso:", data);
+      alert("Post excluído com sucesso!");
+      // Aqui você pode remover o post da interface ou recarregar a lista
+      killModal();
+      while (document.getElementById("post" + postId) !== null) {
+        document.getElementById("post" + postId).remove();
+      }
+    })
+    .catch((error) => {
+      // Tratamento de erros
+      console.error("Erro ao excluir post:", error);
+
+      if (error.error) {
+        // Erro vindo do backend (já parseado)
+        alert(`Erro: ${error.error}`);
+      } else if (error.message) {
+        // Erro de rede ou outro erro do fetch
+        alert(`Falha na requisição: ${error.message}`);
+      } else {
+        // Erro genérico
+        alert("Ocorreu um erro ao excluir o post");
+      }
+      document.getElementById("modal-btn-yes-text").classList.add("hidden");
+      document.getElementById("remove-post-loading").classList.remove("hidden");
+    });
 }
 
 function editPost(postId) {
-  alert("Em desenvolvimento")
+  alert("Em desenvolvimento");
 }
 
-function buildModal(info){
-    const modalHTML = `
+function buildModal(info) {
+  const modalHTML = `
       <div class="modal">
           <div class="modal-top">
               <i onclick="killModal()" id="modal-close" class="fa-solid fa-xmark"></i>
@@ -370,21 +414,21 @@ function buildModal(info){
               <button onclick="removePost(${info.id})"id="modal-btn-yes"><span id="modal-btn-yes-text">Sim</span><div id="remove-post-loading" class="loading-spinner hidden"></div></button>
           </div>
       </div>
-    `
-    const modal = document.createElement("div")
-    modal.classList.add('modal-container')
-    modal.innerHTML = modalHTML
-    modal.addEventListener("click", (ev) => {
-      const modalContainer = document.querySelector('.modal-container');
-      if (modalContainer && ev.target === modalContainer) {
-          killModal();
-      }
-    })
-    document.body.appendChild(modal)
-    document.body.classList.add('scroll-lock')
+    `;
+  const modal = document.createElement("div");
+  modal.classList.add("modal-container");
+  modal.innerHTML = modalHTML;
+  modal.addEventListener("click", (ev) => {
+    const modalContainer = document.querySelector(".modal-container");
+    if (modalContainer && ev.target === modalContainer) {
+      killModal();
+    }
+  });
+  document.body.appendChild(modal);
+  document.body.classList.add("scroll-lock");
 }
 
-function killModal(){
-  document.body.classList.remove('scroll-lock')
-  document.querySelector('.modal-container').remove()
+function killModal() {
+  document.body.classList.remove("scroll-lock");
+  document.querySelector(".modal-container").remove();
 }

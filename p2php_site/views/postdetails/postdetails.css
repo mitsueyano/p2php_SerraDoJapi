@@ -36,6 +36,7 @@
     display: flex;
     align-items: center;
     gap: 15px;
+    cursor: pointer;
 }
 
 .profile-pic {
@@ -84,7 +85,6 @@
     max-width: 100%;
     max-height: 400px;
     border-radius: 5px;
-    cursor: pointer;
     border: 1px solid #ddd;
 }
 
@@ -261,7 +261,7 @@
     align-items: center;
     gap: 10px;
     margin-bottom: 10px;
-    position: relative;
+    position: relative; 
 }
 
 .comment-profile-pic {
@@ -269,16 +269,19 @@
     height: 40px;
     border-radius: 50%;
     object-fit: cover;
+    cursor: pointer;
 }
 
 .comment-author {
     font-weight: bold;
     color: #334027;
+    cursor: pointer;
 }
 
 .comment-username {
     color: #7D8C46;
     font-size: 0.8rem;
+    cursor: pointer;
 }
 
 .comment-date {
@@ -363,6 +366,7 @@
     margin-bottom: 15px;
     display: block;
 }
+
 
 @media (max-width: 600px) {
     .post-header {

@@ -5,8 +5,8 @@ USE ecoframe;
 CREATE TABLE usuarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
     cpf VARCHAR(14) NOT NULL UNIQUE,
-    nome VARCHAR(100) NOT NULL,
-    sobrenome VARCHAR(100) NOT NULL,
+    nome VARCHAR(50) NOT NULL,
+    sobrenome VARCHAR(50) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
     nome_usuario VARCHAR(20) NOT NULL UNIQUE,
     senha VARCHAR(255) NOT NULL,
@@ -81,27 +81,26 @@ CREATE TABLE registros_biologicos (
     data_publicacao DATE NOT NULL,
     hora_publicacao TIME NOT NULL,
     identificacao BOOLEAN NOT NULL DEFAULT FALSE,
-    especie_invasora BOOLEAN NOT NULL DEFAULT FALSE,
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id),
     FOREIGN KEY (id_taxonomia) REFERENCES classificacao_taxonomica(id),
     FOREIGN KEY (id_geolocalizacao) REFERENCES geolocalizacao(id)
 );
 INSERT INTO registros_biologicos (
-    id_usuario, id_taxonomia, data_observacao, hora_observacao, descricao, id_geolocalizacao, url_imagem, qtde_likes, qtde_coment, data_publicacao, hora_publicacao, identificacao, especie_invasora
+    id_usuario, id_taxonomia, data_observacao, hora_observacao, descricao, id_geolocalizacao, url_imagem, qtde_likes, qtde_coment, data_publicacao, hora_publicacao, identificacao
 ) VALUES
-(1, 1, '2025-05-20', '10:00:00', 'Papagaio-verdadeiro avistado na copa da árvore', 1, 'https://res.cloudinary.com/djbatjpjn/image/upload/v1746915864/hdhsdtqgv7ea5cbhtl4z.png', 0, 0, '2025-05-21', '08:00:00', TRUE, FALSE),
-(2, 2, '2025-05-18', '14:30:00', 'Onça-pintada vista próxima ao rio', 1, 'https://res.cloudinary.com/djbatjpjn/image/upload/v1746915960/ytbx8r46k4r9fv3qnirn.png', 0, 0, '2025-05-19', '09:00:00', TRUE, FALSE),
-(1, 3, '2025-05-22', '19:45:00', 'Perereca de banheiro encontrada próxima ao banheiro do parque', 1, 'https://res.cloudinary.com/djbatjpjn/image/upload/v1746916025/tviwtun4vxqcivfeiysy.png', 0, 0, '2025-05-23', '07:30:00', TRUE, FALSE),
-(1, 4, '2025-05-19', '11:15:00', 'Tamanduá-bandeira cruzando a trilha', 1, 'https://res.cloudinary.com/djbatjpjn/image/upload/v1747399815/imagem_2025-05-16_094936847_lfogo5.png', 0, 0 , '2025-05-20', '10:00:00', TRUE, FALSE),
-(1, 5, '2025-05-19', '17:45:00', 'Caranguejeira caminhando na trilha', 1, 'https://www.portal.zoo.bio.br/IMG/jpg/20210828_111014.jpg', 0, 0, '2025-05-22', '08:30:00', TRUE, FALSE),
-(3, 6, '2025-05-18', '09:20:00', 'Tucunaré pescado em rio próximo', 1, 'https://pescariasa.com.br/wp-content/uploads/2024/01/especies-de-tucunare-presentes-no-brasil-700x467.jpg', 0, 0, '2025-05-22', '09:00:00', TRUE, FALSE),
-(1, 7, '2025-05-17', '13:00:00', 'Ipê-amarelo florido na praça central', 1, 'https://live.staticflickr.com/4372/35964128804_fd13434b90_b.jpg', 0, 0, '2025-05-22', '09:30:00', TRUE, FALSE),
-(1, 8, '2025-05-20', '08:45:00', 'Formiga-cortadeira carregando folhas', 1, 'https://agropos.com.br/wp-content/uploads/2020/09/Imagem-2024-02-15T102829.573.png', 0, 0, '2025-05-22', '10:30:00', TRUE, FALSE),
-(3, 9, '2025-05-16', '22:10:00', 'Jararaca avistada à beira da trilha', 1, 'https://www.portal.zoo.bio.br/local/cache-gd2/b2/423ed49e85515eff13d4dd7ce64590.jpg?1640271823', 0, 0, '2025-05-22', '11:00:00', TRUE, FALSE),
-(1, NULL, '2025-05-15', '07:30:00', 'Musgo crescendo em tronco úmido', 1, 'https://live.staticflickr.com/8502/8327280895_dbe17f5c85_b.jpg', 0, 0, '2025-05-22', '11:30:00', TRUE, FALSE),
-(2, 11, '2025-05-21', '18:50:00', 'Cogumelo-do-sol encontrado na mata', 1, 'https://www.fungicultura.com.br/wp-content/uploads/2022/11/cogumelo-do-sol-1200x900-1.jpg', 0, 0, '2025-05-22', '12:00:00', TRUE, FALSE),
-(3, 1, '2025-02-20', '10:00:00', 'Papagaio-verdadeiro', 1, 'https://casadospassaros.net/wp-content/uploads/2016/12/Papagaio-Verdadeiro.jpg', 0, 0, '2025-02-21', '08:00:00', TRUE, FALSE),
-(1, 1, '2025-02-20', '10:00:00', 'Papagaio comendo', 1, 'https://cdn0.peritoanimal.com.br/pt/posts/3/0/3/o_que_comem_os_diferentes_tipos_de_papagaio_23303_5_600.jpg', 0, 0, '2025-02-21', '08:00:00', TRUE, FALSE);
+(1, 1, '2025-05-20', '10:00:00', 'Papagaio-verdadeiro avistado na copa da árvore', 1, 'https://res.cloudinary.com/djbatjpjn/image/upload/v1746915864/hdhsdtqgv7ea5cbhtl4z.png', 0, 0, '2025-05-21', '08:00:00', TRUE),
+(2, 2, '2025-05-18', '14:30:00', 'Onça-pintada vista próxima ao rio', 1, 'https://res.cloudinary.com/djbatjpjn/image/upload/v1746915960/ytbx8r46k4r9fv3qnirn.png', 0, 0, '2025-05-19', '09:00:00', TRUE),
+(1, 3, '2025-05-22', '19:45:00', 'Perereca de banheiro encontrada próxima ao banheiro do parque', 1, 'https://res.cloudinary.com/djbatjpjn/image/upload/v1746916025/tviwtun4vxqcivfeiysy.png', 0, 0, '2025-05-23', '07:30:00', TRUE),
+(1, 4, '2025-05-19', '11:15:00', 'Tamanduá-bandeira cruzando a trilha', 1, 'https://res.cloudinary.com/djbatjpjn/image/upload/v1747399815/imagem_2025-05-16_094936847_lfogo5.png', 0, 0 , '2025-05-20', '10:00:00', TRUE),
+(1, 5, '2025-05-19', '17:45:00', 'Caranguejeira caminhando na trilha', 1, 'https://www.portal.zoo.bio.br/IMG/jpg/20210828_111014.jpg', 0, 0, '2025-05-22', '08:30:00', TRUE),
+(3, 6, '2025-05-18', '09:20:00', 'Tucunaré pescado em rio próximo', 1, 'https://pescariasa.com.br/wp-content/uploads/2024/01/especies-de-tucunare-presentes-no-brasil-700x467.jpg', 0, 0, '2025-05-22', '09:00:00', TRUE),
+(1, 7, '2025-05-17', '13:00:00', 'Ipê-amarelo florido na praça central', 1, 'https://live.staticflickr.com/4372/35964128804_fd13434b90_b.jpg', 0, 0, '2025-05-22', '09:30:00', TRUE),
+(1, 8, '2025-05-20', '08:45:00', 'Formiga-cortadeira carregando folhas', 1, 'https://agropos.com.br/wp-content/uploads/2020/09/Imagem-2024-02-15T102829.573.png', 0, 0, '2025-05-22', '10:30:00', TRUE),
+(3, 9, '2025-05-16', '22:10:00', 'Jararaca avistada à beira da trilha', 1, 'https://www.portal.zoo.bio.br/local/cache-gd2/b2/423ed49e85515eff13d4dd7ce64590.jpg?1640271823', 0, 0, '2025-05-22', '11:00:00', TRUE),
+(1, NULL, '2025-05-15', '07:30:00', 'Musgo crescendo em tronco úmido', 1, 'https://live.staticflickr.com/8502/8327280895_dbe17f5c85_b.jpg', 0, 0, '2025-05-22', '11:30:00', FALSE),
+(2, 11, '2025-05-21', '18:50:00', 'Cogumelo-do-sol encontrado na mata', 1, 'https://www.fungicultura.com.br/wp-content/uploads/2022/11/cogumelo-do-sol-1200x900-1.jpg', 0, 0, '2025-05-22', '12:00:00', TRUE),
+(3, 1, '2025-02-20', '10:00:00', 'Papagaio-verdadeiro', 1, 'https://casadospassaros.net/wp-content/uploads/2016/12/Papagaio-Verdadeiro.jpg', 0, 0, '2025-02-21', '08:00:00', TRUE),
+(1, 1, '2025-02-20', '10:00:00', 'Papagaio comendo', 1, 'https://cdn0.peritoanimal.com.br/pt/posts/3/0/3/o_que_comem_os_diferentes_tipos_de_papagaio_23303_5_600.jpg', 0, 0, '2025-02-21', '08:00:00', TRUE);
 
 CREATE TABLE tipo_ocorrencia(
 	id INT AUTO_INCREMENT PRIMARY KEY,
@@ -118,7 +117,7 @@ CREATE TABLE ocorrencias (
     data_publicacao DATE NOT NULL,
     hora_publicacao TIME NOT NULL,
     img_url_ocorrencia VARCHAR(255) NOT NULL,
-    titulo_ocorrencia VARCHAR(255) NOT NULL,
+    titulo_ocorrencia VARCHAR(100) NOT NULL,
     descricao_ocorrencia TEXT NOT NULL,
     sensivel BOOLEAN DEFAULT FALSE,
     exibicao BOOLEAN DEFAULT FALSE,
@@ -140,10 +139,10 @@ INSERT INTO ocorrencias (id_usuario, id_geolocalizacao, data_publicacao, hora_pu
 
 
 CREATE TABLE curtidas_usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
     id_usuario INT NOT NULL,
     id_registro INT NOT NULL,
     data_curtida DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (id_usuario, id_registro),
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id),
     FOREIGN KEY (id_registro) REFERENCES registros_biologicos(id) ON DELETE CASCADE
 );
@@ -212,8 +211,6 @@ INSERT INTO comentarios (id_registro, id_usuario, conteudo, data_publicacao) VAL
 -- Tucunaré
 INSERT INTO comentarios (id_registro, id_usuario, conteudo, data_publicacao) VALUES
 (6, 2, 'Que tamanho tinha esse tucunaré?', '2025-05-22 09:30:00');
-
-
 
 SELECT * FROM usuarios;
 SELECT * FROM classificacao_taxonomica;

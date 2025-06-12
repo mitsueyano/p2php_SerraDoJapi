@@ -23,7 +23,6 @@ function loadSpecies(category) {
       }
       const speciesPerLetter = {};
       species.forEach(name => {
-        console.log(name);
         const letter = name.especie[0].toUpperCase();
         if (!speciesPerLetter[letter]) speciesPerLetter[letter] = [];
         speciesPerLetter[letter].push({especie: name.especie, classe: name.classe});
@@ -118,6 +117,8 @@ function infoSpecie(name) {
 
         const gallery = document.createElement('div');
         gallery.className = 'gallery';
+
+        gallery.innerHTML += `<span id="linkinaturalist"><a href="https://www.inaturalist.org/search?q=${encodeURIComponent(name)}" target="_blank">iNaturalist</a></span>`;
 
         data.forEach(record => {
           const galleryItem = document.createElement('div');

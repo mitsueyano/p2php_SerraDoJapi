@@ -75,6 +75,7 @@ echo json_encode([
     'userData' => [
         'username' => $_SESSION['username'], // Retorna o username do usuário
         'name' => $_SESSION['user'], // Retorna o nome do usuário
+        'lastname' => $_SESSION['userlastname'], // Retorna o sobrenome do usuário
         'isSpecialist' => ($_SESSION['access'] === 'especialista'), // Retorna se é especialista
         'pfp' => $_SESSION['pfp']
     ]

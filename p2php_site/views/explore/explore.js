@@ -39,17 +39,6 @@ function like(postid) {
     });
 }
 
-function openModal(urlImagem) {
-  const modal = document.getElementById("modal");
-  const img = document.getElementById("imgModal");
-  img.src = urlImagem;
-  modal.style.display = "block";
-}
-
-function closeModal() {
-  document.getElementById("modal").style.display = "none";
-}
-
 function datetime(dateStr, timeStr) {
   const segment = dateStr.split("/");
   if (segment.length !== 3) return dateStr + " às " + timeStr.slice(0, 5);
@@ -108,10 +97,10 @@ function loadPosts() {
                 
                     <span id="datetime">${datetimePub}</span>
                     <div class="image-post">
-                        <img src="${post.url_imagem}" alt="Imagem de ${post.nome_popular}" draggable="false" onclick="openModal('${post.url_imagem}')">
+                        <img src="${post.url_imagem}" alt="Imagem de ${post.nome_popular}" draggable="false" onclick="window.location.href = '../postdetails/postdetails.php?id=${post.id}'">
                     </div>
                     <div class="text-post">
-                        <div class="flexname" onclick="window.location.href = '../postdetails/postdetails.php?id=${post.id}'">
+                        <div class="flexname">
                             <span class="common-name">${post.nome_popular}</span>
                             <span class="specie">${scientificName}</span>
                         </div>                        

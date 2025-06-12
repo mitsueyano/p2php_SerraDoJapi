@@ -19,7 +19,7 @@ $letters = range('A', 'Z');
 
 <body>
     <div id="header">
-        <h1>ecoframe</h1>
+        <h1 onclick="window.location.href='../explore/explore.php'">ecoframe</h1>
         <span>Foto: José Aparecido dos Santos</span>
     </div>
     <div id="navbar">

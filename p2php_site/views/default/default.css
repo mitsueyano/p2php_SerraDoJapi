@@ -43,6 +43,7 @@ html, body {
     z-index: 1;
     text-align: center;
     letter-spacing: 2px;
+    cursor: pointer;
 }
 
 #header span {
