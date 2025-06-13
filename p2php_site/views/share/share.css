@@ -118,6 +118,12 @@ form input{
 form input:focus{
     outline: 1px solid #7D8C46;
 }
+form textarea:focus{
+    outline: 1px solid #7D8C46;
+}
+form textarea:hover{
+    border: 1px solid #7D8C46;
+}
 #incidentTitle{
     margin: 5px;
 }

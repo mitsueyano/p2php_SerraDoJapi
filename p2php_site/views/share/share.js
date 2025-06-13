@@ -12,13 +12,15 @@ const items = document.querySelectorAll(".items");
 checkbox.addEventListener("change", () => {
   if (checkbox.checked) {
     items.forEach((item) => {
+      item.value = "";
       item.readonly = true;
       item.style.color = "linen";
       item.style.opacity = "1";
       item.setAttribute("disabled", true);
     });
   } else {
-    items.forEach((item) => {
+      items.forEach((item) => {
+      item.style.color = "#000";
       item.style.backgroundColor = "";
       item.style.border = "1px solid grey";
       item.style.opacity = "";

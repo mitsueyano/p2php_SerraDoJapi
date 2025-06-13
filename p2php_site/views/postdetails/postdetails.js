@@ -567,5 +567,13 @@ function updateCommentCount(increment = 1) {
   }
 }
 
+window.addEventListener('load', () => {
+    const header = document.getElementById("header");
+    window.scrollTo({
+        top: header.offsetHeight,
+        behavior: "smooth"
+    });
+});
+
 // Carregar os dados quando a página estiver pronta
 document.addEventListener("DOMContentLoaded", loadPostData);

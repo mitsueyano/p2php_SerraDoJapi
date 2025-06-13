@@ -1,3 +1,4 @@
+
 .back{
     max-width: 800px;
     margin: 25px auto 0 auto;
@@ -181,6 +182,12 @@
     border-top: 1px solid #eaeaea;
 }
 
+.post-interactions span{
+    font-family: "Prompt", sans-serif !important;
+    font-weight: 300 !important;
+    font-style: normal !important;
+}
+
 .like-btn {
     background: none;
     border: none;
@@ -234,6 +241,10 @@
     min-height: 80px;
     margin-bottom: 10px;
     resize: vertical;
+}
+.comment-form textarea:focus {
+    border-color: #7D8C46;
+    outline: none;
 }
 
 .comment-form button {

@@ -184,7 +184,7 @@
     width: 500px;
     max-width: 90vw;
     background-color: white;
-    border-radius: 12px;
+    border-radius: 2px;
     overflow: hidden;
 }
 
@@ -223,7 +223,7 @@
     background-color: #e8e8e8;
     color: #333;
     font-weight: bold;
-    border-radius: 6px;
+    border-radius: 2px;
     cursor: pointer;
 }
 

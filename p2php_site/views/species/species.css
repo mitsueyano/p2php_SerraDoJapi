@@ -223,6 +223,9 @@ body{
     justify-content: center;
     padding-top: 9vh;
 }
+.gallery strong{
+    color: #495927;
+}
 @media (max-width: 730px) {
     .gallery {
         padding-top: 100px;
@@ -275,8 +278,42 @@ body{
     display: none;
 }
 
+#btn-notidentified {
+    padding: 6px;
+    width: 100%;
+    margin: 5px;
+    border: 2px solid #4959278f;
+    background-color: transparent;
+    color: #495927cc;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+#btn-notidentified:hover {
+    background-color: #4959278f;
+    color: #fff;
+}
+
+#btn-notidentified.active {
+    background-color: #4959278f;
+    color: #fff;
+}
+
+.full-width-info {
+  width: 100%;
+  display: block;
+}
+
+.hidden {
+  display: none !important;
+}
+
+
 @media (max-width: 670px) {
     #box{
         flex-direction: column;
     }
 }
+

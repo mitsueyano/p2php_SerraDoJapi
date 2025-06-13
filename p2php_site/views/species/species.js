@@ -1,58 +1,92 @@
 function loadSpecies(category) {
+  const speciesItems = document.getElementById('species-items');
+  const navbarLetters = document.getElementById("navbar-letters");
+  const noSpecies = document.getElementById("nospecies");
+  const speciesList = document.getElementById('species-list');
+  const divInfo = document.getElementById('div-info-specie');
+
+  if (category === 'naoidentificado') {
+    infoSpecie('Não identificado');
+    speciesItems.innerHTML = ''; // limpa só os itens das espécies
+    navbarLetters.classList.add('hidden');  // esconde filtro letras
+    noSpecies.classList.remove('hidden');   // mostra "sem espécies"
+    divInfo.innerHTML = '<p>Clique em um tipo para ver mais informações.</p>';
+
+    // Esconder lista e expandir div de info
+    speciesList.classList.add('hidden');
+    divInfo.classList.add('full-width-info');
+
+    // Esconde o link do iNaturalist se existir
+    setTimeout(() => {
+      const inatLink = document.getElementById('linkinaturalist');
+      if (inatLink) inatLink.style.display = 'none';
+    }, 50); // aguarda a renderização do conteúdo
+
+    return;
+  } else {
+    navbarLetters.classList.remove('hidden');
+    noSpecies.classList.add('hidden');
+    divInfo.innerHTML = '<p>Clique em um tipo para ver mais informações.</p>';
+
+    // Restaurar exibição padrão
+    speciesList.classList.remove('hidden');
+    divInfo.classList.remove('full-width-info');
+  }
+
   fetch(`../../php/loadspecies.php?category=${encodeURIComponent(category)}`)
     .then(res => res.json())
     .then(species => {
-      const list = document.getElementById('species-list');
-      var letters = document.getElementById("navbar-letters").cloneNode(true);
-      var nospecies = document.getElementById("nospecies").cloneNode(true);
-      list.innerHTML = '';
-      list.appendChild(letters);
-      list.appendChild(nospecies);
+      speciesItems.innerHTML = '';  // limpa só os itens das espécies
       scroll();
 
-      const divInfo = document.getElementById('div-info-specie');
-      divInfo.innerHTML = '<p>Clique em um tipo para ver mais informações.</p>';
-
       if (species.length === 0) {
-        document.getElementById("navbar-letters").classList.add("hidden");
-        document.getElementById("nospecies").classList.remove("hidden");
+        navbarLetters.classList.add("hidden");
+        noSpecies.classList.remove("hidden");
         return;
-      } else{
-        document.getElementById("navbar-letters").classList.remove("hidden");
-        document.getElementById("nospecies").classList.add("hidden");
+      } else {
+        navbarLetters.classList.remove("hidden");
+        noSpecies.classList.add("hidden");
       }
+
       const speciesPerLetter = {};
       species.forEach(name => {
         const letter = name.especie[0].toUpperCase();
         if (!speciesPerLetter[letter]) speciesPerLetter[letter] = [];
-        speciesPerLetter[letter].push({especie: name.especie, classe: name.classe});
+        speciesPerLetter[letter].push({ especie: name.especie, classe: name.classe });
       });
-
 
       Object.keys(speciesPerLetter).sort().forEach(letter => {
         const marker = document.createElement('span');
         marker.id = `letter-marker-${letter}`;
         marker.className = 'letter-marker';
-        list.appendChild(marker);
+        speciesItems.appendChild(marker);
 
         const titleletter = document.createElement('h3');
         titleletter.id = `letter-${letter}`;
         titleletter.textContent = letter;
-        list.appendChild(titleletter);
+        speciesItems.appendChild(titleletter);
 
         speciesPerLetter[letter].forEach(a => {
           const div = document.createElement('div');
           const spanSpecie = document.createElement('span');
           const spanClass = document.createElement('span');
           spanSpecie.textContent = a.especie;
-          spanSpecie.classList.add('spanSpecie')
+          spanSpecie.classList.add('spanSpecie');
           spanClass.textContent = a.classe;
           spanClass.classList.add('spanClass');
           div.appendChild(spanSpecie);
           div.appendChild(spanClass);
           div.className = 'specie-item';
-          div.onclick = () => infoSpecie(a.especie);
-          list.appendChild(div);
+          div.onclick = () => {
+            infoSpecie(a.especie);
+
+            // Após carregar info, tenta mostrar o link do iNaturalist (se estiver oculto)
+            setTimeout(() => {
+              const inatLink = document.getElementById('linkinaturalist');
+              if (inatLink) inatLink.style.display = '';
+            }, 100);
+          }
+          speciesItems.appendChild(div);
         });
       });
 
@@ -62,6 +96,8 @@ function loadSpecies(category) {
       console.error('Erro ao carregar espécies:', err);
     });
 }
+
+
 
 function scroll(){
     document.querySelectorAll('#navbar-letters a').forEach(link => {
@@ -81,7 +117,7 @@ function scroll(){
     });
 }
 
-const btnsFilter = document.querySelectorAll('#filter button');
+const btnsFilter = document.querySelectorAll('button');
 btnsFilter.forEach(button => {
   button.addEventListener('click', () => {
     btnsFilter.forEach(b => b.classList.remove('active'));
