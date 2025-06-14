@@ -1,12 +1,3 @@
-const btnshare = document.getElementById("btn-share");
-
-btnshare.addEventListener("click", function () {
-    if (sessionStorage.getItem("loggedin") !== "true") {
-        window.location.href = "../login/login.php";
-    } else {
-        window.location.href = "../share/share.php";
-    }
-});
 
 //Carrega as estatísticas
 fetch("../../php/statistics.php")
@@ -35,7 +26,7 @@ fetch("../../php/loadhighlights.php")
             highlight.className = "box-highlights";
 
             highlight.innerHTML = `
-                <img src="${post.url_imagem}" alt="${post.nome_popular}")">
+                <img src="${post.url_imagem}" alt="${post.nome_popular}") onclick="window.location.href = '../postdetails/postdetails.php?id=${post.id}'">
                 <div class="description">
                     <span>${post.nome_popular}</span>
                     <span>(${post.especie})</span>

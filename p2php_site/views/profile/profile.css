@@ -4,7 +4,7 @@
 }
 
 .back {
-    width: 80%;
+    width: 75%;
     padding: 5px;
 }
 
@@ -16,7 +16,7 @@
 }
 
 .page {
-    width: 80%;
+    width: 75%;
     margin: 0 auto;
 }
 
@@ -298,6 +298,9 @@
     margin-right: 5px;
     font-size: 2vh;
     color: #334027;
+}
+.author a{
+    color: #495927;
 }
 
 .post-interactions {

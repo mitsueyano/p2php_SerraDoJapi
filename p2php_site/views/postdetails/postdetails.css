@@ -1,8 +1,11 @@
 
+#content{
+    min-height: 70vh;
+}
 .back{
     max-width: 800px;
+    padding-left: 20px;
     margin: 25px auto 0 auto;
-    padding: 0 20px;
 }
 .back a{
     text-decoration: none;
@@ -23,7 +26,34 @@
     padding: 20px;
     margin-bottom: 30px;
 }
+.location-info i{
+    color: #495927 !important;
+}
+.checked{
+    color: #ffff !important;
+}
+.observation-info i{
+    color: #495927 ;
+}
+.invasive {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: baseline;
+    padding: 5px;
+    color: white !important;
+    background-color: #974f4c;
+    border-radius: 2px;
+    margin-bottom: 5px;
+}
+.invasive i {
+    margin-right: 10px;
+    font-size: 1.1em;
+}
 
+
+i{
+    font-size: 1.2em !important;
+}
 .post-header {
     display: flex;
     justify-content: space-between;
@@ -111,7 +141,9 @@
 
 .scientific-name {
     font-style: italic;
-    color: #7D8C46;
+    color: #36421c;
+    font-size: 1.2em;
+    font-weight: 500;
     margin: 0 0 20px 0;
 }
 
@@ -124,7 +156,7 @@
 
 .taxonomy-info div {
     padding: 8px;
-    background-color: #f9f9f9;
+    background-color: #ebe9e9;
     border-radius: 4px;
 }
 
@@ -141,12 +173,10 @@
     color: #666;
 }
 
-.location-info i {
-    color: #7D8C46;
-}
 
 .observation-info {
     margin-bottom: 20px;
+    color: #666;
 }
 
 .tag {
@@ -162,11 +192,6 @@
     color: #fff;
 }
 
-.tag.invasive {
-    background-color: #ffebee;
-    color: #d32f2f;
-}
-
 .post-description {
     line-height: 1.6;
     margin: 20px 0;
@@ -177,15 +202,24 @@
 
 .post-interactions {
     display: flex;
+    align-items: center;
+    height: 100%;
     gap: 20px;
     padding-top: 15px;
     border-top: 1px solid #eaeaea;
+}
+
+.post-interactions i{
+  font-size: 1.5em !important;
 }
 
 .post-interactions span{
     font-family: "Prompt", sans-serif !important;
     font-weight: 300 !important;
     font-style: normal !important;
+}
+.comments-count i{
+    color: #495927;
 }
 
 .like-btn {
@@ -195,12 +229,12 @@
     display: flex;
     align-items: center;
     gap: 5px;
-    color: #666;
+    color: #495927;
     font-size: 1rem;
 }
 
 .like-btn:hover, .like-btn.liked {
-    color: #e74c3c;
+    color: #d32f2f !important;
 }
 
 .like-btn i {
@@ -214,12 +248,7 @@
     color: #666;
 }
 
-.comments-count i {
-    color: #7D8C46;
-}
-
 .comments-section {
-    margin-top: 30px;
     padding-top: 20px;
     border-top: 1px solid #eaeaea;
 }
@@ -248,16 +277,17 @@
 }
 
 .comment-form button {
-    background-color: #7D8C46;
+    background-color: #495927;
     color: white;
     border: none;
     padding: 8px 15px;
-    border-radius: 4px;
+    width: 20%;
+    border-radius: 2px;
     cursor: pointer;
 }
 
 .comment-form button:hover {
-    background-color: #6a7a3b;
+    background-color: #36421c;
 }
 
 .comment {

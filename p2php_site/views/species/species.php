@@ -39,6 +39,7 @@ $letters = range('A', 'Z');
                 <button id="btn-all" class="active" value="todos">Todos</button>
                 <button id="btn-fauna" value="fauna">Fauna</button>
                 <button id="btn-flora" value="flora">Flora</button>
+                <button id="btn-invader" value="especiesinvasoras">Espécies Invasoras</button>
                 <button id="btn-notidentified" value="naoidentificado">Espécies não identificadas</button>
             </div>
             <div id="div-search-bar">

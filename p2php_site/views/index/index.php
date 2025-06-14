@@ -59,7 +59,7 @@
             <div id="imggeneraltext">
                 <div id="generaltext">
                     <p>Ajude a documentar a vida ao seu redor. Registre aves, plantas e outros organismos que encontrar na natureza. Cada observação conta para a conservação do nosso planeta.</p>
-                    <button id="btn-share">Compartilhe sua observação</button>
+                    <a href="../share/share.php" id="btn-share">Compartilhe sua observação</a>
                 </div>
             </div>
         </div>

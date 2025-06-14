@@ -221,6 +221,7 @@
     display: block;
     border-radius: 8px;
     transition: 0.1s ease-out;
+    cursor: pointer;
 }
 
 .box-highlights:hover img {

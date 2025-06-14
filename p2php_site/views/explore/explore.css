@@ -229,6 +229,19 @@
     display: flex;
     flex-direction: column;
 }
+.badge-invasive {
+    display: flex !important;
+    flex-direction: row! important;
+    align-items: baseline;
+    padding: 5px;
+    color: white;
+    background-color: #d9534f;
+    border-radius: 2px;
+}
+.badge-invasive i {
+    margin-right: 10px;
+    font-size: 1.1em;
+}
 
 /* Nome */
 .flexnome {

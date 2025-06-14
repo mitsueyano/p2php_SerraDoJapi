@@ -38,7 +38,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $place_name = $_POST['placename'] ?? '';
     $user_id = $_SESSION["userid"] ?? null;
     $identified = isset($_POST["identified"]) ? 0 : 1;
-    $invader = isset($_POST["invader"]) ? 1 : 0;
+    $is_invader = isset($_POST["invader"]) ? 1 : 0;
+    $category_name = $is_invader ? 'Espécie invasora' : ($_POST["category"] ?? 'não identificado');
 
     date_default_timezone_set('America/Sao_Paulo');
     $publication_date = date("Y-m-d");
@@ -54,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     ]);
     $img_url = $result['secure_url'];
 
-    if ($identified === true) {
+    if ($identified == true) {
         $stmt = $conn->prepare("SELECT id FROM categoria WHERE nome = ?");
         $stmt->bind_param("s", $category_name);
         $stmt->execute();
@@ -100,12 +101,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $stmt = $conn->prepare("
     INSERT INTO registros_biologicos 
-    (id_usuario, id_taxonomia, data_observacao, hora_observacao, descricao, id_geolocalizacao, url_imagem, qtde_likes, qtde_coment, data_publicacao, hora_publicacao, identificacao, especie_invasora) 
-    VALUES (?, ?, ?, ?, ?, ?, ?, 0, 0, ?, ?, ?, ?)
+    (id_usuario, id_taxonomia, data_observacao, hora_observacao, descricao, id_geolocalizacao, url_imagem, qtde_likes, qtde_coment, data_publicacao, hora_publicacao, identificacao) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, 0, 0, ?, ?, ?)
 ");
 
     $stmt->bind_param(
-        "iisssissssi",
+        "iisssissss",
         $user_id,
         $taxon_id,
         $date,
@@ -116,7 +117,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $publication_date,
         $publication_time,
         $identified,
-        $invader
     );
 
 

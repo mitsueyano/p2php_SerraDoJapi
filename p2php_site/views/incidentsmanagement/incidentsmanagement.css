@@ -88,6 +88,9 @@
     color: #555;
     font-size: 0.9rem;
 }
+.meta-item i{
+    color: #495927 !important;
+}
 
 .sensitive-tag{
     padding: 5px 20px;
@@ -120,12 +123,12 @@
 }
 
 .btn-approve {
-    background-color: #4CAF50;
+    background-color: #495927;
     color: white;
 }
 
 .btn-approve:hover {
-    background-color: #3e8e41;
+    background-color: #2e3819;
 }
 
 .btn-reject {
@@ -134,7 +137,7 @@
 }
 
 .btn-reject:hover {
-    background-color: #d32f2f;
+    background-color: #b3292988;
 }
 
 @media (max-width: 768px) {
@@ -205,9 +208,6 @@
 #modal-close{
     cursor: pointer;
 
-}
-
-.modal-body {
 }
 
 .modal-bottom {

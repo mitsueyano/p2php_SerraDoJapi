@@ -3,7 +3,7 @@ html{
 }
 
 body{
-    height: unset!important;
+    height: unset !important;
 }
 
 #content {
@@ -17,27 +17,37 @@ body{
     width: 100%;
 }
 #divtitle{
+    margin-top: 20px;
     width: 90%;
-    margin-bottom: 20px;
     position: absolute;
-    top: 0;
+    top: -20px;
     background-color: #fff;
-}
-#title {
-    width: 100%;
     display: flex;
+    align-items: center;
+    flex-direction: column;
+    border-bottom: 1px solid #495927;
+
+}   
+#title {
+    display: flex;
+    font-weight: 500;
+    width: 100% !important;
     justify-content: center;
     align-items: center;
     text-align: center;
     font-size: 1.8em;
     margin-bottom: 5px;
+    color: #495927;
+}
+.popular{
+    font-style: italic;
+    font-size: 0.9em;
 }
 #bar {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    flex-wrap: wrap;
     margin-bottom: 10px;
     gap: 5px;
 }
@@ -73,7 +83,7 @@ body{
     background-color: #495927;
 }
 .flex {
-    width: 40%;
+    width: 70%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -83,19 +93,55 @@ body{
     display: flex;
     justify-content: space-between;
 }
+@media (max-width: 1500px) {
+  #filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  #filter button {
+    flex: 1 1 calc(33.33% - 20px); /* 3 por linha */
+  }
+
+  #filter button:nth-child(n+4) {
+    flex: 1 1 calc(50% - 20px); /* 2 por linha a partir do quarto */
+  }
+}
+
 @media (max-width: 1200px) {
     .flex{
         min-width: 50%;
+    }
+    #bar {
+        flex-direction: column;
+        align-items: center;
+    }
+    #filter button{
+        min-width: 200px;
     }
 }
 @media (max-width: 690px) {
     .flex{
         min-width: 60%;
     }
+    #filter button{
+        min-width: 200px;
+    }
 }
 @media (max-width: 600px) {
     .flex{
         min-width: 80%;
+    }
+
+    #filter {
+        flex-direction: column;
+        align-items: center;
+    }
+    #species-list {
+        max-height: 50vh !important;
+        overflow: auto;
     }
 }
 @media (max-width: 400px) {
@@ -209,13 +255,9 @@ body{
     overflow: auto;
     position: relative;
 }
-#linkinaturalist{
-    position: absolute;
-    top: 0;
-    left: 5px;
-}
 
 .gallery {
+    padding-top: 120px !important;
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
@@ -224,6 +266,7 @@ body{
     padding-top: 9vh;
 }
 .gallery strong{
+    font-weight: 500;
     color: #495927;
 }
 @media (max-width: 730px) {
@@ -254,22 +297,26 @@ body{
     max-height: 200px;
     border-radius: 5px;
     object-fit: cover;
+    cursor: pointer;
 }
 
 .gallery-info {
     width: 100%;
+    display: flex;
+    flex-direction: column;
     text-align: start;
+    justify-content: center;
+    margin-top: 1px;
 }
 
 .info{
     font-size: 10pt;
 }
-
-#linkinaturalist{
-    position: absolute;
-    left: 20px;
-    top: 20px;
+.user a{
+    color: #495927;
+    font-weight: 400;
 }
+
 #linkinaturalist a{
         color: #495927 !important;
 }
@@ -280,7 +327,6 @@ body{
 
 #btn-notidentified {
     padding: 6px;
-    width: 100%;
     margin: 5px;
     border: 2px solid #4959278f;
     background-color: transparent;

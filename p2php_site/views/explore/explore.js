@@ -93,6 +93,12 @@ function loadPosts() {
           post.hora_observacao
         );
 
+        let invasorBadge = "";
+        if (post.id_categoria == 3) {
+          invasorBadge = `<span class="badge-invasive"><i class="fa-solid fa-triangle-exclamation"></i> Espécie invasora</span>`;
+        }
+
+
         container.innerHTML = ` 
                 
                     <span id="datetime">${datetimePub}</span>
@@ -103,8 +109,9 @@ function loadPosts() {
                         <div class="flexname">
                             <span class="common-name">${post.nome_popular}</span>
                             <span class="specie">${scientificName}</span>
-                        </div>                        
-                        <div class="description">
+                        </div>
+                        ${invasorBadge}                    
+                        <div class="description"  onclick="window.location.href = '../postdetails/postdetails.php?id=${post.id}'">
                             <span class="description">${post.descricao}</span>
                         </div>
 

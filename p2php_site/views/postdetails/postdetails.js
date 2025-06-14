@@ -52,7 +52,9 @@ function renderPost(postData) {
   // Construir HTML do post
   let html = `
         <div class="post-detail">
-            <div class="post-header" onclick="window.location.href = '../profile/profile.php?username=${postData.usuario.username}'">
+            <div class="post-header" onclick="window.location.href = '../profile/profile.php?username=${
+              postData.usuario.username
+            }'">
                 <div class="author-info">
                     <img src="${
                       postData.usuario.imagem_perfil ||
@@ -91,10 +93,14 @@ function renderPost(postData) {
 
                 <div class="post-info">
                     <h1 class="species-name">${
-                      postData.taxonomia.nome_popular
+                     postData.taxonomia.nome_popular
                     }</h1>
-                    <p class="scientific-name">${postData.taxonomia.especie}</p>
-                    
+                    <p class="scientific-name">(${postData.taxonomia.especie})</p>
+                    ${
+                        postData.taxonomia.categoria === "Espécie invasora"
+                          ? '<span class="invasive"><i class="fa-solid fa-triangle-exclamation"></i> Espécie invasora</span>'
+                          : ""
+                      }
                     <div class="taxonomy-info">
                         <div><span class="label">Classe:</span> ${
                           postData.taxonomia.classe
@@ -114,23 +120,20 @@ function renderPost(postData) {
                         <i class="fas fa-map-marker-alt"></i>
                         <span>${postData.geolocalizacao.nome_lugar}</span>
                     </div>
-
                     <div class="observation-info">
-                        <p><strong>Data da observação:</strong> ${formatDateTime(
+                      <p>
+                        <i class="fa-solid fa-calendar"></i> ${formatDateTime(
                           postData.data_observacao,
                           postData.hora_observacao
-                        )}</p>
-                        ${
-                          postData.identificacao
-                            ? '<span class="tag identified">Verificado por especialista <i class="fa-solid fa-check"></i></span>'
-                            : ""
-                        }
-                        ${
-                          postData.especie_invasora
-                            ? '<span class="tag invasive">Espécie invasora</span>'
-                            : ""
-                        }
+                        )}
+                      </p>
+                      ${
+                        postData.identificacao
+                          ? '<span class="tag identified">Verificado por especialista <i class="fa-solid fa-check checked"></i></span>'
+                          : ""
+                      }
                     </div>
+
 
                     <div class="post-description">
                         <p>${postData.descricao}</p>
@@ -141,10 +144,10 @@ function renderPost(postData) {
                     <button class="like-btn ${
                       postData.liked ? "liked" : ""
                     }" onclick="toggleLike(${postData.id})">
-                        <i class="${
-                          postData.liked ? "fas" : "far"
-                        } fa-heart"></i>
-                        <span id="like-count">${postData.likes}</span>
+                          <i class="${
+                            postData.liked ? "fas liked" : "far"
+                          } fa-solid fa-heart like"></i>
+                          <span id="like-count">${postData.likes}</span>
                     </button>
                     <div class="comments-count">
                         <i class="fas fa-comment"></i>
@@ -180,12 +183,14 @@ function renderComments(comments) {
                 <img src="${
                   comment.usuario.imagem_perfil || "../img/default-profile.png"
                 }" alt="Foto de perfil" class="comment-profile-pic" data-username="${
-                  comment.usuario.username
-                }">
+        comment.usuario.username
+      }">
                 <div>
                     <span class="comment-author" data-username="${
                       comment.usuario.username
-                    }">${comment.usuario.nome} ${comment.usuario.sobrenome}</span>
+                    }">${comment.usuario.nome} ${
+        comment.usuario.sobrenome
+      }</span>
                     <span class="comment-username" data-username="${
                       comment.usuario.username
                     }">@${comment.usuario.username}</span>
@@ -238,8 +243,8 @@ function renderComments(comments) {
                                   reply.usuario.imagem_perfil ||
                                   "../img/default-profile.png"
                                 }" alt="Foto de perfil" class="comment-profile-pic" data-username="${
-                                  reply.usuario.username
-                                }">
+                          reply.usuario.username
+                        }">
                                 <div>
                                     <span class="comment-author" data-username="${
                                       reply.usuario.username
@@ -297,7 +302,29 @@ document.addEventListener("click", (event) => {
   }
 });
 
+function back() {
+  const params = new URLSearchParams(document.location.search);
+  const specie = params.get("specie") || "";
+  const category = params.get("category") || "";
 
+  if (!specie) {
+    // Se specie não está definida, volta na navegação do histórico
+    history.back();
+    return; // para garantir que o resto não execute
+  }
+
+  let url = "../species/species.php?";
+
+  if (specie) {
+    url += "lastSpecieSearched=" + encodeURIComponent(specie);
+  }
+
+  if (category) {
+    url += (specie ? "&" : "") + "category=" + encodeURIComponent(category);
+  }
+
+  window.location.href = url;
+}
 
 function toggleLike(postId) {
   fetch("../../php/likeupdate.php", {
@@ -381,12 +408,20 @@ function postComment(postId) {
             minute: "2-digit",
           })
           .replace(",", " às");
-       newComment.innerHTML = `
+        newComment.innerHTML = `
     <div class="comment-header">
-        <img src="${data.userData.pfp}" alt="Foto de perfil" class="comment-profile-pic" data-username="${data.userData.username}">
+        <img src="${
+          data.userData.pfp
+        }" alt="Foto de perfil" class="comment-profile-pic" data-username="${
+          data.userData.username
+        }">
         <div>
-            <span class="comment-author" data-username="${data.userData.username}">${data.userData.name} ${data.userData.lastname}</span>
-            <span class="comment-username" data-username="${data.userData.username}">@${data.userData.username}</span>
+            <span class="comment-author" data-username="${
+              data.userData.username
+            }">${data.userData.name} ${data.userData.lastname}</span>
+            <span class="comment-username" data-username="${
+              data.userData.username
+            }">@${data.userData.username}</span>
             ${
               data.userData.isSpecialist
                 ? '<span class="badge">Especialista</span>'
@@ -399,14 +434,21 @@ function postComment(postId) {
         <p>${commentText}</p>
     </div>
     <div class="comment-actions">
-        <button class="reply-btn" onclick="showReplyForm(${data.commentId})">Responder</button>
+        <button class="reply-btn" onclick="showReplyForm(${
+          data.commentId
+        })">Responder</button>
     </div>
-    <div class="reply-form-container" id="reply-form-${data.commentId}" style="display: none;">
-        <textarea id="reply-input-${data.commentId}" placeholder="Escreva sua resposta..."></textarea>
-        <button onclick="postReply(${data.commentId}, ${postId})">Enviar resposta</button>
+    <div class="reply-form-container" id="reply-form-${
+      data.commentId
+    }" style="display: none;">
+        <textarea id="reply-input-${
+          data.commentId
+        }" placeholder="Escreva sua resposta..."></textarea>
+        <button onclick="postReply(${
+          data.commentId
+        }, ${postId})">Enviar resposta</button>
     </div>
 `;
-
 
         // Adicionar o novo comentário no topo da lista
         commentsContainer.prepend(newComment);
@@ -567,13 +609,13 @@ function updateCommentCount(increment = 1) {
   }
 }
 
-window.addEventListener('load', () => {
+window.addEventListener("load", () => {
+  loadPostData();
+  setTimeout(() => {
     const header = document.getElementById("header");
     window.scrollTo({
-        top: header.offsetHeight,
-        behavior: "smooth"
+      top: header.offsetHeight,
+      behavior: "smooth",
     });
+  }, 300);
 });
-
-// Carregar os dados quando a página estiver pronta
-document.addEventListener("DOMContentLoaded", loadPostData);

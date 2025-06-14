@@ -29,6 +29,16 @@ checkbox.addEventListener("change", () => {
   }
 });
 
+const invaderCheckbox = document.getElementById("invader");
+const categoryInputs = document.querySelectorAll("input[name='category']");
+
+invaderCheckbox.addEventListener("change", () => {
+  categoryInputs.forEach((input) => {
+    input.disabled = invaderCheckbox.checked;
+    input.checked = invaderCheckbox.checked ? false : input.checked;
+  });
+});
+
 const upload = () => {
   document.querySelector("#image").click();
 };

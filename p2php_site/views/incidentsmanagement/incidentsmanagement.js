@@ -166,4 +166,10 @@ function loadIncidents() {
 
 }
 
-window.addEventListener("DOMContentLoaded", loadIncidents);
+window.addEventListener('load', () => {
+    loadIncidents();
+    const header = document.getElementById("header");
+    window.scrollTo({
+        top: header.offsetHeight,
+    });
+});

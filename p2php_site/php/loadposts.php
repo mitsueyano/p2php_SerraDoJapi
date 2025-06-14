@@ -27,6 +27,7 @@ $sql = "
         ct.ordem,
         ct.familia,
         ct.especie,
+        ct.id_categoria,
         g.nome_lugar,
         DATE_FORMAT(rb.data_observacao, '%d/%m/%Y') AS data_observacao,
         rb.hora_observacao,

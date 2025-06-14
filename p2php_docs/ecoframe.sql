@@ -65,7 +65,8 @@ INSERT INTO classificacao_taxonomica
 ('Formiga-cortadeira', 'Insecta', 'Hymenoptera', 'Formicidae', 'Atta sexdens', 1),
 ('Jararaca', 'Reptilia', 'Squamata', 'Viperidae', 'Bothrops jararaca', 1),
 ('Musgo-estrela', 'Bryopsida', 'Funariales', 'Funariaceae', 'Funaria hygrometrica', 2),
-('Cogumelo-do-sol', 'Fungi', 'Agaricales', 'Agaricaceae', 'Agaricus blazei', 2);
+('Cogumelo-do-sol', 'Fungi', 'Agaricales', 'Agaricaceae', 'Agaricus blazei', 2),
+('Guaxinim', 'Mammalia', 'Carnivora', 'Procyonidae', 'Procyon lotor', 3);
 
 CREATE TABLE registros_biologicos (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -100,8 +101,8 @@ INSERT INTO registros_biologicos (
 (1, NULL, '2025-05-15', '07:30:00', 'Musgo crescendo em tronco úmido', 1, 'https://live.staticflickr.com/8502/8327280895_dbe17f5c85_b.jpg', 0, 0, '2025-05-22', '11:30:00', FALSE),
 (2, 11, '2025-05-21', '18:50:00', 'Cogumelo-do-sol encontrado na mata', 1, 'https://www.fungicultura.com.br/wp-content/uploads/2022/11/cogumelo-do-sol-1200x900-1.jpg', 0, 0, '2025-05-22', '12:00:00', TRUE),
 (3, 1, '2025-02-20', '10:00:00', 'Papagaio-verdadeiro', 1, 'https://casadospassaros.net/wp-content/uploads/2016/12/Papagaio-Verdadeiro.jpg', 0, 0, '2025-02-21', '08:00:00', TRUE),
-(1, 1, '2025-02-20', '10:00:00', 'Papagaio comendo', 1, 'https://cdn0.peritoanimal.com.br/pt/posts/3/0/3/o_que_comem_os_diferentes_tipos_de_papagaio_23303_5_600.jpg', 0, 0, '2025-02-21', '08:00:00', TRUE);
-
+(1, 1, '2025-02-20', '10:00:00', 'Papagaio comendo', 1, 'https://cdn0.peritoanimal.com.br/pt/posts/3/0/3/o_que_comem_os_diferentes_tipos_de_papagaio_23303_5_600.jpg', 0, 0, '2025-02-21', '08:00:00', TRUE),
+(2, 12, '2025-05-25', '15:40:00', 'Guaxinim avistado próximo à borda da mata', 1, 'https://res.cloudinary.com/djbatjpjn/image/upload/v1749916018/imagem_2025-06-14_124630030_y4b3ak.png', 0, 0, '2025-05-22', '10:36:00', TRUE);
 CREATE TABLE tipo_ocorrencia(
 	id INT AUTO_INCREMENT PRIMARY KEY,
     tipo VARCHAR(20) NOT NULL
