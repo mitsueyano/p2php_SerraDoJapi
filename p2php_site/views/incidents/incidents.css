@@ -11,7 +11,7 @@ h3{
     margin-bottom: 50px;
 }
 #div-incident-report{
-    width: 100%;
+    width: 80%;
     padding-right: 20px;
     text-align: end;
 }
@@ -28,6 +28,7 @@ h3{
 }
 
 #box {
+    width: 80%;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
