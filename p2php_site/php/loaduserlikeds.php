@@ -3,17 +3,14 @@ session_start();
 include("connectDB.php");
 mysqli_set_charset($conn, "utf8mb4");
 
-// Configuração de timeout
-set_time_limit(30); // Limite de 30 segundos
+set_time_limit(30);
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
-// Parâmetros
 $targetun = filter_input(INPUT_GET, 'targetun', FILTER_SANITIZE_STRING);
 $userid = $_SESSION['userid'] ?? 0;
 $limit = filter_input(INPUT_GET, 'limit', FILTER_VALIDATE_INT, ['options' => ['default' => 12, 'min_range' => 1]]);
 $lastId = filter_input(INPUT_GET, 'last_id', FILTER_VALIDATE_INT, ['options' => ['default' => 0, 'min_range' => 0]]);
 
-// Verificação rápida se usuário existe
 $stmt_check = $conn->prepare("SELECT id FROM usuarios WHERE nome_usuario = ? LIMIT 1");
 $stmt_check->bind_param("s", $targetun);
 $stmt_check->execute();
@@ -24,7 +21,6 @@ if ($stmt_check->get_result()->num_rows === 0) {
     exit;
 }
 
-// Verificação simplificada se há curtidas
 $stmt_count = $conn->prepare("
     SELECT COUNT(*) as total 
     FROM curtidas_usuarios cu
@@ -43,7 +39,6 @@ if ($stmt_count->get_result()->fetch_assoc()['total'] === 0) {
     exit;
 }
 
-// Paginação otimizada
 try {
     $whereClause = "u_target.nome_usuario = ?";
     $params = [$targetun];
@@ -87,9 +82,9 @@ try {
 ";
 
     $stmt = $conn->prepare($sql);
-    $types = "i" . $types . "i"; // userid + tipos anteriores + limit
+    $types = "i" . $types . "i";
     array_unshift($params, $userid);
-    $params[] = $limit + 1; // Verifica se tem mais registros
+    $params[] = $limit + 1;
     
     $stmt->bind_param($types, ...$params);
     $stmt->execute();

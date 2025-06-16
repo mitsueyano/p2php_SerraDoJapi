@@ -9,14 +9,12 @@ $targetun = isset($_GET['targetun']) ? trim($_GET['targetun']) : '';
 $userid = isset($_SESSION['userid']) ? intval($_SESSION['userid']) : 0;
 $filter = $_GET['filter'] ?? 'recentes';
 
-// Validações iniciais
 if ($targetun === '') {
     header('Content-Type: application/json');
     echo json_encode(['error' => 'Nome de usuário inválido']);
     exit;
 }
 
-// Configurar ordenação
 switch ($filter) {
     case 'populares':
         $orderby = "rb.qtde_likes DESC, rb.id DESC";
@@ -27,7 +25,6 @@ switch ($filter) {
         break;
 }
 
-// Coletar informações do último post para paginação
 $lastDataPublicacao = null;
 $lastQtdeLikes = null;
 if ($lastId > 0) {
@@ -47,12 +44,10 @@ if ($lastId > 0) {
     $lastQtdeLikes = $lastPost['qtde_likes'];
 }
 
-// Construir query dinâmica
 $whereClauses = ["u.nome_usuario = ?"];
 $params = [$targetun];
 $types = "s";
 
-// Adicionar condições de paginação
 if ($lastId > 0) {
     if ($filter === 'recentes') {
         $whereClauses[] = "(rb.data_publicacao < ? OR (rb.data_publicacao = ? AND rb.id < ?))";
@@ -65,7 +60,6 @@ if ($lastId > 0) {
     }
 }
 
-// Montar query final
 $query = "
     SELECT 
         rb.*,
@@ -97,34 +91,30 @@ $query = "
     LIMIT ?
 ";
 
-// Preparar e executar a query
 $stmt = $conn->prepare($query);
-$types = "i" . $types . "i"; // Adicionar tipos para userid e limit
-array_unshift($params, $userid); // Inserir userid no início
-array_push($params, $limit); // Adicionar limit no final
+$types = "i" . $types . "i"; 
+array_unshift($params, $userid); 
+array_push($params, $limit); 
 
 $stmt->bind_param($types, ...$params);
 $stmt->execute();
 $result = $stmt->get_result();
 
-// Processar resultados
 $posts = [];
 while ($row = $result->fetch_assoc()) {
-    // Formatação dos campos...
     $row['nome_popular'] = trim($row['nome_popular'] ?? '') ?: 'Não identificado';
     $row['especie'] = trim($row['especie'] ?? '') ?: 'Não identificado';
     $posts[] = $row;
     
 }
 
-// Determinar se há mais registros
+
 $hasMore = count($posts) === $limit;
 $lastLoadedId = $lastId;
 if (!empty($posts)) {
     $lastLoadedId = end($posts)['id'];
 }
 
-// Retornar resposta
 header('Content-Type: application/json');
 echo json_encode([
     'registros' => $posts,

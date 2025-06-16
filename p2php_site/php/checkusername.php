@@ -1,9 +1,8 @@
 <?php
-// check-username.php
+
 header("Content-Type: application/json");
 include '../php/connectDB.php';
 
-// Verifica se o username foi enviado via GET
 if (!isset($_GET['username'])) {
     http_response_code(400);
     echo json_encode(['success' => false, 'message' => 'Username não fornecido']);
@@ -12,7 +11,6 @@ if (!isset($_GET['username'])) {
 
 $username = trim($_GET['username']);
 
-// Validações básicas
 if (empty($username)) {
     echo json_encode(['available' => false, 'message' => 'Username não pode estar vazio']);
     exit;
@@ -24,7 +22,6 @@ if (strlen($username) < 3) {
 }
 
 try {
-    // Verifica se o username já existe
     $stmt = $conn->prepare("SELECT id FROM usuarios WHERE nome_usuario = ?");
     $stmt->bind_param("s", $username);
     $stmt->execute();
@@ -32,7 +29,6 @@ try {
     
     $available = $stmt->num_rows === 0;
     
-    // Mensagens personalizadas
     $message = $available 
         ? 'Username disponível' 
         : 'Username já está em uso';

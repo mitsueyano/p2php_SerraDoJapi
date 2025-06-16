@@ -52,14 +52,11 @@ $sql = "
     LIMIT ? OFFSET ?
 ";
 
-
-// Preparar e executar
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("iii", $userid, $limit, $offset);
 $stmt->execute();
 $result = $stmt->get_result();
 
-// Processar os resultados
 $posts = [];
 while ($row = $result->fetch_assoc()) {
     $row['liked'] = $row['liked'] == 1;

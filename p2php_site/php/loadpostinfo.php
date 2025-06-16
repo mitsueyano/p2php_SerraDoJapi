@@ -3,7 +3,6 @@ session_start();
 header("Content-Type: application/json");
 require_once("connectDB.php");
 
-// Verificar se o ID do registro foi fornecido
 if (!isset($_GET['id'])) {
     http_response_code(400);
     echo json_encode(['success' => false, 'message' => 'ID do registro não fornecido']);
@@ -17,11 +16,9 @@ if ($registroId <= 0) {
     exit;
 }
 
-// Obter o ID do usuário logado, se existir
 $userId = isset($_SESSION['userid']) ? intval($_SESSION['userid']) : 0;
 
 try {
-    // Consulta para obter os detalhes completos do registro
     $sql = "
         SELECT 
             rb.*,

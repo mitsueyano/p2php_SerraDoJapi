@@ -97,7 +97,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $taxon_id = NULL;
     }
 
-    // Geolocalização
     $stmt = $conn->prepare("SELECT id FROM geolocalizacao WHERE latitude = ? AND longitude = ? AND nome_lugar = ?");
     $stmt->bind_param("dds", $latitude, $longitude, $place_name);
     $stmt->execute();
@@ -114,7 +113,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $stmt->close();
     }
 
-    // Inserção final no banco de dados
     $stmt = $conn->prepare("
         INSERT INTO ocorrencias
         (id_usuario, id_geolocalizacao, data_publicacao, hora_publicacao, img_url_ocorrencia, titulo_ocorrencia, descricao_ocorrencia, sensivel, id_taxonomia, id_tipo_ocorrencia, exibicao) 

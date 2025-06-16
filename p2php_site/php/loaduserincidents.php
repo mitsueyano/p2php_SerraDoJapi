@@ -13,7 +13,6 @@ if ($targetun === '') {
     exit;
 }
 
-// Obter dados do último post carregado (para paginação)
 if ($lastId > 0) {
     $stmtLast = $conn->prepare("
         SELECT data_publicacao 
@@ -34,7 +33,6 @@ if ($lastId > 0) {
     $lastDate = $lastPost['data_publicacao'];
 }
 
-// Construir query com paginação baseada em cursor
 $whereClause = "u.nome_usuario = ? AND n.exibicao = TRUE";
 $params = [$targetun];
 $types = "s";
@@ -64,8 +62,7 @@ $sql = "
     LIMIT ?
 ";
 
-// Adicionar parâmetros adicionais
-array_push($params, $limit + 1); // Busca 1 a mais para saber se tem mais registros
+array_push($params, $limit + 1);
 $types .= "i";
 
 $stmt = $conn->prepare($sql);

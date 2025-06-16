@@ -13,7 +13,7 @@ if ($stmt) {
     $result = mysqli_stmt_get_result($stmt);
 
     if ($row = mysqli_fetch_assoc($result)) {
-        var_dump($row); // ✅ Apenas uma vez
+        var_dump($row);
 
         if (password_verify($password, $row["senha"])) {
             $_SESSION["loggedin"] = true;
