@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+if ($_SESSION['loggedin'] !== true) {
+    header("Location: ../login/login.php");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>

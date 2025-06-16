@@ -277,7 +277,7 @@ i{
 }
 
 .comment-form button {
-    background-color: #495927;
+    background-color: #334027;
     color: white;
     border: none;
     padding: 8px 15px;
@@ -345,7 +345,7 @@ i{
 .reply-btn {
     background: none;
     border: none;
-    color: #7D8C46;
+    color: #334027;
     cursor: pointer;
     font-size: 0.9rem;
     padding: 0;
@@ -371,11 +371,11 @@ i{
 }
 
 .reply-form-container button {
-    background-color: #7D8C46;
+    background-color: #334027;
     color: white;
     border: none;
     padding: 5px 10px;
-    border-radius: 4px;
+    border-radius: 2px;
     cursor: pointer;
     font-size: 0.9rem;
 }

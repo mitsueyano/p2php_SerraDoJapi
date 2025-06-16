@@ -11,7 +11,8 @@ h3{
     margin-bottom: 50px;
 }
 #div-incident-report{
-    width: 80%;
+    width: 100%;
+    padding-right: 20px;
     text-align: end;
 }
 #div-incident-report a{
