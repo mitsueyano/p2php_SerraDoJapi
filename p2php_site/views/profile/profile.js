@@ -349,7 +349,6 @@ function removePost(postId) {
     })
     .then((data) => {
       console.log("Sucesso:", data);
-      alert("Post excluído com sucesso!");
       killModal();
       while (document.getElementById("post" + postId) !== null) {
         document.getElementById("post" + postId).remove();
