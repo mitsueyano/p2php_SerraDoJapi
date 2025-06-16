@@ -272,7 +272,7 @@ i{
     resize: vertical;
 }
 .comment-form textarea:focus {
-    border-color: #7D8C46;
+    border-color: #334027;
     outline: none;
 }
 
@@ -381,7 +381,7 @@ i{
 }
 
 .reply-form-container button:hover {
-    background-color: #6a7a3b;
+    background-color: #36421c;
 }
 
 .replies {
