@@ -8,6 +8,7 @@ window.addEventListener("load", function () {
 
 const checkbox = document.getElementById("identified");
 const items = document.querySelectorAll(".items");
+const checks = document.querySelectorAll(".checks");
 
 checkbox.addEventListener("change", () => {
   if (checkbox.checked) {
@@ -18,13 +19,21 @@ checkbox.addEventListener("change", () => {
       item.style.opacity = "1";
       item.setAttribute("disabled", true);
     });
+    checks.forEach((check) => {
+      check.readonly = true;
+      check.disabled = true;
+    });
   } else {
-      items.forEach((item) => {
+    items.forEach((item) => {
       item.style.color = "#000";
       item.style.backgroundColor = "";
       item.style.border = "1px solid grey";
       item.style.opacity = "";
       item.removeAttribute("disabled");
+    });
+    checks.forEach((check) => {
+      check.readonly = false;
+      check.disabled = false;
     });
   }
 });
@@ -32,11 +41,27 @@ checkbox.addEventListener("change", () => {
 const invaderCheckbox = document.getElementById("invader");
 const categoryInputs = document.querySelectorAll("input[name='category']");
 
+let lastSelectedCategory = null;
+
 invaderCheckbox.addEventListener("change", () => {
-  categoryInputs.forEach((input) => {
-    input.disabled = invaderCheckbox.checked;
-    input.checked = invaderCheckbox.checked ? false : input.checked;
-  });
+  const disabled = invaderCheckbox.checked;
+
+  if (disabled) {
+    categoryInputs.forEach((input) => {
+      if (input.checked) lastSelectedCategory = input.value;
+      input.checked = false;
+      input.disabled = true;
+    });
+  } else {
+    categoryInputs.forEach((input, index) => {
+      input.disabled = false;
+      if (lastSelectedCategory && input.value === lastSelectedCategory) {
+        input.checked = true;
+      } else if (!lastSelectedCategory && index === 0) {
+        input.checked = true;
+      }
+    });
+  }
 });
 
 const upload = () => {

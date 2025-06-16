@@ -52,8 +52,11 @@ session_start();
                 </div>
             </div>
         </div>
-
         <div id="div-feed">
+            <div id="share">
+                <a href="../share/share.php" class="btn-share"><i class="fa-solid fa-camera"></i> Compartilhe sua Observação</a>
+                <a href="../discussions/discussions.php" class="btn-share"><i class="fa-solid fa-comments"></i> Discussões</a>
+            </div>
             <div id="navbar-feed">
                 <span id="text">Registros da comunidade</span>
                 <div id="filter">
@@ -63,9 +66,6 @@ session_start();
                 </div>
             </div>
 
-            <div id="share">
-                <a href="../share/share.php" id="btn-share">Compartilhe sua Observação</a>
-            </div>
 
             <div id="feed"></div>
 
@@ -73,11 +73,7 @@ session_start();
                 <button id="btn-see-more">Ver mais</button>
             </div>
         </div>
-
-        <div id="modal" class="modal" onclick="closeModal()">
-            <span class="close" onclick="closeModal()"><i class="fa-solid fa-x"></i></span>
-            <img class="modal-content" id="imgModal" draggable="false">
-        </div>
+        <button id="backToTop" title="Voltar ao topo"><i class="fa-solid fa-arrow-up"></i></button>
     </div>
     <script src="explore.js"></script>
 </body>

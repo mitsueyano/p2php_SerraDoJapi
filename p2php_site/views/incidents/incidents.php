@@ -41,6 +41,7 @@ session_start();
         <div id="box">
         </div>
         <button id="btn-see-more">Ver mais</button>
+        <button id="backToTop" title="Voltar ao topo"><i class="fa-solid fa-arrow-up"></i></button>
     </div>
     <script src="https://kit.fontawesome.com/c68ccb89e7.js" crossorigin="anonymous"></script>
     <script src="incidents.js"></script>

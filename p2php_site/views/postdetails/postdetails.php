@@ -19,9 +19,9 @@
         </div>
         <div id="content-post">
             <div id="post-container">
-                <!-- Será preenchido pelo JavaScript -->
             </div>
         </div>
+        <button id="backToTop" title="Voltar ao topo"><i class="fa-solid fa-arrow-up"></i></button>
     </div>
     <script src="postdetails.js"></script>
 </body>

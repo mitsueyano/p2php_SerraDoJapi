@@ -1,5 +1,5 @@
 <?php
-    session_start();
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,27 +21,35 @@
     <div id="navbar">
         <a href="../index/index.php" class="selected">INÍCIO</a>
         <a href="../explore/explore.php">EXPLORAR</a>
-        <?php 
-            if(isset($_SESSION['loggedin'])) {
-                echo '<a href="../profile/profile.php?username=' . $_SESSION['username'] . '" id="profile-link">PERFIL</a>';
-            } else {
-                echo '<a href="../login/login.php" id="login-link">ENTRE</a>';
-            }
+        <?php
+        if (isset($_SESSION['loggedin'])) {
+            echo '<a href="../profile/profile.php?username=' . $_SESSION['username'] . '" id="profile-link">PERFIL</a>';
+        } else {
+            echo '<a href="../login/login.php" id="login-link">ENTRE</a>';
+        }
         ?>
     </div>
     <div id="content">
         <div id="description">
             <div id="text">
                 <p id="motto">Descubra, Registre, Proteja.</p>
-                <p>Bem-vindo à nossa plataforma colaborativa de catalogação da biodiversidade! Aqui, você pode registrar
-                    e gerenciar dados sobre a fauna e flora local, ajudando a construir um banco de dados rico e
-                    dinâmico, acessível a todos.</p>
-                <p>Nossa plataforma permite que especialistas e cidadãos contribuam juntos para a preservação da
-                    natureza. Registre suas observações com informações detalhadas, como nome científico e localização,
-                    e contribua para o crescimento de um conhecimento compartilhado.</p>
-                <p>Com uma estrutura sólida de usuários, registros biológicos e validação pela comunidade, nossa
-                    ferramenta oferece uma maneira eficiente de catalogar, atualizar e corrigir dados em tempo real.
-                    Vamos trabalhar juntos pela conservação e pelo futuro da biodiversidade!</p>
+                <p>Seja muito bem-vindo à nossa plataforma colaborativa de catalogação da biodiversidade, um espaço
+                    pensado para unir conhecimento, ciência cidadã e preservação ambiental. Aqui, qualquer pessoa
+                    interessada pode registrar e gerenciar
+                    informações valiosas sobre a fauna e flora local, contribuindo diretamente para a construção de um
+                    banco de dados abrangente, rico em detalhes e sempre em constante atualização.
+                    Nosso compromisso é promover a participação ativa da comunidade, incentivando o compartilhamento de
+                    observações com dados precisos, como nomes científicos, localização geográfica e características das
+                    espécies observadas. Dessa forma, fortalecemos o conhecimento coletivo e ampliamos a compreensão
+                    sobre a biodiversidade que nos cerca.
+                <p>Oferecemos um ambiente onde é possível debater, trocar experiências e discutir
+                    tópicos relevantes relacionados à conservação, ecossistemas e sustentabilidade. Por meio de nosso
+                    fórum, usuários promovem
+                    a colaboração e o engajamento,
+                    tornando a plataforma um verdadeiro ponto de encontro para apaixonados pela natureza.
+                    Venha fazer parte desse movimento fundamental para
+                    a proteção da biodiversidade e o futuro do nosso planeta. Juntos, podemos transformar informações em
+                    ações concretas pela conservação ambiental.
             </div>
             <div id="data">
                 <div class="section">
@@ -58,7 +66,8 @@
         <div id="div-generaltext">
             <div id="imggeneraltext">
                 <div id="generaltext">
-                    <p>Ajude a documentar a vida ao seu redor. Registre aves, plantas e outros organismos que encontrar na natureza. Cada observação conta para a conservação do nosso planeta.</p>
+                    <p>Ajude a documentar a vida ao seu redor. Registre aves, plantas e outros organismos que encontrar
+                        na natureza. Cada observação conta para a conservação do nosso planeta.</p>
                     <a href="../share/share.php" id="btn-share">Compartilhe sua observação</a>
                 </div>
             </div>
@@ -67,6 +76,7 @@
             <p>Destaques da comunidade</p>
             <div id="highlights-bar"></div>
         </div>
+        <button id="backToTop" title="Voltar ao topo"><i class="fa-solid fa-arrow-up"></i></button>
     </div>
 </body>
 

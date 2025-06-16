@@ -89,12 +89,12 @@ CREATE TABLE registros_biologicos (
 INSERT INTO registros_biologicos (
     id_usuario, id_taxonomia, data_observacao, hora_observacao, descricao, id_geolocalizacao, url_imagem, qtde_likes, qtde_coment, data_publicacao, hora_publicacao, identificacao
 ) VALUES
-(1, 1, '2025-05-20', '10:00:00', 'Papagaio-verdadeiro avistado na copa da árvore', 1, 'https://res.cloudinary.com/djbatjpjn/image/upload/v1746915864/hdhsdtqgv7ea5cbhtl4z.png', 0, 0, '2025-05-21', '08:00:00', TRUE),
-(2, 2, '2025-05-18', '14:30:00', 'Onça-pintada vista próxima ao rio', 1, 'https://res.cloudinary.com/djbatjpjn/image/upload/v1746915960/ytbx8r46k4r9fv3qnirn.png', 0, 0, '2025-05-19', '09:00:00', TRUE),
-(1, 3, '2025-05-22', '19:45:00', 'Perereca de banheiro encontrada próxima ao banheiro do parque', 1, 'https://res.cloudinary.com/djbatjpjn/image/upload/v1746916025/tviwtun4vxqcivfeiysy.png', 0, 0, '2025-05-23', '07:30:00', TRUE),
-(1, 4, '2025-05-19', '11:15:00', 'Tamanduá-bandeira cruzando a trilha', 1, 'https://res.cloudinary.com/djbatjpjn/image/upload/v1747399815/imagem_2025-05-16_094936847_lfogo5.png', 0, 0 , '2025-05-20', '10:00:00', TRUE),
-(1, 5, '2025-05-19', '17:45:00', 'Caranguejeira caminhando na trilha', 1, 'https://www.portal.zoo.bio.br/IMG/jpg/20210828_111014.jpg', 0, 0, '2025-05-22', '08:30:00', TRUE),
-(3, 6, '2025-05-18', '09:20:00', 'Tucunaré pescado em rio próximo', 1, 'https://pescariasa.com.br/wp-content/uploads/2024/01/especies-de-tucunare-presentes-no-brasil-700x467.jpg', 0, 0, '2025-05-22', '09:00:00', TRUE),
+(1, 1, '2025-05-20', '10:00:00', 'Papagaio-verdadeiro avistado na copa da árvore', 1, 'https://res.cloudinary.com/djbatjpjn/image/upload/v1746915864/hdhsdtqgv7ea5cbhtl4z.png', 1, 0, '2025-05-21', '08:00:00', TRUE),
+(2, 2, '2025-05-18', '14:30:00', 'Onça-pintada vista próxima ao rio', 1, 'https://res.cloudinary.com/djbatjpjn/image/upload/v1746915960/ytbx8r46k4r9fv3qnirn.png', 3, 0, '2025-05-19', '09:00:00', TRUE),
+(1, 3, '2025-05-22', '19:45:00', 'Perereca de banheiro encontrada próxima ao banheiro do parque', 1, 'https://res.cloudinary.com/djbatjpjn/image/upload/v1746916025/tviwtun4vxqcivfeiysy.png', 2, 0, '2025-05-23', '07:30:00', TRUE),
+(1, 4, '2025-05-19', '11:15:00', 'Tamanduá-bandeira cruzando a trilha', 1, 'https://res.cloudinary.com/djbatjpjn/image/upload/v1747399815/imagem_2025-05-16_094936847_lfogo5.png', 1, 0 , '2025-05-20', '10:00:00', TRUE),
+(1, 5, '2025-05-19', '17:45:00', 'Caranguejeira caminhando na trilha', 1, 'https://www.portal.zoo.bio.br/IMG/jpg/20210828_111014.jpg', 1, 0, '2025-05-22', '08:30:00', TRUE),
+(3, 6, '2025-05-18', '09:20:00', 'Tucunaré pescado em rio próximo', 1, 'https://pescariasa.com.br/wp-content/uploads/2024/01/especies-de-tucunare-presentes-no-brasil-700x467.jpg', 2, 0, '2025-05-22', '09:00:00', TRUE),
 (1, 7, '2025-05-17', '13:00:00', 'Ipê-amarelo florido na praça central', 1, 'https://live.staticflickr.com/4372/35964128804_fd13434b90_b.jpg', 0, 0, '2025-05-22', '09:30:00', TRUE),
 (1, 8, '2025-05-20', '08:45:00', 'Formiga-cortadeira carregando folhas', 1, 'https://agropos.com.br/wp-content/uploads/2020/09/Imagem-2024-02-15T102829.573.png', 0, 0, '2025-05-22', '10:30:00', TRUE),
 (3, 9, '2025-05-16', '22:10:00', 'Jararaca avistada à beira da trilha', 1, 'https://www.portal.zoo.bio.br/local/cache-gd2/b2/423ed49e85515eff13d4dd7ce64590.jpg?1640271823', 0, 0, '2025-05-22', '11:00:00', TRUE),
@@ -147,6 +147,17 @@ CREATE TABLE curtidas_usuarios (
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id),
     FOREIGN KEY (id_registro) REFERENCES registros_biologicos(id) ON DELETE CASCADE
 );
+INSERT INTO curtidas_usuarios (id_usuario, id_registro) VALUES
+(1, 2),
+(1, 4),
+(1, 6),
+(2, 1),
+(2, 2),
+(2, 3),
+(2, 6),
+(3, 2),
+(3, 3),
+(3, 5);
 
 CREATE TABLE comentarios (
     id INT AUTO_INCREMENT PRIMARY KEY,

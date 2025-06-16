@@ -1,7 +1,5 @@
-// Estado global para gerenciar os posts e likes
 const postsState = {};
 
-// Configurações de paginação
 const limits = {
   registros: 9,
   ocorrencias: 6,
@@ -14,7 +12,6 @@ let last_ids = {
   curtidos: 0,
 };
 
-// Elementos da UI
 const tabs = document.querySelectorAll(".tab");
 const contents = document.querySelectorAll(".tab-content");
 const username =
@@ -22,9 +19,7 @@ const username =
     ? userData.username
     : new URLSearchParams(document.location.search).get("username");
 
-// Inicialização
 document.addEventListener("DOMContentLoaded", () => {
-  // Eventos das abas
   tabs.forEach((tab) => {
     tab.addEventListener("click", () => {
       tabs.forEach((t) => t.classList.remove("active"));
@@ -37,17 +32,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Carrega a aba inicial
   carregarAba("registros");
 
-  // Evento delegado para likes
   document.addEventListener("click", (e) => {
     if (e.target.classList.contains("like")) {
       handleLikeClick(e.target.dataset.postid);
     }
   });
 
-  // Evento dos botões "Ver mais"
   document.querySelectorAll("#btn-see-more").forEach((btn) => {
     btn.addEventListener("click", function () {
       carregarMais(this.closest(".tab-content").id);
@@ -55,14 +47,12 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// Funções principais
 function carregarAba(aba) {
   last_ids[aba] = 0;
   const container = document.querySelector(`#${aba} .posts-list`);
   container.innerHTML = "";
   document.querySelector(`#${aba} #div-see-more`).style.display = "flex";
 
-  // Remove "nada encontrado" anterior, se houver
   const noResults = container.querySelector(".no-results");
   if (noResults) noResults.remove();
 
@@ -91,7 +81,6 @@ function carregarMais(aba) {
       } else {
         document.querySelector(`#${aba} #div-see-more`).style.display = "none";
 
-        // Adiciona a mensagem "Nada encontrado"
         if (!container.querySelector(".no-results")) {
           const msg = document.createElement("div");
           msg.style.color = "#777";
@@ -108,7 +97,6 @@ function renderAba(aba, posts) {
   const container = document.querySelector(`#${aba} .posts-list`);
 
   posts.forEach((post) => {
-    // Atualiza o estado global do post
     if (!postsState[post.id]) {
       postsState[post.id] = {
         liked: post.liked,
@@ -123,7 +111,6 @@ function renderAba(aba, posts) {
         : createPostElement(post, post.id);
     container.appendChild(element);
 
-    // Armazena referência ao elemento criado
     postsState[post.id].elements.push({
       element: element,
       tab: aba,
@@ -262,11 +249,9 @@ function handleLikeClick(postid) {
   const state = postsState[postid];
   if (!state) return;
 
-  // Atualização otimista da UI
   const newLikeState = !state.liked;
   const newCount = newLikeState ? state.qtde_likes + 1 : state.qtde_likes - 1;
 
-  // Atualiza todos os elementos do post em todas as abas
   state.elements.forEach((item) => {
     const likeIcon = item.element.querySelector(`[data-postid="${postid}"]`);
     const countElement = item.element.querySelector(
@@ -277,14 +262,12 @@ function handleLikeClick(postid) {
     if (countElement) countElement.textContent = newCount;
   });
 
-  // Atualiza estado global
   postsState[postid] = {
     ...state,
     liked: newLikeState,
     qtde_likes: newCount,
   };
 
-  // Envia para o servidor
   fetch("../../php/likeupdate.php", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -299,13 +282,11 @@ function handleLikeClick(postid) {
     })
     .then((data) => {
       if (!data || !data.success) {
-        // Reverte se houver erro
         updatePostState(postid, state.liked, state.qtde_likes);
       }
     })
     .catch((error) => {
       console.error("Erro no fetch:", error);
-      // Reverte em caso de erro de rede
       updatePostState(postid, state.liked, state.qtde_likes);
     });
 }
@@ -314,7 +295,6 @@ function updatePostState(postid, liked, count) {
   const state = postsState[postid];
   if (!state) return;
 
-  // Atualiza todos os elementos do post
   state.elements.forEach((item) => {
     const likeIcon = item.element.querySelector(`[data-postid="${postid}"]`);
     const countElement = item.element.querySelector(
@@ -325,7 +305,6 @@ function updatePostState(postid, liked, count) {
     if (countElement) countElement.textContent = count;
   });
 
-  // Atualiza estado global
   postsState[postid] = {
     ...state,
     liked: liked,
@@ -371,24 +350,19 @@ function removePost(postId) {
     .then((data) => {
       console.log("Sucesso:", data);
       alert("Post excluído com sucesso!");
-      // Aqui você pode remover o post da interface ou recarregar a lista
       killModal();
       while (document.getElementById("post" + postId) !== null) {
         document.getElementById("post" + postId).remove();
       }
     })
     .catch((error) => {
-      // Tratamento de erros
       console.error("Erro ao excluir post:", error);
 
       if (error.error) {
-        // Erro vindo do backend (já parseado)
         alert(`Erro: ${error.error}`);
       } else if (error.message) {
-        // Erro de rede ou outro erro do fetch
         alert(`Falha na requisição: ${error.message}`);
       } else {
-        // Erro genérico
         alert("Ocorreu um erro ao excluir o post");
       }
       document.getElementById("modal-btn-yes-text").classList.add("hidden");
@@ -432,3 +406,19 @@ function killModal() {
   document.body.classList.remove("scroll-lock");
   document.querySelector(".modal-container").remove();
 }
+const backToTopButton = document.getElementById("backToTop");
+
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 300) {
+    backToTopButton.style.display = "block";
+  } else {
+    backToTopButton.style.display = "none";
+  }
+});
+
+backToTopButton.addEventListener("click", () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+});

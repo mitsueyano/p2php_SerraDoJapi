@@ -142,3 +142,24 @@ html, body {
 *::-webkit-scrollbar-thumb:hover {
     background-color: #49592780;
 }
+#backToTop {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #334027;
+    color: white;
+    border: none;
+    outline: none;
+    padding: 12px 16px;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    display: none;
+    transition: opacity 0.3s ease;
+}
+
+#backToTop:hover {
+    background-color: #1e2516;
+}

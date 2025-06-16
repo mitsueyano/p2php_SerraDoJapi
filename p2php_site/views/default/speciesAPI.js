@@ -1,4 +1,3 @@
-// ELEMENTOS
 const inputCommonName = document.getElementById("common-name");
 const inputScientificName = document.getElementById("scientific-name");
 const inputClass = document.getElementById("class");
@@ -21,7 +20,6 @@ document.addEventListener("click", (e) => {
         dropdownList.classList.remove("active");
     }
 });
-
 
 async function searchTaxonomy() {
     const userEntry = inputCommonName.value.trim();
@@ -98,7 +96,6 @@ function clearFields() {
     inputFamily.value = "";
     inputOrder.value = "";
 }
-
 
 async function selectTaxon(taxon) {
     dropdownList.innerHTML = "";

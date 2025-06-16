@@ -57,11 +57,11 @@ if (isset($_SESSION["loggedin"]) != "loggedin") {
                     </div>
                     <div id="flexradio">
                         <div>
-                            <input class="items" type="radio" name="category" id="fauna" value="Fauna" required>
+                            <input class="checks" type="radio" name="category" id="fauna" value="Fauna" required>
                             <label for="fauna">Fauna</label>
                         </div>
                         <div>
-                            <input class="items" type="radio" name="category" id="flora" value="Flora">
+                            <input class="checks" type="radio" name="category" id="flora" value="Flora">
                             <label for="flora">Flora</label>
                         </div>
                     </div>
@@ -127,6 +127,4 @@ if (isset($_SESSION["loggedin"]) != "loggedin") {
 <script src="share.js"></script>
 <script src="../default/map.js"></script>
 <script src="../default/speciesAPI.js"></script>
-
-
 </html>

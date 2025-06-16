@@ -1,4 +1,3 @@
-//Formatar CPF enquanto digita
 document.querySelector('input[name="cpf"]').addEventListener('input', function (e) {
     let value = e.target.value.replace(/\D/g, ""); // remove tudo que não é número
 

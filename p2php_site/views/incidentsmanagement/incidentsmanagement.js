@@ -45,7 +45,6 @@ function approveIncident(incidentId) {
         id_ocorrencia: incidentId
     };
 
-    // Configurações do fetch
     const options = {
         method: 'POST',
         headers: {
@@ -54,21 +53,15 @@ function approveIncident(incidentId) {
         body: JSON.stringify(body)
     };
 
-    // Fazendo a requisição
     fetch("../../php/approveIncident.php", options)
         .then(response => {
-            // Verifica se a resposta foi bem sucedida (status 2xx)
             if (!response.ok) {
-                // Se a resposta não estiver OK, rejeita a promessa com o status
                 return response.json().then(err => Promise.reject(err));
             }
             return response.json();
         })
         .then(data => {
-            // Tratamento da resposta bem sucedida
             console.log('Sucesso:', data);
-            
-            // Atualiza a UI conforme necessário
             if (data.success) {
                 document.querySelector(`#card${incidentId}`).remove();
             } else {
@@ -77,17 +70,13 @@ function approveIncident(incidentId) {
             killModal()
         })
         .catch(error => {
-            // Tratamento de erros de rede ou da API
             console.error('Erro:', error);
             
             if (error.mensagem) {
-                // Erro retornado pela API
                 alert(`Falha ao aprovar: ${error.mensagem}`);
             } else if (error instanceof TypeError) {
-                // Erro de rede (falha na conexão)
                 alert('Falha na conexão. Verifique sua internet e tente novamente.');
             } else {
-                // Outros erros
                 alert('Ocorreu um erro inesperado. Tente novamente mais tarde.');
             }
             killModal()
@@ -165,6 +154,23 @@ function loadIncidents() {
 
 
 }
+const backToTopButton = document.getElementById("backToTop");
+
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 300) {
+    backToTopButton.style.display = "block";
+  } else {
+    backToTopButton.style.display = "none";
+  }
+});
+
+backToTopButton.addEventListener("click", () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+});
+
 
 window.addEventListener('load', () => {
     loadIncidents();

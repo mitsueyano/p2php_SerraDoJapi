@@ -1,7 +1,5 @@
-// Inicializa o mapa em Jundiaí
 const map = L.map('map').setView([-23.1857, -46.8978], 13);
 
-// Adiciona o tile layer do OpenStreetMap
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap contributors'
 }).addTo(map);

@@ -3,10 +3,8 @@ session_start();
 include('../../php/connectDB.php');
 $letters = range('A', 'Z');
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -15,7 +13,6 @@ $letters = range('A', 'Z');
     <link rel="stylesheet" href="species.css" />
     <script src="https://kit.fontawesome.com/c68ccb89e7.js" crossorigin="anonymous"></script>
 </head>
-
 <body>
     <div id="header">
         <h1 onclick="window.location.href='../explore/explore.php'">ecoframe</h1>
@@ -58,7 +55,6 @@ $letters = range('A', 'Z');
                     <p>Nenhuma espécie encontrada.</p>
                 </div>
                 <div id="species-items">
-                    <!-- Aqui o JS vai colocar as espécies carregadas -->
                 </div>
             </div>
             <div id="div-info-specie">

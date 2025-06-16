@@ -9,13 +9,12 @@ function loadSpecies(category) {
   const divInfo = document.getElementById('div-info-specie');
 
   if (category === 'naoidentificado') {
-    infoSpecie('Não identificado', true);  // passa true para esconder link e mudar título
-    speciesItems.innerHTML = ''; // limpa só os itens das espécies
-    navbarLetters.classList.add('hidden');  // esconde filtro letras
-    noSpecies.classList.remove('hidden');   // mostra "sem espécies"
-    divInfo.innerHTML = '<p>Clique em um tipo para ver mais informações.</p>';
+    infoSpecie('Não identificado', true);
+    speciesItems.innerHTML = '';
+    navbarLetters.classList.add('hidden');
+    noSpecies.classList.remove('hidden');
+    divInfo.innerHTML = '<p>Clique em uma espécie para ver mais informações.</p>';
 
-    // Esconder lista e expandir div de info
     speciesList.classList.add('hidden');
     divInfo.classList.add('full-width-info');
 
@@ -23,9 +22,8 @@ function loadSpecies(category) {
   } else {
     navbarLetters.classList.remove('hidden');
     noSpecies.classList.add('hidden');
-    divInfo.innerHTML = '<p>Clique em um tipo para ver mais informações.</p>';
+    divInfo.innerHTML = '<p>Clique em uma espécie para ver mais informações.</p>';
 
-    // Restaurar exibição padrão
     speciesList.classList.remove('hidden');
     divInfo.classList.remove('full-width-info');
   }
@@ -33,7 +31,7 @@ function loadSpecies(category) {
   fetch(`../../php/loadspecies.php?category=${encodeURIComponent(category)}`)
     .then(res => res.json())
     .then(species => {
-      speciesItems.innerHTML = '';  // limpa só os itens das espécies
+      speciesItems.innerHTML = '';
       scroll();
 
       if (species.length === 0) {
@@ -78,10 +76,7 @@ function loadSpecies(category) {
           div.appendChild(spanClass);
           div.className = 'specie-item';
           div.onclick = () => {
-            // passa hideLink true se a categoria atual for "naoidentificado"
             infoSpecie(a.especie, currentCategory === 'naoidentificado');
-
-            // Mostrar link só se não for naoidentificado
             const inatLink = document.getElementById('linkinaturalist');
             if (inatLink) inatLink.style.display = (currentCategory === 'naoidentificado') ? 'none' : '';
           }
@@ -141,7 +136,7 @@ function infoSpecie(name, hideLink = false) {
         }
 
         if (data.length === 0) {
-          divInfo.innerHTML = '<p>Informações não encontradas para este tipo.</p>';
+          divInfo.innerHTML = '<p>Informações não encontradas para esta espécie.</p>';
           return;
         }
 
@@ -205,8 +200,6 @@ function infoSpecie(name, hideLink = false) {
     });
 }
 
-
-
 function formatDate(dataISO) {
   if (!dataISO) return 'Sem data';
   const [year, month, day] = dataISO.split('-');
@@ -216,23 +209,19 @@ function formatDate(dataISO) {
 
 window.addEventListener('load', () => {
 
-  // recupera a category da URL
   const params = new URLSearchParams(window.location.search);
   const categoryFromUrl = params.get('category') || 'todos';
 
-  // ativa o botão certo
   const btnsFilter = document.querySelectorAll('button');
   btnsFilter.forEach(button => {
     button.classList.toggle('active', button.value === categoryFromUrl);
   });
 
-  // carrega as espécies com a category da URL
   loadSpecies(categoryFromUrl);
 
   const lastSpecieSearched = params.get("lastSpecieSearched");
   if (lastSpecieSearched) {
     setTimeout(() => {
-      // passa hideLink = true se a categoria for naoidentificado
       infoSpecie(lastSpecieSearched, categoryFromUrl === 'naoidentificado');
     }, 300);
   } else {
@@ -245,8 +234,6 @@ window.addEventListener('load', () => {
         behavior: "smooth"
     });
 });
-
-
 
 
 const input = document.getElementById('search-bar');

@@ -1,4 +1,3 @@
-// Função para formatar a data
 function formatDateTime(dateStr, timeStr) {
   const date = new Date(dateStr.split("/").reverse().join("-") + "T" + timeStr);
   const options = {
@@ -11,7 +10,6 @@ function formatDateTime(dateStr, timeStr) {
   return date.toLocaleString("pt-BR", options);
 }
 
-// Função para carregar os dados do post
 function loadPostData() {
   const postId = new URLSearchParams(window.location.search).get("id");
   if (!postId) {
@@ -45,11 +43,9 @@ function loadPostData() {
     });
 }
 
-// Função para renderizar o post
 function renderPost(postData) {
   const postContainer = document.getElementById("post-container");
 
-  // Construir HTML do post
   let html = `
         <div class="post-detail">
             <div class="post-header" onclick="window.location.href = '../profile/profile.php?username=${
@@ -308,9 +304,8 @@ function back() {
   const category = params.get("category") || "";
 
   if (!specie) {
-    // Se specie não está definida, volta na navegação do histórico
     history.back();
-    return; // para garantir que o resto não execute
+    return;
   }
 
   let url = "../species/species.php?";
@@ -393,12 +388,9 @@ function postComment(postId) {
     })
     .then((data) => {
       if (data && data.success) {
-        // Criar o novo comentário diretamente no DOM
         const commentsContainer = document.getElementById("comments-container");
         const newComment = document.createElement("div");
         newComment.className = "comment";
-
-        // Formatar a data atual
         const currentDate = new Date()
           .toLocaleString("pt-BR", {
             day: "2-digit",
@@ -450,13 +442,10 @@ function postComment(postId) {
     </div>
 `;
 
-        // Adicionar o novo comentário no topo da lista
         commentsContainer.prepend(newComment);
 
-        // Limpar o campo de comentário
         commentInput.value = "";
 
-        // Atualizar contador de comentários
         const commentsCount = document.querySelector(".comments-count span");
         if (commentsCount) {
           const currentCount = parseInt(commentsCount.textContent) || 0;
@@ -499,13 +488,10 @@ function postReply(commentId, postId) {
     }),
   })
     .then((response) => {
-      // Primeiro verifica o status da resposta
       if (response.status === 401) {
         window.location.href = "../login/login.php?error=Comment";
         return;
       }
-
-      // Depois verifica se é JSON válido
       return response.json().then((data) => {
         if (!response.ok) {
           throw new Error(data.message || `Erro ${response.status}`);
@@ -518,16 +504,13 @@ function postReply(commentId, postId) {
         throw new Error(data?.message || "Resposta inválida do servidor");
       }
 
-      // Encontrar o comentário pai
       const parentComment = document
         .querySelector(`#reply-form-${commentId}`)
         .closest(".comment");
 
-      // Criar elemento da resposta
       const replyElement = document.createElement("div");
       replyElement.className = "comment reply";
 
-      // Formatar a data atual
       const currentDate = new Date()
         .toLocaleString("pt-BR", {
           day: "2-digit",
@@ -561,7 +544,6 @@ function postReply(commentId, postId) {
             </div>
         `;
 
-      // Adicionar a resposta
       let repliesContainer = parentComment.querySelector(".replies");
       if (!repliesContainer) {
         repliesContainer = document.createElement("div");
@@ -571,27 +553,22 @@ function postReply(commentId, postId) {
       }
       repliesContainer.prepend(replyElement);
 
-      // Limpar e esconder o formulário
       replyInput.value = "";
       document.getElementById(`reply-form-${commentId}`).style.display = "none";
 
-      // Atualizar contador de comentários
       updateCommentCount(1);
     })
     .catch((error) => {
       console.error("Erro ao postar resposta:", error);
 
-      // Se for uma mensagem de sucesso que veio como erro, trata diferente
       if (error.message.includes('{"success":true')) {
         try {
           const data = JSON.parse(error.message);
           if (data.success) {
-            // Se realmente foi um sucesso, apenas logamos
             console.log("Resposta postada com sucesso:", data);
             return;
           }
         } catch (e) {
-          // Não é JSON válido, mostra o erro original
           alert("Erro ao postar resposta: " + error.message);
         }
       } else {
@@ -600,7 +577,6 @@ function postReply(commentId, postId) {
     });
 }
 
-// Função auxiliar para atualizar o contador
 function updateCommentCount(increment = 1) {
   const commentsCount = document.querySelector(".comments-count span");
   if (commentsCount) {
@@ -608,6 +584,24 @@ function updateCommentCount(increment = 1) {
     commentsCount.textContent = currentCount + increment + " comentários";
   }
 }
+
+const backToTopButton = document.getElementById("backToTop");
+
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 300) {
+    backToTopButton.style.display = "block";
+  } else {
+    backToTopButton.style.display = "none";
+  }
+});
+
+backToTopButton.addEventListener("click", () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+});
+
 
 window.addEventListener("load", () => {
   loadPostData();

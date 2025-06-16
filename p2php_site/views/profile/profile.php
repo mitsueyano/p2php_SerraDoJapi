@@ -9,7 +9,6 @@ if ($_SESSION['loggedin'] !== true) {
 
 $username = $_GET['username'] ?? $_SESSION['username'];
 $own = ($username == $_SESSION['username']);
-// Busca os dados do usuário
 $query = "SELECT 
     u.*,
     (SELECT COUNT(*) FROM registros_biologicos rb WHERE rb.id_usuario = u.id) AS total_registros,
@@ -27,7 +26,6 @@ if (!$result || !$user_data = $result->fetch_assoc()) {
     die("Usuário não encontrado");
 }
 
-// Formata os dados
 $usuario = [
     "id" => $user_data["id"],
     "nome" => $user_data["nome"],
@@ -113,11 +111,12 @@ $estatisticas = [
                 </div>
             </div>
         </div>
+        <button id="backToTop" title="Voltar ao topo"><i class="fa-solid fa-arrow-up"></i></button>
     </div>
 </body>
     <script src="https://kit.fontawesome.com/c68ccb89e7.js" crossorigin="anonymous"></script>
     <script>
-    window.userData = { // Adicionando ao objeto window para garantir escopo global
+    window.userData = {
         username: "<?= $usuario['nome_usuario'] ?>",
         own: <?= $own ? 'true' : 'false' ?>,
         isSpecialist: <?= $usuario['especialista'] ? 'true' : 'false' ?>,

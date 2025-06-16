@@ -2,7 +2,7 @@ const box = document.getElementById('box');
 const btnVerMais = document.getElementById('btn-see-more');
 
 let incidentsLoaded = 0;
-const incidentsPerPage = 4;
+const incidentsPerPage = 8;
 let allIncidents = [];
 
 fetch('../../php/loadincidents.php')
@@ -102,3 +102,20 @@ window.addEventListener('load', () => {
 
 const checkbox = document.getElementById('identified');
 const items = document.querySelectorAll('.items');
+
+const backToTopButton = document.getElementById("backToTop");
+
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 300) {
+    backToTopButton.style.display = "block";
+  } else {
+    backToTopButton.style.display = "none";
+  }
+});
+
+backToTopButton.addEventListener("click", () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+});

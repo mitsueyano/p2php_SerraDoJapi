@@ -30,13 +30,13 @@ form{
 }
 
 form input{
-    border: 1px solid #7D8C46;
+    border: 1px solid #334027 !important;
     height: 3vh;
     max-width: 100%;
     width: 100%;
 }
 form input:focus{
-    outline: 1px solid #7D8C46;
+    outline: 1px solid #2e3819 !important;
 }
 .flex{
     width: 80%;
@@ -65,17 +65,17 @@ form input:focus{
 #signup{
     width: 50%;
     height: 5vh;
-    background-color: #7D8C46;
+    background-color: #2e3819;
     color: #fff;
     border: none;
-    box-shadow: 1px 1px 5px #7D8C46;
+    box-shadow: 1px 1px 5px #2e3819;
 }
 #signup:hover{
     cursor: pointer;
     transform: scale(1.05);
 }
 #login{
-    font-size: 10pt;
+    font-size: 1rem;
     color: #334027;
 }
 

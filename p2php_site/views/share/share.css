@@ -16,7 +16,6 @@
     margin-bottom: 10px;
 }
 
-/* Formulário */
 form{
     display: flex;
     width: 100%;
@@ -112,17 +111,17 @@ form > div{
     transform: scale(1.05);
 }
 form input{
-    border: 1px solid #7D8C46;
+    border: 1px solid #334027;
     height: 3vh;
 }
 form input:focus{
-    outline: 1px solid #7D8C46;
+    outline: 1px solid #334027;
 }
 form textarea:focus{
-    outline: 1px solid #7D8C46;
+    outline: 1px solid #334027;
 }
 form textarea:hover{
-    border: 1px solid #7D8C46;
+    border: 1px solid #334027;
 }
 #incidentTitle{
     margin: 5px;
@@ -152,6 +151,7 @@ form textarea:hover{
     outline: none !important;
     scale: 1.5;
     margin: 10px !important;
+    cursor: pointer !important;
 }
 #flexradio{
     width: 100%;

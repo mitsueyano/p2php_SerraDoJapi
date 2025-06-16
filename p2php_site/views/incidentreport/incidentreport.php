@@ -114,7 +114,6 @@ if (isset($_SESSION["loggedin"]) != "loggedin") {
                             <label for="time">Hora:</label><input type="time" name="time" id="time" required>
                         </div>
                     </div>
-
                     <div class="flextitle"><label for="incident_title">Título:</label><input type="text"
                             name="incident_title" id="incidentTitle" required></div>
                     <label for="description">Descrição</label><textarea name="description" id="description"></textarea>
@@ -148,6 +147,4 @@ if (isset($_SESSION["loggedin"]) != "loggedin") {
 <script src="incidentreport.js"></script>
 <script src="../default/map.js"></script>
 <script src="../default/speciesAPI.js"></script>
-
-
 </html>

@@ -1,6 +1,5 @@
 var unTaken = true
 
-//Formatar CPF enquanto digita
 document.querySelector('input[name="cpf"]').addEventListener('input', function (e) {
     let value = e.target.value.replace(/\D/g, "");
 
@@ -99,13 +98,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const usernameStatus = document.getElementById('username-status');
     let debounceTimer;
     
-    // Debounce function
     function debounce(func, delay) {
         clearTimeout(debounceTimer);
         debounceTimer = setTimeout(func, delay);
     }
     
-    // Verifica disponibilidade do username
     function checkUsernameAvailability(username) {
         if (username.length < 3) {
             usernameStatus.className = 'username-status';
@@ -136,7 +133,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     }
     
-    // Event listener com debounce
     usernameInput.addEventListener('input', function() {
         const username = this.value.trim();
         debounce(() => checkUsernameAvailability(username), 500);

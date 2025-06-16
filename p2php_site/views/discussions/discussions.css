@@ -1,0 +1,245 @@
+.forum-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.forum-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #495927;
+}
+
+.forum-header h2 {
+    font-weight: 600;
+    color: #334027;
+    font-size: 1.8em;
+}
+
+#image-container {
+    display: flex;
+    gap: 10px;
+}
+
+#image-container img {
+    width: 75px;
+    height: 75px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.last-image-wrapper {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.last-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(50%);
+}
+
+.overlay-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 1.5em;
+    text-shadow: 0 0 5px black;
+}
+
+
+#filter {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    gap: 5px;
+    margin-bottom: 15px;
+}
+
+#filter button {
+    transition: 0.1s ease-out;
+    margin-left: 10px;
+    text-decoration: none;
+    padding: 5px;
+    text-align: center;
+    color: #334027;
+    border-radius: 2px;
+    border: 2px solid #334027;
+    font-size: 1em;
+}
+
+#filter button:hover {
+    cursor: pointer;
+    background-color: #334027;
+    color: #fff;
+}
+
+.selectedFilter {
+    background-color: #334027 !important;
+    color: #fff !important;
+    cursor: default !important;
+}
+
+.new-discussion {
+    font-weight: 500;
+    transition: 0.1s ease-out;
+    margin-left: 10px;
+    text-decoration: none;
+    padding: 5px;
+    text-align: center;
+    color: #334027;
+    border-radius: 2px;
+    border: 2px solid #334027;
+    font-size: 1em;
+    min-width: 20%;
+}
+
+.new-discussion:hover {
+    cursor: pointer;
+    background-color: #334027;
+    color: #fff;
+}
+
+.discussion-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.discussion-card {
+    background-color: #ffffff;
+    border: 1px solid #d9d9d9;
+    border-left: 4px solid #495927;
+    border-radius: 2px;
+    padding: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+}
+.discussion-info .title {
+    font-size: 1.2em;
+    font-weight: 600;
+    margin: 0 0 6px 0;
+    cursor: default;
+}
+#user-info{
+    position: absolute;
+    color: #555;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    right: 20px;
+    margin: 0 0 6px 0;
+    cursor: default;
+}
+@media (max-width: 740px) {
+    #user-info {
+        position: static;
+    }
+}
+.discussion-info p {
+    font-size: 0.9em;
+    color: #555;
+    margin-bottom: 12px;
+    cursor: default;
+}
+
+.discussion-info > div {
+    font-size: 1em;
+    color: #777;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 10px;
+    cursor: default;
+}
+@media (max-width: 450px) {
+    .tags{
+        display: flex; 
+        flex-direction: column;
+        width: 100%;
+  }
+    .tag{
+        width: 80%;
+        text-align: center;
+    }
+    
+}
+#div-tags {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    align-items: center !important;
+
+}
+
+.discussions-tags {
+    background-color: #F2F2F2;
+    color: #334027;
+    border: 1px solid #334027;
+    padding: 6px 14px;
+    font-size: 0.9rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.1s ease-in-out;
+}
+
+.discussions-tags:hover {
+    background-color: #334027;
+    color: #fff;
+}
+
+.tag {
+    background-color: #dde5cc;
+    color:#495927;
+    font-size: 1em;
+    padding: 3px 8px;
+    border-radius: 2px;
+}
+
+.discussion-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1em;
+    color: #555;
+    cursor: default;
+}
+
+.discussion-footer i {
+    margin-right: 4px;
+    color: #495927;
+    font-size: 1.4em;
+    cursor: pointer;
+}
+
+.answer-btn {
+    font-weight: 500;
+    transition: 0.1s ease-out;
+    margin-left: 10px;
+    text-decoration: none;
+    padding: 5px;
+    text-align: center;
+    color: #fff;
+    border-radius: 2px;
+    border: 2px solid #334027;
+    font-size: 1em;
+    min-width: 12%;
+    background-color: #334027;
+}
+
+.answer-btn:hover {
+    cursor: pointer;
+}
