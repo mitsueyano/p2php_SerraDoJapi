@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (button.value === "animal") {
         incidentType.value = "animal";
-        animalFields.style.display = "block";
+        animalFields.style.display = "flex";
         imageField.style.marginBottom = "5px";
         animalFields.querySelectorAll("input, select").forEach((input) => {
           input.required = true;
