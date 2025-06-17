@@ -30,16 +30,16 @@ Para que o upload de imagens funcione corretamente, é necessário configurar um
 3. **Criar o arquivo `.env`**  
    Na pasta raiz do projeto, dentro de `p2php_site`, crie um arquivo `.env` com o seguinte conteúdo (substitua pelos seus dados do Cloudinary e do banco de dados):
    
-  DB_HOST=nome_host
-  DB_USER=nome_usuario
-  DB_PASSWORD=senha_bancodedados
-  DB_NAME=nome_bancodedados
-  CLOUDINARY_CLOUD_NAME=nome_bancodedados-cloudinary
-  CLOUDINARY_API_KEY=api_key_cloudinary
-  CLOUDINARY_API_SECRET=api_secret_cloudinary
-  CLOUDINARY_FOLDER_RECORDS=pasta_observacoes
-  CLOUDINARY_FOLDER_INCIDENTS=pasta_ocorrencias
-  CLOUDINARY_FOLDER_PROFILES=pasta_perfis
+     DB_HOST=nome_host
+     DB_USER=nome_usuario
+     DB_PASSWORD=senha_bancodedados
+     DB_NAME=nome_bancodedados
+     CLOUDINARY_CLOUD_NAME=nome_bancodedados_cloudinary
+     CLOUDINARY_API_KEY=api_key_cloudinary
+     CLOUDINARY_API_SECRET=api_secret_cloudinary
+     CLOUDINARY_FOLDER_RECORDS=pasta_observacoes
+     CLOUDINARY_FOLDER_INCIDENTS=pasta_ocorrencias
+     CLOUDINARY_FOLDER_PROFILES=pasta_perfis
 
 4. **Instalar dependências com Composer**  
 No terminal, navegue até a pasta `p2php_site` e execute:
