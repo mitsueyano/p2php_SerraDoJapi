@@ -17,7 +17,7 @@ if ($_SESSION['access'] != "especialista") {
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $data = json_decode(file_get_contents("php://input"), true);
-    
+
     if (!$data || !isset($data['id_ocorrencia'])) {
         http_response_code(400);
         echo json_encode(["success" => false, "mensagem" => "Dados inválidos. ID da ocorrência é obrigatório."]);
@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     try {
         $stmt = $conn->prepare("UPDATE ocorrencias SET exibicao = TRUE WHERE id = ?");
         $stmt->bind_param("i", $id_ocorrencia);
-        
+
         if ($stmt->execute()) {
             if ($stmt->affected_rows > 0) {
                 echo json_encode(["success" => true, "mensagem" => "Ocorrência aprovada com sucesso."]);
@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             http_response_code(500);
             echo json_encode(["success" => false, "mensagem" => "Erro ao atualizar a ocorrência.", "erro" => $stmt->error]);
         }
-        
+
         $stmt->close();
     } catch (Exception $e) {
         http_response_code(500);

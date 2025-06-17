@@ -1,3 +1,4 @@
+//Função para construir um modal de confirmação
 function buildModal(action, fun, incidentId) {
     const modalHTML = `
       <div class="modal">
@@ -16,7 +17,7 @@ function buildModal(action, fun, incidentId) {
     const modal = document.createElement("div")
     modal.classList.add('modal-container')
     modal.innerHTML = modalHTML
-    modal.addEventListener("click", (ev) => {
+    modal.addEventListener("click", (ev) => { //Fecha o modal se clicar fora da caixa do modal (clicar na área escura)
         const modalContainer = document.querySelector('.modal-container');
         if (modalContainer && ev.target === modalContainer) {
             killModal();
@@ -26,7 +27,7 @@ function buildModal(action, fun, incidentId) {
     document.body.classList.add('scroll-lock')
 }
 
-function killModal() {
+function killModal() { //Função para fechar o modal e desbloquear o scroll da página
     document.body.classList.remove('scroll-lock')
     document.querySelector('.modal-container').remove()
 }
@@ -38,7 +39,8 @@ function approve(incidentId) {
 function reject(incidentId) {
     buildModal("rejeitar", "rejectIncident", incidentId)
 }
-
+ 
+//Função que aprova a ocorrência
 function approveIncident(incidentId) {
     
     const body = {
@@ -83,6 +85,7 @@ function approveIncident(incidentId) {
         });
 }
 
+//Função que rejeita a ocorrência
 function rejectIncident(incidentId) {
     fetch(`../../php/rejectIncident.php/${incidentId}`, {
         method: 'DELETE',
@@ -111,6 +114,7 @@ function rejectIncident(incidentId) {
     });
 }
 
+//Função para carregar as ocorrências e renderizar na página
 function loadIncidents() {
     fetch('../../php/loadpendingincidents.php')
         .then(response => response.json())

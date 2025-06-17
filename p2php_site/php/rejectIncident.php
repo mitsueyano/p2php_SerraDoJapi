@@ -3,6 +3,7 @@ session_start();
 header("Content-Type: application/json");
 include 'connectDB.php';
 
+//Verifica se o usuário tem acesso de especialista
 if (!isset($_SESSION['access']) || $_SESSION['access'] != "especialista") {
     http_response_code(403);
     echo json_encode(["success" => false, "mensagem" => "Acesso restrito a especialistas"]);
@@ -10,10 +11,10 @@ if (!isset($_SESSION['access']) || $_SESSION['access'] != "especialista") {
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "DELETE") {
-    $urlParts = explode('/', $_SERVER['REQUEST_URI']);
+    $urlParts = explode('/', $_SERVER['REQUEST_URI']); //Extrai o último segmento da URL como ID da ocorrência
     $incidentId = end($urlParts);
     
-    if (!is_numeric($incidentId)) {
+    if (!is_numeric($incidentId)) { //Valida se o ID é um número
         http_response_code(400);
         echo json_encode(["success" => false, "mensagem" => "ID inválido"]);
         exit;
@@ -34,10 +35,11 @@ if ($_SERVER["REQUEST_METHOD"] === "DELETE") {
         }
         $stmtCheck->close();
 
+        //Query para excluir a ocorrência
         $stmtDelete = $conn->prepare("DELETE FROM ocorrencias WHERE id = ?");
         $stmtDelete->bind_param("i", $incidentId);
         
-        if ($stmtDelete->execute()) {
+        if ($stmtDelete->execute()) { //Tenta executar a exclusão
             if ($stmtDelete->affected_rows > 0) {
                 echo json_encode([
                     "success" => true,

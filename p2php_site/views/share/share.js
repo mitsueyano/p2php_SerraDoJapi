@@ -9,8 +9,8 @@ window.addEventListener("load", function () {
 const checkbox = document.getElementById("identified");
 const items = document.querySelectorAll(".items");
 const checks = document.querySelectorAll(".checks");
-
-checkbox.addEventListener("change", () => {
+ 
+checkbox.addEventListener("change", () => { //Checkbox que identifica se o organismo já é identificado
   if (checkbox.checked) {
     items.forEach((item) => {
       item.value = "";
@@ -38,9 +38,9 @@ checkbox.addEventListener("change", () => {
   }
 });
 
+//Checkbox para marcar como "espécie invasora"
 const invaderCheckbox = document.getElementById("invader");
 const categoryInputs = document.querySelectorAll("input[name='category']");
-
 let lastSelectedCategory = null;
 
 invaderCheckbox.addEventListener("change", () => {
@@ -64,10 +64,12 @@ invaderCheckbox.addEventListener("change", () => {
   }
 });
 
+//Função para simular o clique no input de imagem
 const upload = () => {
   document.querySelector("#image").click();
 };
 
+// Exibe a imagem selecionada no preview
 function previewImage(event) {
   const input = event.target;
   const preview = document.getElementById("image-preview");

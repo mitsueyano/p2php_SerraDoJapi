@@ -3,11 +3,12 @@ session_start();
 require_once("connectDB.php");
 mysqli_set_charset($conn, "utf8mb4");
 
+//Coleta os dados
 $limit = isset($_GET['limit']) ? intval($_GET['limit']) : 12;
 $lastId = isset($_GET['last_id']) ? intval($_GET['last_id']) : 0;
 $targetun = isset($_GET['targetun']) ? trim($_GET['targetun']) : '';
 $userid = isset($_SESSION['userid']) ? intval($_SESSION['userid']) : 0;
-$filter = $_GET['filter'] ?? 'recentes';
+$filter = $_GET['filter'] ?? 'recentes'; //Filtro ainda não aplicado então está como default "recentes"
 
 if ($targetun === '') {
     header('Content-Type: application/json');
@@ -15,7 +16,7 @@ if ($targetun === '') {
     exit;
 }
 
-switch ($filter) {
+switch ($filter) { //Define a ordenação dos registros conforme filtro ("populares" ou "recentes")
     case 'populares':
         $orderby = "rb.qtde_likes DESC, rb.id DESC";
         break;
@@ -27,7 +28,7 @@ switch ($filter) {
 
 $lastDataPublicacao = null;
 $lastQtdeLikes = null;
-if ($lastId > 0) {
+if ($lastId > 0) { //Se lastId > 0, busca dados do último registro para paginação baseada em data ou likes
     $stmtLast = $conn->prepare("SELECT data_publicacao, qtde_likes FROM registros_biologicos WHERE id = ?");
     $stmtLast->bind_param("i", $lastId);
     $stmtLast->execute();
@@ -48,7 +49,7 @@ $whereClauses = ["u.nome_usuario = ?"];
 $params = [$targetun];
 $types = "s";
 
-if ($lastId > 0) {
+if ($lastId > 0) { //Adiciona condição para paginação
     if ($filter === 'recentes') {
         $whereClauses[] = "(rb.data_publicacao < ? OR (rb.data_publicacao = ? AND rb.id < ?))";
         $types .= "ssi";
@@ -60,6 +61,7 @@ if ($lastId > 0) {
     }
 }
 
+//Query
 $query = "
     SELECT 
         rb.*,
@@ -108,7 +110,7 @@ while ($row = $result->fetch_assoc()) {
     
 }
 
-
+//Verifica se ainda há mais registros além do limite
 $hasMore = count($posts) === $limit;
 $lastLoadedId = $lastId;
 if (!empty($posts)) {

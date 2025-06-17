@@ -1,3 +1,4 @@
+//Formatar data
 function formatDateTime(dateStr, timeStr) {
   const date = new Date(dateStr.split("/").reverse().join("-") + "T" + timeStr);
   const options = {
@@ -10,6 +11,7 @@ function formatDateTime(dateStr, timeStr) {
   return date.toLocaleString("pt-BR", options);
 }
 
+//Carrega os detalhes do post com base no ID presente na URL
 function loadPostData() {
   const postId = new URLSearchParams(window.location.search).get("id");
   if (!postId) {
@@ -43,6 +45,7 @@ function loadPostData() {
     });
 }
 
+//Exibe o conteúdo do post na página
 function renderPost(postData) {
   const postContainer = document.getElementById("post-container");
 
@@ -170,6 +173,7 @@ function renderPost(postData) {
   postContainer.innerHTML = html;
 }
 
+//Exibe os comentários
 function renderComments(comments) {
   return comments
     .map(
@@ -285,6 +289,8 @@ function renderComments(comments) {
     )
     .join("");
 }
+
+//Evento de click para redirecionar para a página de perfil do usuário
 document.addEventListener("click", (event) => {
   const el = event.target;
 
@@ -298,11 +304,13 @@ document.addEventListener("click", (event) => {
   }
 });
 
+//Função para voltar para a página anterior
 function back() {
   const params = new URLSearchParams(document.location.search);
   const specie = params.get("specie") || "";
   const category = params.get("category") || "";
 
+  //Caso nenhuma espécie esteja selecionada
   if (!specie) {
     history.back();
     return;
@@ -310,7 +318,7 @@ function back() {
 
   let url = "../species/species.php?";
 
-  if (specie) {
+  if (specie) { //Caso alguma espécie esteja selecionada (página anterior: species.php)
     url += "lastSpecieSearched=" + encodeURIComponent(specie);
   }
 
@@ -321,6 +329,7 @@ function back() {
   window.location.href = url;
 }
 
+//Função par atualizar os likes
 function toggleLike(postId) {
   fetch("../../php/likeupdate.php", {
     method: "POST",
@@ -355,6 +364,7 @@ function toggleLike(postId) {
     });
 }
 
+//Função para postar o comentário
 function postComment(postId) {
   const commentInput = document.getElementById("comment-input");
   const commentText = commentInput.value.trim();
@@ -386,7 +396,7 @@ function postComment(postId) {
 
       return responseData;
     })
-    .then((data) => {
+    .then((data) => { //Exibe o comentário automaticamente
       if (data && data.success) {
         const commentsContainer = document.getElementById("comments-container");
         const newComment = document.createElement("div");
@@ -461,11 +471,13 @@ function postComment(postId) {
     });
 }
 
+//Exibe a caixa de "responder"
 function showReplyForm(commentId) {
   const form = document.getElementById(`reply-form-${commentId}`);
   form.style.display = form.style.display === "none" ? "block" : "none";
 }
 
+//Função para postar resposta de comentário
 function postReply(commentId, postId) {
   const replyInput = document.getElementById(`reply-input-${commentId}`);
   const replyText = replyInput.value.trim();
@@ -487,7 +499,7 @@ function postReply(commentId, postId) {
       parentid: parseInt(commentId),
     }),
   })
-    .then((response) => {
+    .then((response) => { //Exibe a resposta automaticamente
       if (response.status === 401) {
         window.location.href = "../login/login.php?error=Comment";
         return;
@@ -577,6 +589,7 @@ function postReply(commentId, postId) {
     });
 }
 
+//Atualiza a quantidade de comentários
 function updateCommentCount(increment = 1) {
   const commentsCount = document.querySelector(".comments-count span");
   if (commentsCount) {
@@ -601,7 +614,6 @@ backToTopButton.addEventListener("click", () => {
     behavior: "smooth"
   });
 });
-
 
 window.addEventListener("load", () => {
   loadPostData();

@@ -1,4 +1,5 @@
 
+//Obter as estatísticas do sistema
 fetch("../../php/statistics.php")
     .then(response => response.json())
     .then(data => {
@@ -13,7 +14,7 @@ fetch("../../php/statistics.php")
     })
     .catch(error => console.error("Erro ao carregar estatísticas:", error));
 
-
+//Carregar os destaques
 fetch("../../php/loadhighlights.php")
     .then(response => response.json())
     .then(highlights => {

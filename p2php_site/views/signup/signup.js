@@ -1,4 +1,4 @@
-var unTaken = true
+var unTaken = true //Variável para indicar se o nome de usuário está disponível ou não
 
 document.querySelector('input[name="cpf"]').addEventListener('input', function (e) {
     let value = e.target.value.replace(/\D/g, "");
@@ -12,6 +12,7 @@ document.querySelector('input[name="cpf"]').addEventListener('input', function (
     e.target.value = value;
 });
 
+//Formata o CPF automaticamente
 document.querySelector('input[name="cpf"]').addEventListener('blur', function (e) {
     const cpf = e.target.value.replace(/\D/g, "");
     const cpfErrorSpan = document.querySelector('#cpfError');
@@ -32,6 +33,8 @@ document.querySelector('input[name="cpf"]').addEventListener('blur', function (e
         }
     }
 });
+
+//Valida o CPF quando o campo perde o foco
 function cpfValidation(cpf) {
     if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false;
 
@@ -48,6 +51,7 @@ function cpfValidation(cpf) {
     return remainder === parseInt(cpf.charAt(10));
 }
 
+//Função que valida o CPF com base nos dígitos verificadores
 document.querySelector("form").addEventListener("submit", function (e) {
     const password = document.querySelector('input[name="password"]').value;
     const password2 = document.querySelector('input[name="password2"]').value;
@@ -62,6 +66,7 @@ document.querySelector("form").addEventListener("submit", function (e) {
     }
 });
 
+//Exibe o campo Lattes apenas se a pessoa marcar "Sim"
 const yesRadio = document.getElementById('yes');
 const noRadio = document.getElementById('no');
 const Lattesfield = document.getElementById('lattesfield');
@@ -75,10 +80,12 @@ noRadio.addEventListener('change', updateLattesfield);
 
 updateLattesfield();
 
+//Função para simular o clique no input de imagem
 const upload = () => {
   document.querySelector("#image").click();
 };
 
+//Exibe o preview da imagem selecionada
 function previewImage(event) {
   const input = event.target;
   const preview = document.getElementById("image-preview");
@@ -93,6 +100,7 @@ function previewImage(event) {
 const form = document.getElementById("form");
 const imageInput = document.getElementById("image");
 
+//Verifica a disponibilidade do nome de usuário com debounce
 document.addEventListener('DOMContentLoaded', function() {
     const usernameInput = document.getElementById('username');
     const usernameStatus = document.getElementById('username-status');
@@ -102,7 +110,8 @@ document.addEventListener('DOMContentLoaded', function() {
         clearTimeout(debounceTimer);
         debounceTimer = setTimeout(func, delay);
     }
-    
+     
+    //Verifica no backend (via PHP) se o nome está disponível
     function checkUsernameAvailability(username) {
         if (username.length < 3) {
             usernameStatus.className = 'username-status';

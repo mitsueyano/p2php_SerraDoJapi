@@ -2,20 +2,21 @@
 session_start();
 require_once("connectDB.php");
 
+//Coleta os dados
 $limit = isset($_GET['limit']) ? max(1, min(intval($_GET['limit']), 50)) : 12;
 $offset = isset($_GET['offset']) ? max(0, intval($_GET['offset'])) : 0;
 $userid = isset($_SESSION['userid']) ? intval($_SESSION['userid']) : 0;
-
 $allowed_filters = ['recentes', 'populares'];
 $filter = $_GET['filter'] ?? 'recentes';
+
 if (!in_array($filter, $allowed_filters)) {
     $filter = 'recentes';
 }
-
 $orderby = $filter === 'populares'
     ? "rb.qtde_likes DESC, rb.data_publicacao DESC, rb.hora_publicacao DESC"
     : "rb.data_publicacao DESC, rb.hora_publicacao DESC";
 
+//Query
 $sql = "
     SELECT 
         rb.*,

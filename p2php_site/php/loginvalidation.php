@@ -2,6 +2,7 @@
 session_start();
 include '../php/connectDB.php';
 
+//Coleta os dados
 $cpf = $_POST["cpf"];
 $password = $_POST["password"];
 $query = "SELECT * FROM usuarios WHERE cpf = ?";
@@ -12,10 +13,10 @@ if ($stmt) {
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
 
-    if ($row = mysqli_fetch_assoc($result)) {
+    if ($row = mysqli_fetch_assoc($result)) { //Se encontrar algum usuário com o CPF fornecido
         var_dump($row);
 
-        if (password_verify($password, $row["senha"])) {
+        if (password_verify($password, $row["senha"])) {   //Verifica se a senha fornecida corresponde à senha criptografada armazenada no banco
             $_SESSION["loggedin"] = true;
             $_SESSION["user"] = $row["nome"];
             $_SESSION["userlastname"] = $row["sobrenome"];

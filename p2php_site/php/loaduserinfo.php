@@ -1,8 +1,9 @@
 <?php
 include("connectDB.php");
-
+//Coleta os dados
 $username = $_GET['username'] ?? null;
 
+//Query
 $query = "SELECT 
     u.*,
     (SELECT COUNT(*) 

@@ -1,3 +1,4 @@
+//Ao carregar a página, rola a janela para baixo até a altura do header
 window.addEventListener("load", () => {
   const header = document.getElementById("header");
   window.scrollTo({
@@ -5,6 +6,7 @@ window.addEventListener("load", () => {
   });
 });
 
+//Quando o checkbox muda de estado
 const checkbox = document.getElementById("identified");
 const items = document.querySelectorAll(".items");
 checkbox.addEventListener("change", () => {
@@ -16,6 +18,7 @@ checkbox.addEventListener("change", () => {
       item.value = "";
     });
   } else {
+    //Se desmarcado, habilita os campos, restaura estilos e permite edição
     items.forEach((item) => {
       item.style.color = "#000";
       item.style.backgroundColor = "";
@@ -31,20 +34,20 @@ document.addEventListener("DOMContentLoaded", function () {
   const animalFields = document.getElementById("animal-fields");
   const imageField = document.getElementById("image");
   const incidentType = document.getElementById("incident_type");
-
-  buttons.forEach((button) => {
+ 
+  buttons.forEach((button) => { //Adiciona evento de clique em cada botão
     button.addEventListener("click", () => {
       buttons.forEach((btn) => btn.classList.remove("active"));
       button.classList.add("active");
 
-      if (button.value === "animal") {
+      if (button.value === "animal") { //Se selecionado "animal", mostra os campos relacionados e torna obrigatórios
         incidentType.value = "animal";
         animalFields.style.display = "flex";
         imageField.style.marginBottom = "5px";
         animalFields.querySelectorAll("input, select").forEach((input) => {
           input.required = true;
         });
-      } else {
+      } else { //Se selecionado "ambiental", esconde os campos e remove obrigatoriedade
         incidentType.value = "ambiental";
         animalFields.style.display = "none";
         imageField.style.marginBottom = "10%";
@@ -55,10 +58,13 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
+
+//Função para disparar clique no input de imagem
 const upload = () => {
   document.querySelector("#image").click();
 };
 
+//Função para mostrar preview da imagem selecionada pelo usuário
 function previewImage(event) {
   const input = event.target;
   const preview = document.getElementById("image-preview");

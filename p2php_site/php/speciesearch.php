@@ -5,12 +5,13 @@ error_reporting(E_ALL);
 
 include('connectDB.php');
 
+//Coleta os dados
 $specie = isset($_GET['specie']) ? $_GET['specie'] : '';
 
 $data = [];
-
-if ($specie !== '') {
-    if ($specie === 'Não identificado') {
+if ($specie !== '') { //Se a espécie foi fornecida
+    if ($specie === 'Não identificado') { //Quando a espécie ainda não foi identificada
+        //Query para registros que ainda não foram identificados
         $stmt = $conn->prepare("
             SELECT 
                 r.id AS id,
@@ -26,7 +27,7 @@ if ($specie !== '') {
             JOIN geolocalizacao g ON r.id_geolocalizacao = g.id
             WHERE r.identificacao = FALSE
         ");
-    } else {
+    } else { //Caso a espécie seja conhecida, busca registros com a espécie exata
         $stmt = $conn->prepare("
             SELECT 
                 r.id AS id,
@@ -65,6 +66,5 @@ if ($specie !== '') {
         $data[] = $row;
     }
 }
-
 header('Content-Type: application/json');
 echo json_encode($data);

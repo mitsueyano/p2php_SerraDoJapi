@@ -7,6 +7,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     die(json_encode(['success' => false, 'message' => 'Usuário não autenticado']));
 }
 
+//Lê o "corpo" da requisição (esperando um JSON)
 $json = file_get_contents('php://input');
 $data = json_decode($json, true);
 
@@ -20,6 +21,7 @@ if (!isset($data['content']) || empty(trim($data['content']))) {
     die(json_encode(['success' => false, 'message' => 'Conteúdo do comentário não pode estar vazio']));
 }
 
+//Coleta os dados
 $postId = $data['postid'];
 $content = trim($data['content']);
 $parentId = isset($data['parentid']) && is_numeric($data['parentid']) ? $data['parentid'] : null;
@@ -35,6 +37,7 @@ if ($result->num_rows === 0) {
     die(json_encode(['success' => false, 'message' => 'Registro biológico não encontrado']));
 }
 
+//Se for uma resposta a outro comentário, valida o comentário pai
 if ($parentId !== null) {
     $stmt = $conn->prepare("SELECT id FROM comentarios WHERE id = ? AND id_registro = ?");
     $stmt->bind_param("ii", $parentId, $postId);
@@ -46,7 +49,7 @@ if ($parentId !== null) {
         die(json_encode(['success' => false, 'message' => 'Comentário pai não encontrado']));
     }
 }
-
+//Insere o novo comentário no banco
 $stmt = $conn->prepare("INSERT INTO comentarios (id_registro, id_usuario, id_comentario_pai, conteudo) VALUES (?, ?, ?, ?)");
 $stmt->bind_param("iiis", $postId, $userId, $parentId, $content);
 
@@ -55,6 +58,7 @@ if (!$stmt->execute()) {
     die(json_encode(['success' => false, 'message' => 'Erro ao cadastrar comentário: ' . $stmt->error]));
 }
 
+//Atualiza a contagem de comentários no registro biológico
 $updateStmt = $conn->prepare("UPDATE registros_biologicos SET qtde_coment = qtde_coment + 1 WHERE id = ?");
 $updateStmt->bind_param("i", $postId);
 $updateStmt->execute();

@@ -1,12 +1,14 @@
 <?php
 include('connectDB.php');
 
+//Coleta os dados
 $selectedcategory = isset($_GET['category']) ? $_GET['category'] : 'todos';
 $validcategories = ['todos', 'fauna', 'flora', 'especiesinvasoras', 'naoidentificado'];
 if (!in_array($selectedcategory, $validcategories)) {
     $selectedcategory = 'todos';
 }
 
+//Query
 if ($selectedcategory == 'todos') {
     $query = "
         SELECT DISTINCT ct.especie, ct.classe, ct.nome_popular
@@ -16,7 +18,6 @@ if ($selectedcategory == 'todos') {
         ORDER BY ct.especie
     ";
     $result = $conn->query($query);
-
 } else if ($selectedcategory == 'naoidentificado') {
     $query = "
         SELECT 
@@ -27,7 +28,6 @@ if ($selectedcategory == 'todos') {
         WHERE identificacao = FALSE
     ";
     $result = $conn->query($query);
-
 } else {
     $query = "
         SELECT DISTINCT ct.especie, ct.classe, ct.nome_popular

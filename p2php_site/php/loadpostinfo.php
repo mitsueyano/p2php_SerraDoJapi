@@ -9,15 +9,16 @@ if (!isset($_GET['id'])) {
     exit;
 }
 
+//Coleta os dados
 $registroId = intval($_GET['id']);
 if ($registroId <= 0) {
     http_response_code(400);
     echo json_encode(['success' => false, 'message' => 'ID inválido']);
     exit;
 }
-
 $userId = isset($_SESSION['userid']) ? intval($_SESSION['userid']) : 0;
 
+//Query
 try {
     $sql = "
         SELECT 
@@ -73,10 +74,9 @@ try {
         echo json_encode(['success' => false, 'message' => 'Registro não encontrado']);
         exit;
     }
-
     $registro = $result->fetch_assoc();
 
-    // Obter comentários principais e suas respostas
+    //Obtém os comentários principais e suas respostas
     $sqlComentarios = "
         SELECT 
             c.id,
@@ -107,7 +107,7 @@ try {
     $stmtComentarios->execute();
     $resultComentarios = $stmtComentarios->get_result();
 
-    // Estruturar os dados hierarquicamente
+    //Estrutura os dados hierarquicamente
     $comentarios = [];
     $respostasPorPai = [];
     
@@ -138,21 +138,19 @@ try {
         }
     }
     
-    // Associar respostas aos comentários pais
+    //Associa as respostas aos comentários pais
     foreach ($respostasPorPai as $paiId => $respostas) {
         if (isset($comentarios[$paiId])) {
             $comentarios[$paiId]['respostas'] = $respostas;
         }
     }
-    
-    // Converter para array indexado numericamente
+
     $comentariosFormatados = array_values($comentarios);
 
-    // Converter campos booleanos para booleanos reais
     $registro['identificacao'] = (bool)$registro['identificacao'];
     $registro['liked'] = (bool)$registro['liked'];
 
-    // Formatar os dados para retorno
+    //Formata os dados para retorno
     $response = [
         'success' => true,
         'data' => [

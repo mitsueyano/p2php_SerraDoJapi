@@ -6,21 +6,22 @@ mysqli_set_charset($conn, "utf8mb4");
 set_time_limit(30);
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
-$targetun = filter_input(INPUT_GET, 'targetun', FILTER_SANITIZE_STRING);
-$userid = $_SESSION['userid'] ?? 0;
-$limit = filter_input(INPUT_GET, 'limit', FILTER_VALIDATE_INT, ['options' => ['default' => 12, 'min_range' => 1]]);
-$lastId = filter_input(INPUT_GET, 'last_id', FILTER_VALIDATE_INT, ['options' => ['default' => 0, 'min_range' => 0]]);
+$targetun = filter_input(INPUT_GET, 'targetun', FILTER_SANITIZE_STRING); //Nome do usuário alvo
+$userid = $_SESSION['userid'] ?? 0; //ID do usuário (0 se não estiver logado)
+$limit = filter_input(INPUT_GET, 'limit', FILTER_VALIDATE_INT, ['options' => ['default' => 12, 'min_range' => 1]]); //Limite de registros a retornar, padrão 12
+$lastId = filter_input(INPUT_GET, 'last_id', FILTER_VALIDATE_INT, ['options' => ['default' => 0, 'min_range' => 0]]); //ID do último registro para paginação
 
 $stmt_check = $conn->prepare("SELECT id FROM usuarios WHERE nome_usuario = ? LIMIT 1");
 $stmt_check->bind_param("s", $targetun);
 $stmt_check->execute();
 
-if ($stmt_check->get_result()->num_rows === 0) {
+if ($stmt_check->get_result()->num_rows === 0) { //Verifica se o usuário alvo existe
     http_response_code(404);
     echo json_encode(["error" => "Usuário não encontrado"]);
     exit;
 }
 
+// Verifica se o usuário alvo possui curtidas
 $stmt_count = $conn->prepare("
     SELECT COUNT(*) as total 
     FROM curtidas_usuarios cu
@@ -30,7 +31,7 @@ $stmt_count = $conn->prepare("
 $stmt_count->bind_param("s", $targetun);
 $stmt_count->execute();
 
-if ($stmt_count->get_result()->fetch_assoc()['total'] === 0) {
+if ($stmt_count->get_result()->fetch_assoc()['total'] === 0) { // Se não houver curtidas, retorna array vazio e sinaliza fim da paginação
     echo json_encode([
         'registros' => [],
         'last_id' => 0,
@@ -50,6 +51,7 @@ try {
         $params[] = $lastId;
     }
 
+    //Query
     $sql = "
     SELECT 
         rb.*,

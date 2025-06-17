@@ -1,26 +1,30 @@
-const postsState = {};
+const postsState = {}; //Objeto para armazenar o estado de cada post (se está curtido, número de curtidas, elementos DOM relacionados)
 
+//Define o limite de carregamento por aba
 const limits = {
   registros: 9,
   ocorrencias: 6,
   curtidos: 9,
 };
 
+//Guarda o último ID carregado de cada aba para paginação
 let last_ids = {
   registros: 0,
   ocorrencias: 0,
   curtidos: 0,
 };
 
+//Seleciona todas as abas e os conteúdos correspondentes
 const tabs = document.querySelectorAll(".tab");
 const contents = document.querySelectorAll(".tab-content");
+//Obtém o username da URL (se houver), ou do objeto global userData
 const username =
   new URLSearchParams(document.location.search).get("username") == null
     ? userData.username
     : new URLSearchParams(document.location.search).get("username");
 
 document.addEventListener("DOMContentLoaded", () => {
-  tabs.forEach((tab) => {
+  tabs.forEach((tab) => { //Adiciona evento de clique para cada aba
     tab.addEventListener("click", () => {
       tabs.forEach((t) => t.classList.remove("active"));
       contents.forEach((c) => c.classList.remove("active"));
@@ -34,6 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   carregarAba("registros");
 
+  //Gerencia os cliques no botão de curtir
   document.addEventListener("click", (e) => {
     if (e.target.classList.contains("like")) {
       handleLikeClick(e.target.dataset.postid);
@@ -47,6 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+//Carrega os dados de uma aba
 function carregarAba(aba) {
   last_ids[aba] = 0;
   const container = document.querySelector(`#${aba} .posts-list`);
@@ -59,6 +65,7 @@ function carregarAba(aba) {
   carregarMais(aba);
 }
 
+//Carrega mais dados da aba (paginado)
 function carregarMais(aba) {
   const url = `../../php/loaduser${
     aba === "ocorrencias"
@@ -93,6 +100,7 @@ function carregarMais(aba) {
     .catch(console.error);
 }
 
+//Renderiza os itens de uma aba (post ou ocorrência)
 function renderAba(aba, posts) {
   const container = document.querySelector(`#${aba} .posts-list`);
 
@@ -118,6 +126,7 @@ function renderAba(aba, posts) {
   });
 }
 
+//Cria o HTML de um post (registro ou curtido)
 function createPostElement(post, postId) {
   const card = document.createElement("div");
   card.className = "post-container";
@@ -184,6 +193,7 @@ function createPostElement(post, postId) {
   return card;
 }
 
+//Cria o HTML de uma ocorrência
 function createIncidentElement(incident) {
   const incidentDiv = document.createElement("div");
   incidentDiv.className = "incident";
@@ -194,7 +204,7 @@ function createIncidentElement(incident) {
   imgincidentDiv.style.backgroundSize = "cover";
   imgincidentDiv.style.backgroundPosition = "center";
 
-  if (incident.sensivel) {
+  if (incident.sensivel) { //Se for sensível, aplica blur e botão de exibição
     const blur = document.createElement("div");
     blur.className = "blur";
     imgincidentDiv.appendChild(blur);
@@ -245,6 +255,7 @@ function createIncidentElement(incident) {
   return incidentDiv;
 }
 
+//Trata o clique no botão de curtir
 function handleLikeClick(postid) {
   const state = postsState[postid];
   if (!state) return;
@@ -267,7 +278,7 @@ function handleLikeClick(postid) {
     liked: newLikeState,
     qtde_likes: newCount,
   };
-
+  //Requisição para o servidor para atualizar o like
   fetch("../../php/likeupdate.php", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -291,6 +302,7 @@ function handleLikeClick(postid) {
     });
 }
 
+//Reverte estado local do post
 function updatePostState(postid, liked, count) {
   const state = postsState[postid];
   if (!state) return;
@@ -312,6 +324,7 @@ function updatePostState(postid, liked, count) {
   };
 }
 
+//Formata data e hora
 function datetime(dateStr, timeStr) {
   const segment = dateStr.split("/");
   if (segment.length !== 3) return dateStr + " às " + timeStr.slice(0, 5);
@@ -332,6 +345,7 @@ function datetime(dateStr, timeStr) {
   }
 }
 
+//Remove um post via modal de confirmação
 function removePost(postId) {
   document.getElementById("modal-btn-yes-text").classList.add("hidden");
   document.getElementById("remove-post-loading").classList.remove("hidden");
@@ -373,6 +387,7 @@ function editPost(postId) {
   alert("Em desenvolvimento");
 }
 
+//Abre modal de confirmação
 function buildModal(info) {
   const modalHTML = `
       <div class="modal">
@@ -400,7 +415,7 @@ function buildModal(info) {
   document.body.appendChild(modal);
   document.body.classList.add("scroll-lock");
 }
-
+//Fecha modal
 function killModal() {
   document.body.classList.remove("scroll-lock");
   document.querySelector(".modal-container").remove();
